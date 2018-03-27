@@ -1,0 +1,46 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.miguelangel.savenergy.Menu_configuracion">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="15dp">
+
+        <TextView
+            android:id="@+id/txt_titulo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:textSize="27sp"
+            android:textColor="#000"
+            android:layout_gravity="center_horizontal"
+            android:text="Configuración" />
+
+        <Button
+            android:id="@+id/btn_configurar_perfil"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Configurar Perfil" />
+
+        <Button
+            android:id="@+id/btn_contrasenia"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Cambiar Contraseña" />
+
+
+        <Button
+            android:id="@+id/btn_tarifa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Cambiar tipo de Tarifa y corte" />
+    </LinearLayout>
+
+</FrameLayout>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.miguelangel.savenergy.Inicio">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="#076a31">
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="75sp"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center"
+                        android:padding="15dp"
+                        android:background="#076a31">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="#fff"
+                            android:textSize="30dp"
+                            android:text="Sav" />
+
+                        <ImageView
+                            android:id="@+id/imageView2"
+                            android:layout_width="57dp"
+                            android:layout_height="44dp"
+                            android:src="@drawable/logo"
+                            android:layout_margin="0dp"
+                            tools:ignore="MissingConstraints"
+                            tools:layout_editor_absoluteX="110dp"
+                            tools:layout_editor_absoluteY="16dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+
+                            android:text="nergy"
+                            android:textColor="#fff"
+                            android:textSize="30dp" />
+
+                    </LinearLayout>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="8dp"
+                    tools:layout_editor_absoluteY="8dp">
+
+                    <ImageSwitcher
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="15sp"
+                        android:src="@drawable/logo"
+                        tools:layout_editor_absoluteX="8dp"
+                        tools:layout_editor_absoluteY="273dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="15sp"
+                    android:orientation="vertical"
+                    tools:layout_editor_absoluteX="12dp"
+                    tools:layout_editor_absoluteY="273dp">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_horizontal"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:text="¿Aún no tienes una cuenta?" />
+
+                    <Button
+                        android:id="@+id/registrarse"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:text="Registrate" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center|center_horizontal"
+                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:layout_margin="4dp"
+                        android:text="Ó" />
+
+                    <Button
+                        android:id="@+id/inicio_sesion"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Inicia Sesión" />
+                </LinearLayout>
+            </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>
