@@ -95,7 +95,7 @@ public class Menu_configuracion extends Fragment implements View.OnClickListener
     public void configurar_perfil() {
 
         fragment = new Configuracion_Perfil();
-        
+
 
 
     }
