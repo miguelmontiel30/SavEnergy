@@ -30,7 +30,6 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Principal_admin_global" />
         <activity android:name=".Consumos" />
-        <activity android:name=".Configuracion_Cuenta"></activity>
     </application>
 
 </manifest>
