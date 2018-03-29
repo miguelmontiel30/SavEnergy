@@ -2,8 +2,10 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/SavEnergy.iml" filepath="$PROJECT_DIR$/SavEnergy.iml" />
+      <module fileurl="file://$PROJECT_DIR$/SIIEA.iml" filepath="$PROJECT_DIR$/SIIEA.iml" />
+      <module fileurl="file://C:\Users\tazaz\AndroidStudioProjects\SIIEA\SavEnergy.iml" filepath="C:\Users\tazaz\AndroidStudioProjects\SIIEA\SavEnergy.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\tazaz\AndroidStudioProjects\SIIEA\app\app.iml" filepath="C:\Users\tazaz\AndroidStudioProjects\SIIEA\app\app.iml" />
     </modules>
   </component>
 </project>
