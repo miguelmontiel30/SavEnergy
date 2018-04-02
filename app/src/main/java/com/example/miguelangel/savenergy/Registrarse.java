@@ -1,7 +1,8 @@
 package com.example.miguelangel.savenergy;
 
 import android.content.Intent;
-import android.support.design.widget.TextInputLayout;
+import android.R.*;
+import android.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
