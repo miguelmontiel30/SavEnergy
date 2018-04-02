@@ -6,6 +6,14 @@
     android:layout_height="match_parent"
     tools:context="com.example.miguelangel.savenergy.Registrarse">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:title="@string/registrarse"
+        app:titleTextColor="@color/buttonText"
+        style="@style/Toolbar_components" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -18,6 +26,7 @@
             android:padding="8dp"
             android:orientation="vertical">
 
+                                <!-- Cabecera SavEnergy -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -35,85 +44,87 @@
                     android:src="@drawable/logo"
                     tools:layout_editor_absoluteX="110dp"
                     tools:layout_editor_absoluteY="16dp"
-                    tools:ignore="MissingConstraints" />
+                    tools:ignore="MissingConstraints"
+                    android:contentDescription="TODO" />
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/nombre"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Nombre" />
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:text="" />
-
-            <TextView
-                android:id="@+id/usuario"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Correo electronico" />
-
-            <EditText
-                android:id="@+id/correo"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:contentDescription="usuario@ejemplo.com"
-                android:ems="10"
-                android:inputType="textEmailAddress" />
-
-            <TextView
-                android:id="@+id/password_txt"
+                                            <!-- Text Input layouts de Registro -->
+            <!-- Nombre -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_nombre"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Contraseña" />
+                android:hint="@string/nombre">
 
-            <EditText
-                android:id="@+id/password"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_nombre"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:errorEnabled="true"
+                    android:inputType="textPersonName"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Correo -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:text="Contraseña" />
+                android:hint="@string/correo"
+                android:layout_marginTop="8dp">
 
-            <TextView
-                android:id="@+id/password_txt_2"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Contraseña -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_contrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:text="Repetir Contraseña" />
+                app:passwordToggleEnabled="true"
+                android:hint="@string/pass">
 
-            <EditText
-                android:id="@+id/repeat_password"
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_contrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Repetir Contraseña-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_repetir_contrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPassword"
-                android:text="Contraseña" />
+                android:layout_marginTop="8dp"
+                app:passwordToggleEnabled="true"
+                android:hint="@string/re_pass">
 
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_repetir_contrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Boton registro-->
             <Button
                 android:id="@+id/registrarse"
-                android:layout_width="match_parent"
+                android:theme="@style/Button_style"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:text="Registrarse" />
-
-            <Button
-                android:id="@+id/Registrarse_google"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:layout_marginBottom="15dp"
-                android:text="Registrate con Google" />
-
+                android:layout_marginTop="20dp"
+                android:padding="@dimen/button_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/buttonText"
+                android:text="@string/registrarse" />
         </LinearLayout>
-
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>

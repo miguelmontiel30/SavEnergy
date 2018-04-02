@@ -1,16 +1,36 @@
 <resources>
 
-    <!-- Base application theme. -->
+                                        <!-- Colores de Base para aplicación. -->
+
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
+
+                                <!-- Colores utilizados para Fondos Material Design. -->
+
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
     </style>
+
+                                            <!-- Estilos de boton -->
+    <style  name = "Button_style"  parent = "Theme.AppCompat.Light" >
+        <item name = "colorControlHighlight" > @color/colorPrimary</item>
+        <item name = "colorButtonNormal" > @color/colorAccent</item>
+    </style>
+
+                                                <!-- Estilos de la toolbar-->
+    <style name="Toolbar_components">
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark</item>
+        <item name="navigationIcon">@drawable/ic_back</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="android:elevation">4dp</item>
+    </style>
+
     <style name="NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
@@ -19,5 +39,7 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+
 
 </resources>

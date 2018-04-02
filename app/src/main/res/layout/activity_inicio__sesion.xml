@@ -61,6 +61,7 @@
                     android:layout_height="wrap_content"
                     android:contentDescription="usuario@ejemplo.com"
                     android:ems="10"
+                    android:hint="Correo@ejemplo,com"
                     android:inputType="textEmailAddress" />
 
                 <TextView
@@ -75,8 +76,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"
-                    android:inputType="textPassword"
-                    android:text="Contraseña" />
+                    android:hint="contraseña"
+                    android:inputType="textPassword" />
 
                 <TextView
                     android:id="@+id/olvido"

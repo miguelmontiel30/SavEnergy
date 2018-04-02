@@ -6,7 +6,14 @@
     <string name="navigation_drawer_close">Close navigation drawer</string>
 
     <string name="action_settings">Settings</string>
+                                                <!-- Strings de Erores -->
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="campo_obligatorio">Este campo es obligatorio</string>
+
+                                        <!-- Strings de interfaz "REGISTRARSE" -->
+    <string name="registrarse">Registrarse</string>
+    <string name="pass">Contraseña</string>
+    <string name="re_pass">Repetir Contraseña</string>
+    <string name="correo">Correo</string>
+    <string name="nombre">Nombre</string>
 </resources>

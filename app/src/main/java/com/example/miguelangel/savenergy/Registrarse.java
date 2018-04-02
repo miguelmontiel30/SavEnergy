@@ -1,6 +1,7 @@
 package com.example.miguelangel.savenergy;
 
 import android.content.Intent;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,7 +9,9 @@ import android.widget.Button;
 
 public class Registrarse extends AppCompatActivity implements View.OnClickListener{
 
+    //Declaracion de variables
     Button registrarse;
+    //Fin de declaración de variables
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

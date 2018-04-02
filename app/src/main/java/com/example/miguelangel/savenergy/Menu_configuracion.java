@@ -16,7 +16,7 @@ public class Menu_configuracion extends Fragment implements View.OnClickListener
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
-    Button btn_configurar_perfil;
+    Button btn_configurar_perfil,btn_contrasenia,btn_tarifa;
 
     // TODO: Rename and change types of parameters
     private String mParam1;
@@ -40,13 +40,21 @@ public class Menu_configuracion extends Fragment implements View.OnClickListener
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
-        btn_configurar_perfil = (Button) btn_configurar_perfil.findViewById(R.id.iniciar_sesion);
+        btn_configurar_perfil =  (Button) btn_configurar_perfil.findViewById(R.id.btn_configurar_perfil);
+        btn_contrasenia = (Button) btn_contrasenia.findViewById(R.id.btn_contrasenia);
+        btn_tarifa = (Button) btn_tarifa.findViewById(R.id.btn_tarifa);
+
         btn_configurar_perfil.setOnClickListener(this);
+        btn_contrasenia.setOnClickListener(this);
+        btn_tarifa.setOnClickListener(this);
+
+
     }
 
     @Override
@@ -84,20 +92,34 @@ public class Menu_configuracion extends Fragment implements View.OnClickListener
 
     @Override
     public void onClick(View view) {
-        if(view == btn_configurar_perfil){
-            configurar_perfil();
-
-        }
+        /*if(view == btn_configurar_perfil){
+            cv_configurar_perfil();
+        }else if (view == btn_contrasenia){
+            cv_contrasenia();
+        }else if (view == btn_tarifa){
+            cv_tarifa();
+        }*/
     }
 
-    Fragment fragment = null;
+    private void cv_tarifa() {
+    }
 
-    public void configurar_perfil() {
+    private void cv_contrasenia() {
+    }
 
-        fragment = new Configuracion_Perfil();
+    //Fragment fragment = null;
 
+    public void cv_configurar_perfil() {
 
+       /* fragment = new Configuracion_Perfil();
+        FragmentTransaction transaction = getFragmentManager().beginTransaction();
+        transaction.replace(R.id.Principal, fragment);
+        transaction.addToBackStack(null);
 
+        // Commit a la transacción
+        transaction.commit();
+
+*/
     }
 
     public interface OnFragmentInteractionListener {

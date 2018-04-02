@@ -22,7 +22,10 @@
             </intent-filter>
         </activity>
         <activity android:name=".Inicio_Sesion" />
-        <activity android:name=".Registrarse" />
+        <activity
+            android:name=".Registrarse"
+            android:theme="@style/NoActionBar">>
+        </activity>
         <activity android:name=".Configuracion_f_corte" />
         <activity
             android:name=".Principal"
