@@ -9,5 +9,6 @@ public class Principal_admin_global extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal_admin_global);
+
     }
 }
