@@ -22,44 +22,15 @@
                     android:layout_height="wrap_content"
                     android:padding="8dp"
                     android:orientation="vertical"
-                    android:background="#076a31">
+                    android:background="@color/colorPrimaryDark">
 
-                    <LinearLayout
-                        android:layout_width="wrap_content"
-                        android:layout_height="75sp"
-                        android:orientation="horizontal"
-                        android:layout_gravity="center"
-                        android:padding="15dp"
-                        android:background="#076a31">
 
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textColor="#fff"
-                            android:textSize="30dp"
-                            android:text="Sav" />
-
-                        <ImageView
-                            android:id="@+id/imageView2"
-                            android:layout_width="57dp"
-                            android:layout_height="44dp"
-                            android:layout_gravity="top|bottom|left|right|center_horizontal|center"
-                            android:layout_margin="0dp"
-                            android:layout_marginTop="10dp"
-                            android:src="@drawable/logo"
-                            tools:ignore="MissingConstraints"
-                            tools:layout_editor_absoluteX="110dp"
-                            tools:layout_editor_absoluteY="16dp" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-
-                            android:text="nergy"
-                            android:textColor="#fff"
-                            android:textSize="30dp" />
-
-                    </LinearLayout>
+                    <ImageView
+                        android:id="@+id/banner"
+                        android:layout_width="700dp"
+                        android:layout_height="70dp"
+                        android:layout_gravity="center_horizontal"
+                        app:srcCompat="@drawable/banner" />
                 </LinearLayout>
 
                 <LinearLayout
