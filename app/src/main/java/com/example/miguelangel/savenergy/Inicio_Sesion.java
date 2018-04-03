@@ -18,12 +18,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Inicio_Sesion extends AppCompatActivity implements View.OnClickListener{
+
     //Declaracion de variables
     EditText email, pass;
     Button iniciar;
+    //Fin de la declaración de variables
 
-
-    //Metodo para lanzar un nuevo Activity
+                                        //Metodo para lanzar un nuevo Activity
     public void iniciar_sesionOnclick() {
         Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
         startActivity(intent);
@@ -35,13 +36,17 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio__sesion);
-        //Se asigna la variable que corresponde a cada componente c
+
+        //Se asigna la variable que corresponde a cada componente declarado en el archivo XML
+
         email = (EditText) findViewById(R.id.correo);
         pass = (EditText) findViewById(R.id.password);
         iniciar = (Button) findViewById(R.id.iniciar_sesion);
         iniciar.setOnClickListener(this);
     }
-    //Metodo con 2 parametros para conectar con servidor y devuelve datos
+
+                            //Metodo con 2 parametros para conectar con servidor y devuelve datos
+
     public String getDatos(String contra, String email){
         URL url = null;
         String linea = "";
