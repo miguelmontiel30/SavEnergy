@@ -19,4 +19,8 @@
 
     <!-- Stringa de interfaz "INICIO"-->
     <string name="inicia_sesion">Iniciar Sesión</string>
+    <string name="title_activity_tarifas">Tarifas</string>
+
+    <!-- Strings de interfaz "Tarifas"-->
+    <string name="tarifas">Tarifas</string>
 </resources>

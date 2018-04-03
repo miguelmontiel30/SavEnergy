@@ -24,8 +24,7 @@
         <activity android:name=".Inicio_Sesion" />
         <activity
             android:name=".Registrarse"
-            android:theme="@style/NoActionBar">
-        </activity>
+            android:theme="@style/NoActionBar"></activity>
         <activity android:name=".Configuracion_f_corte" />
         <activity
             android:name=".Principal"
@@ -35,8 +34,8 @@
         <activity android:name=".Consumos" />
         <activity
             android:name=".Tarifas"
-            android:theme="@style/NoActionBar">
-        </activity>
+            android:label="@string/title_activity_tarifas"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
