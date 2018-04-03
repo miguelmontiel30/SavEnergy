@@ -1,8 +1,6 @@
 package com.example.miguelangel.savenergy;
 
 import android.content.Intent;
-import android.R.*;
-import android.R;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -10,17 +8,15 @@ import android.widget.Button;
 
 public class Registrarse extends AppCompatActivity implements View.OnClickListener{
 
-    //Declaracion de variables
-    Button registrarse;
-    //Fin de declaración de variables
+    Button registrar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
 
-        registrarse = (Button) findViewById(R.id.registrarse);
-        registrarse.setOnClickListener(this);
+        registrar = (Button) findViewById(R.id.registrarse);
+        registrar.setOnClickListener(this);
     }
 
     public void registrarse_OnClick() {
@@ -31,7 +27,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(view == registrarse){
+        if(view == registrar){
             registrarse_OnClick();
         }
     }
