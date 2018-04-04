@@ -34,12 +34,12 @@ public class Principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Configuracion_Perfil.OnFragmentInteractionListener,
 Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteractionListener{
 
-    /*
+
     private BarChart grafica;
     private String []horas = new String[]{"1","2","3","4","5","6","7","8"};
     private int[]volts = new int[]{100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,};
     private int[]colores = new int[]{Color.rgb(13,13,13)};
-    */
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -67,8 +67,8 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-     //   grafica = (BarChart) findViewById(R.id.grafica);
-    //    createCharts();
+        grafica = (BarChart) findViewById(R.id.grafica);
+        createCharts();
     }
 
     @Override
@@ -90,12 +90,8 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
@@ -149,7 +145,7 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
     public void onFragmentInteraction(Uri uri) {
 
     }
-    /*
+
     private Chart getSameChart(Chart chart, String description, int textColor, int background, int animation){
         chart.getDescription().setText(description);
         chart.getDescription().setTextSize(15);
@@ -217,5 +213,5 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
         BarData barData = new BarData(barDataSet);
         barData.setBarWidth(1);
         return barData;
-    }*/
+    }
 }
