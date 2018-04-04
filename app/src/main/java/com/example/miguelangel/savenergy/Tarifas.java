@@ -24,7 +24,7 @@ public class Tarifas extends AppCompatActivity {
     //Declaración de variables
     private ListView lv_tarifas;
     private ArrayAdapter adapter;
-    private String getAllContactsURL = "https://savenergy.000webhostapp.com/savenergy/get_Tarifas.php";
+    private String getAllTarifasURL = "https://savenergy.000webhostapp.com/savenergy/get_Tarifas.php";
     //Fin de la declaración de variables
 
     @Override
@@ -53,7 +53,7 @@ public class Tarifas extends AppCompatActivity {
         lv_tarifas.setAdapter(adapter);
 
 
-        CargaDatos(getAllContactsURL);
+        CargaDatos(getAllTarifasURL);
     }
 
                         //Metodo para cargar los datos desde el servidor
