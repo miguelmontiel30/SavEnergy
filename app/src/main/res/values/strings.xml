@@ -23,4 +23,9 @@
 
     <!-- Strings de interfaz "Tarifas"-->
     <string name="tarifas">Tarifas</string>
+
+    <!--Strings de interfaz "Bienvenido"-->
+    <string name="bienvenido">Bienvenido</string>
+    <string name="precio">El precio por kWh/h actual es de $:</string>
+
 </resources>

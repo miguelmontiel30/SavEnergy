@@ -1,5 +1,6 @@
 package com.example.miguelangel.savenergy;
 
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,9 +14,17 @@ import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.github.mikephil.charting.charts.Chart;
+import com.github.mikephil.charting.charts.CombinedChart;
+
 public class Principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Configuracion_Perfil.OnFragmentInteractionListener,
 Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteractionListener{
+
+    private CombinedChart grafica;
+    private String []horas = new String[]{"1","2","3","4","5","6","7","8"};
+    private int[]volts = new int[]{100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,};
+    private int[]colores = new int[]{Color.rgb(13,13,13)};
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -42,6 +51,8 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+
+        grafica = (CombinedChart) findViewById(R.id.grafica);
     }
 
     @Override
@@ -121,5 +132,9 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
     @Override
     public void onFragmentInteraction(Uri uri) {
 
+    }
+
+    private Chart getSameChart(){
+        return null;
     }
 }

@@ -9,4 +9,10 @@
     tools:context="com.example.miguelangel.savenergy.Principal"
     tools:showIn="@layout/app_bar_principal">
 
+    <com.github.mikephil.charting.charts.CombinedChart
+        android:id="@+id/grafica"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"/>
+
 </android.support.constraint.ConstraintLayout>

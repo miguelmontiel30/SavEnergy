@@ -30,7 +30,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="30sp"
                     android:layout_gravity="center_horizontal"
-                    android:text="Bienvenido" />
+                    android:text="@string/bienvenido" />
 
             </LinearLayout>
 
@@ -53,7 +53,7 @@
                         android:textColor="#000"
                         android:textSize="12sp"
                         android:layout_gravity=""
-                        android:text="El precio por kWh/h actual es de $:" />
+                        android:text="@string/precio" />
 
                     <EditText
                         android:layout_width="wrap_content"
@@ -65,11 +65,8 @@
 
                 </LinearLayout>
 
-                <ImageView
-                    android:id="@+id/grafica"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/logo" />
+
+
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
