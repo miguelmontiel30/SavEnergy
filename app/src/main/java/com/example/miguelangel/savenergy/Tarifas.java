@@ -11,6 +11,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -45,7 +47,6 @@ public class Tarifas extends AppCompatActivity {
 
                             //Se Asigna permiso para mantener abierta la conexion
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
-
 
                                         //Inicialización de variables declaradas
         lv_tarifas = (ListView)findViewById(R.id.lv_tarifas);

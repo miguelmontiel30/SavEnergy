@@ -18,7 +18,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Inicio_Sesion extends AppCompatActivity implements View.OnClickListener{
-
     //Declaracion de variables
     EditText email, pass;
     Button iniciar;
@@ -68,6 +67,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                 while((linea=reader.readLine())!=null){
                     result.append(linea);
                 }
+            }
+            else if(respuesta!=200){
+                Toast.makeText(getApplicationContext(),"Revisa tu conexion de internet",Toast.LENGTH_LONG).show();
+                return result.toString();
             }
         } catch (Exception e) {}
         return result.toString();

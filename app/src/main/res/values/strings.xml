@@ -15,7 +15,7 @@
     <string name="pass">Contraseña</string>
     <string name="re_pass">Repetir Contraseña</string>
     <string name="correo">Correo</string>
-    <string name="nombre">Nombre</string>
+    <string name="nombre">Clave</string>
 
     <!-- Stringa de interfaz "INICIO"-->
     <string name="inicia_sesion">Iniciar Sesión</string>

@@ -7,13 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Spinner;
 
 import com.github.mikephil.charting.charts.CombinedChart;
 
 public class Bienvenido extends Fragment {
 
-    private Spinner sp_fecha;
+
 
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
