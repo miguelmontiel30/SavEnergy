@@ -25,7 +25,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
                                         //Metodo para lanzar un nuevo Activity
     public void iniciar_sesionOnclick() {
-        Intent intent = new Intent(Inicio_Sesion.this, Tarifas.class);
+        Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
         startActivity(intent);
         finish();
     }
