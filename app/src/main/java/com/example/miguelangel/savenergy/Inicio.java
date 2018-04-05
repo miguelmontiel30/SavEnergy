@@ -12,6 +12,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     Button tarifa;
     Button iniciar_sesion;
     Button registrarse;
+    Button principal;
     //Fin de la declaración de variables
 
     @Override
@@ -26,6 +27,9 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         registrarse.setOnClickListener(this);
 
         tarifa = (Button) findViewById(R.id.tarifas);
+        tarifa.setOnClickListener(this);
+
+        principal = (Button) findViewById(R.id.id_principal);
         tarifa.setOnClickListener(this);
     }
 
@@ -47,6 +51,12 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         finish();
     }
 
+    public void principal_OnClick() {
+        Intent intent = new Intent(Inicio.this, Principal.class);
+        startActivity(intent);
+        finish();
+    }
+
     @Override
     public void onClick(View view) {
         if (view == iniciar_sesion) {
@@ -55,6 +65,8 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
             registrarse_OnClick();
         }else if (view == tarifa) {
             tarifas_OnClick();
+        }else if (view == principal) {
+            principal_OnClick();
         }
     }
 }

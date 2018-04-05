@@ -63,8 +63,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|center_horizontal"
                         android:textColor="#000"
-                        android:textSize="15dp"
-                        android:text="¿Aún no tienes una cuenta?" />
+                        android:textSize="15sp"
+                        android:text="@string/cuenta" />
 
                     <Button
                         android:id="@+id/registrarse"
@@ -80,9 +80,9 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|center_horizontal"
                         android:textColor="#000"
-                        android:textSize="15dp"
+                        android:textSize="15sp"
                         android:layout_margin="4dp"
-                        android:text="Ó" />
+                        android:text="@string/o" />
 
                     <Button
                         android:id="@+id/inicio_sesion"
@@ -99,6 +99,13 @@
                         android:textColor="@color/buttonText"
                         android:theme="@style/Button_style"
                         android:text="Tarifas" />
+                    <Button
+                        android:id="@+id/id_principal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/buttonText"
+                        android:theme="@style/Button_style"
+                        android:text="Principal" />
                 </LinearLayout>
             </LinearLayout>
     </ScrollView>

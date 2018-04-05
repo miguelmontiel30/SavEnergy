@@ -18,6 +18,7 @@ import android.view.MenuItem;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
+import com.github.mikephil.charting.charts.LineChart;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.XAxis;
@@ -26,20 +27,24 @@ import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
 import com.github.mikephil.charting.data.DataSet;
+import com.github.mikephil.charting.data.Entry;
+import com.github.mikephil.charting.data.LineData;
+import com.github.mikephil.charting.data.LineDataSet;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Principal extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener, Configuracion_Perfil.OnFragmentInteractionListener,
 Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteractionListener{
 
-    /*
-    private BarChart grafica;
-    private String []horas = new String[]{"1","2","3","4","5","6","7","8"};
+
+    private LineChart grafica;
+    private String []tipo_energía = new String[]{"Sustentable","Electrica"};
     private int[]volts = new int[]{100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,};
     private int[]colores = new int[]{Color.rgb(13,13,13)};
-    */
+
 
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -67,8 +72,36 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-     //   grafica = (BarChart) findViewById(R.id.grafica);
-    //    createCharts();
+        grafica = (LineChart) findViewById(R.id.grafica);
+
+        setData(40,60);
+        grafica.animateX(3000);
+    }
+
+    private void setData(int count, int range){
+        ArrayList<Entry> yValues_1 = new ArrayList<>();
+        for (int i = 0; i < count; i++){
+            float value = (float) (Math.random()*range)+250;
+            yValues_1.add(new Entry(i,value));
+        }
+
+        ArrayList<Entry> yValues_2 = new ArrayList<>();
+        for (int i = 0; i < count; i++) {
+            float value = (float) (Math.random() * range) + 150;
+            yValues_2.add(new Entry(i, value));
+        }
+
+        LineDataSet set_1, set_2;
+
+            set_1 = new LineDataSet(yValues_1, "Energía Sustentable");
+            set_1.setColor(getResources().getColor(R.color.sustentable));
+            set_1.setValueTextSize(5f);
+
+            set_2 = new LineDataSet(yValues_2, "Energía Electrica");
+
+        LineData data = new LineData(set_1,set_2);
+
+        grafica.setData(data);
     }
 
     @Override
@@ -83,19 +116,14 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.principal, menu);
         return true;
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
+        int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
         }
@@ -149,6 +177,10 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+
+}
+
     /*
     private Chart getSameChart(Chart chart, String description, int textColor, int background, int animation){
         chart.getDescription().setText(description);
@@ -165,9 +197,9 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
         legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
 
         ArrayList<LegendEntry>entries = new ArrayList<>();
-        for (int i=0; i<horas.length; i++){
+        for (int i=0; i<tipo_energía.length; i++){
             LegendEntry entry = new LegendEntry();
-            entry.label=horas[i];
+            entry.label=tipo_energía[i];
             entries.add(entry);
         }
         legend.setCustom(entries);
@@ -184,7 +216,7 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
     private void axisX(XAxis axis){
         axis.setGranularityEnabled(true);
         axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setValueFormatter(new IndexAxisValueFormatter(horas));
+        axis.setValueFormatter(new IndexAxisValueFormatter(tipo_energía));
     }
 
     private void axisLeft(YAxis axis){
@@ -197,7 +229,7 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
     }
 
     public void createCharts(){
-        grafica = (BarChart)getSameChart(grafica,"Consumo de Energías",Color.WHITE,Color.BLACK,3000);
+        grafica = (BarChart)getSameChart(grafica,"Consumo de Energías",Color.BLACK,Color.WHITE,3000);
         grafica.setData(getBarData());
         grafica.invalidate();
         axisX(grafica.getXAxis());
@@ -218,4 +250,3 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
         barData.setBarWidth(1);
         return barData;
     }*/
-}

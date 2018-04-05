@@ -20,6 +20,8 @@
     <!-- Stringa de interfaz "INICIO"-->
     <string name="inicia_sesion">Iniciar Sesión</string>
     <string name="title_activity_tarifas">Tarifas</string>
+    <string name="o">Ó</string>
+    <string name="cuenta">¿Aún no tienes una cuenta?</string>
 
     <!-- Strings de interfaz "Tarifas"-->
     <string name="tarifas">Tarifas</string>
