@@ -83,18 +83,14 @@ public class Tarifas extends AppCompatActivity {
         String tarifa;
         try{
             jsonArray = new JSONArray(jsonResult);
+            for(int i=0;i<jsonArray.length();i++){
+                    JSONObject jsonObject = jsonArray.getJSONObject(i);
+                    id_tarifa = jsonObject.getString("id_tarifa");
+                    tarifa = jsonObject.getString("tarifa");
+                    adapter.add(id_tarifa + ':' + tarifa);
+            }
         }catch (JSONException e){
             e.printStackTrace();
-        }
-        for(int i=0;i<jsonArray.length();i++){
-            try{
-                JSONObject jsonObject = jsonArray.getJSONObject(i);
-                id_tarifa = jsonObject.getString("id_tarifa");
-                tarifa = jsonObject.getString("tarifa");
-                adapter.add(id_tarifa + ':' + tarifa);
-            }catch (JSONException e){
-                e.printStackTrace();
-            }
         }
     }
 

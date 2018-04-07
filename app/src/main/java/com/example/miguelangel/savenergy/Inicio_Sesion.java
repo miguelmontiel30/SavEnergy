@@ -2,6 +2,7 @@ package com.example.miguelangel.savenergy;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,9 +13,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 
 public class Inicio_Sesion extends AppCompatActivity implements View.OnClickListener{
@@ -42,6 +46,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         pass = (EditText) findViewById(R.id.password);
         iniciar = (Button) findViewById(R.id.iniciar_sesion);
         iniciar.setOnClickListener(this);
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
                             //Metodo con 2 parametros para conectar con servidor y devuelve datos
@@ -68,38 +73,18 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                     result.append(linea);
                 }
             }
-            else if(respuesta!=200){
-                Toast.makeText(getApplicationContext(),"Revisa tu conexion de internet",Toast.LENGTH_LONG).show();
-                return result.toString();
-            }
-        } catch (Exception e) {}
+        } catch (ProtocolException e) {
+            e.printStackTrace();
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return result.toString();
     }
     @Override
     public void onClick(View view) {
-        Thread tr=new Thread(){
-            @Override
-            public void run() {
-                final String resultado=getDatos(pass.getText().toString(),email.getText().toString());//se guarda el resultado de
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONObject respuestaJSON = null;   //Creo un JSONObject a partir del StringBuilder pasado a cadena
-                        try {
-                            respuestaJSON = new JSONObject(resultado.toString());
-                            String resultJSON = respuestaJSON.getString("estado");
-                            if (resultJSON.equals("1")){      // hay un alumno que mostrar
-                                iniciar_sesionOnclick();
-                            }else if (resultJSON.equals("2")){
-                                Toast.makeText(getApplicationContext(),"User incorrect",Toast.LENGTH_LONG).show();
-                        }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        };
-        tr.start();
+        iniciar_sesionOnclick();
     }
+
 }

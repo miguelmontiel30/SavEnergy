@@ -30,7 +30,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         tarifa.setOnClickListener(this);
 
         principal = (Button) findViewById(R.id.id_principal);
-        tarifa.setOnClickListener(this);
+        principal.setOnClickListener(this);
     }
 
     public void inicio_sesion_OnClick() {
@@ -46,7 +46,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     }
 
     public void tarifas_OnClick() {
-        Intent intent = new Intent(Inicio.this, Tarifas.class);
+        Intent intent = new Intent(Inicio.this, Configuracion_f_corte.class);
         startActivity(intent);
         finish();
     }

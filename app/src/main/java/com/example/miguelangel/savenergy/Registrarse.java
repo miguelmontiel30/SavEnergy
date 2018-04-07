@@ -43,6 +43,9 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
     public void registrarse_OnClick() {//Metodo que abre el siguiente Activity
         Intent intent = new Intent(Registrarse.this,Configuracion_f_corte.class);
+        intent.putExtra("clave",clave.getText().toString());
+        intent.putExtra("correo",correo.getText().toString());
+        intent.putExtra("pass",pass.getText().toString());
         startActivity(intent);
         finish();
     }
@@ -119,7 +122,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if(validarClave() && validarCorreo() && validarPass()){
+        if (validarClave() && validarCorreo() && validarPass()){
             registrarse_OnClick();
         }
     }
