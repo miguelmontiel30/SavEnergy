@@ -19,8 +19,10 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.CombinedChart;
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.Legend;
 import com.github.mikephil.charting.components.LegendEntry;
+import com.github.mikephil.charting.components.LimitLine;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
@@ -30,6 +32,7 @@ import com.github.mikephil.charting.data.DataSet;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 
 import java.lang.reflect.Array;
@@ -41,9 +44,6 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
 
     private LineChart grafica;
-    private String []tipo_energía = new String[]{"Sustentable","Electrica"};
-    private int[]volts = new int[]{100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,};
-    private int[]colores = new int[]{Color.rgb(13,13,13)};
 
 
     @Override
@@ -74,9 +74,21 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
         grafica = (LineChart) findViewById(R.id.grafica);
 
-        setData(40,60);
-        grafica.animateX(3000);
+            setData(100, 60);
+            grafica.animateX(3000);
+
+
+
+
+        grafica.getAxisRight().setEnabled(false);
+        /*
+        String[] horas = new String[] {"12","1","2","3","4","5","6","7","8","9","10","11","12","13","14","15","16","17","18","19","20","21","22","23","24"};
+
+        XAxis xAxis = grafica.getXAxis();
+        xAxis.setValueFormatter(new Etiquetas_Eje_X(horas));
+        xAxis.setGranularity(1);*/
     }
+
 
     private void setData(int count, int range){
         ArrayList<Entry> yValues_1 = new ArrayList<>();
@@ -98,7 +110,8 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
             set_1.setValueTextSize(5f);
 
             set_2 = new LineDataSet(yValues_2, "Energía Electrica");
-
+            set_2.setColor(getResources().getColor(R.color.electrica));
+            set_2.setValueTextSize(5f);
         LineData data = new LineData(set_1,set_2);
 
         grafica.setData(data);
@@ -178,75 +191,4 @@ Bienvenido.OnFragmentInteractionListener, Menu_configuracion.OnFragmentInteracti
 
     }
 
-
 }
-
-    /*
-    private Chart getSameChart(Chart chart, String description, int textColor, int background, int animation){
-        chart.getDescription().setText(description);
-        chart.getDescription().setTextSize(15);
-        chart.setBackgroundColor(background);
-        chart.animateY(animation);
-        legend(chart);
-        return chart;
-    }
-
-    private void legend(Chart chart){
-        Legend legend = chart.getLegend();
-        legend.setForm(Legend.LegendForm.CIRCLE);
-        legend.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-
-        ArrayList<LegendEntry>entries = new ArrayList<>();
-        for (int i=0; i<tipo_energía.length; i++){
-            LegendEntry entry = new LegendEntry();
-            entry.label=tipo_energía[i];
-            entries.add(entry);
-        }
-        legend.setCustom(entries);
-    }
-
-    private ArrayList<BarEntry>getBarEntries(){
-        ArrayList<BarEntry> entries = new ArrayList<>();
-        for (int i=0; i<volts.length; i++) {
-            entries.add(new BarEntry(i,volts[i]));
-        }
-        return entries;
-    }
-
-    private void axisX(XAxis axis){
-        axis.setGranularityEnabled(true);
-        axis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        axis.setValueFormatter(new IndexAxisValueFormatter(tipo_energía));
-    }
-
-    private void axisLeft(YAxis axis){
-        axis.setSpaceTop(1000);
-        axis.setAxisMinimum(0);
-    }
-
-    private void axisRight(YAxis axis){
-        axis.setEnabled(false);
-    }
-
-    public void createCharts(){
-        grafica = (BarChart)getSameChart(grafica,"Consumo de Energías",Color.BLACK,Color.WHITE,3000);
-        grafica.setData(getBarData());
-        grafica.invalidate();
-        axisX(grafica.getXAxis());
-        axisLeft(grafica.getAxisLeft());
-        axisRight(grafica.getAxisRight());
-    }
-
-    private DataSet getData(DataSet dataSet){
-        dataSet.setColors(colores);
-        dataSet.setValueTextSize(Color.WHITE);
-        dataSet.setValueTextSize(10);
-        return dataSet;
-    }
-
-    private BarData getBarData(){
-        BarDataSet barDataSet = (BarDataSet) getData(new BarDataSet(getBarEntries(),""));
-        BarData barData = new BarData(barDataSet);
-        barData.setBarWidth(1);
-        return barData;
-    }*/
