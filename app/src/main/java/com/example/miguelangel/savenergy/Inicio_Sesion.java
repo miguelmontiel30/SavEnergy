@@ -3,6 +3,7 @@ package com.example.miguelangel.savenergy;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,12 +14,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
-import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 
 public class Inicio_Sesion extends AppCompatActivity implements View.OnClickListener{
@@ -50,41 +48,43 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     }
 
                             //Metodo con 2 parametros para conectar con servidor y devuelve datos
-
-    public String getDatos(String contra, String email){
+    public String validar(String contra, String email){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
         URL url = null;
-        String linea = "";
-        int respuesta = 0;
-        StringBuilder result=null;
-
+        String line = "";
+        String webServiceResult="";
         try {
             url= new URL("https://savenergy.000webhostapp.com/savenergy/Login.php?contra="+contra+"&email="+email);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setReadTimeout(15000);
-            connection.setConnectTimeout(10000);
-            connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
-            respuesta=connection.getResponseCode();
-            result = new StringBuilder();
-            if(respuesta==200){
-                InputStream in=new BufferedInputStream(connection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                while((linea=reader.readLine())!=null){
-                    result.append(linea);
-                }
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
             }
-        } catch (ProtocolException e) {
-            e.printStackTrace();
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
+            bufferedReader.close();
+        } catch (Exception e) {}
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+    public boolean sesion(){
+        boolean ses= false;
+        try {
+            String resultJSON="";
+            JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
+            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                ses = true;
+                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
+            }
+            else if (resultJSON.equals("2")){//el ususario no existe
+                Toast.makeText(getApplicationContext(),"Datos incorrectos",Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
             e.printStackTrace();
         }
-        return result.toString();
+        return ses;
     }
     @Override
     public void onClick(View view) {
-        iniciar_sesionOnclick();
+        if (sesion()){
+            iniciar_sesionOnclick();
+        }
     }
-
 }

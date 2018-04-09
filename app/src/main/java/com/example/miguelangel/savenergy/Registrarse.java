@@ -3,6 +3,7 @@ package com.example.miguelangel.savenergy;
 import android.content.Intent;
 import android.os.StrictMode;
 import android.support.design.widget.TextInputEditText;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -21,7 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 
 public class Registrarse extends AppCompatActivity implements View.OnClickListener{
-    // Declaracion de varuables
+    // Declaracion de variables
     TextInputEditText clave, correo, pass, pass2;
     Button registrar;
 
@@ -29,7 +30,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
-
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         //Asignacion de variables con componentes
         clave = (TextInputEditText) findViewById(R.id.et_clave);
         correo = (TextInputEditText) findViewById(R.id.et_correo);
@@ -42,7 +43,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
     }
 
     public void registrarse_OnClick() {//Metodo que abre el siguiente Activity
-        Intent intent = new Intent(Registrarse.this,Configuracion_f_corte.class);
+        Intent intent = new Intent(Registrarse.this, Configuracion_f_corte.class);
         intent.putExtra("clave",clave.getText().toString());
         intent.putExtra("correo",correo.getText().toString());
         intent.putExtra("pass",pass.getText().toString());
@@ -57,9 +58,8 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
             url= new URL("https://savenergy.000webhostapp.com/savenergy/registro.php?code="+code+"&data="+data);//url en donde esta guardado el archivo PHP
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null){//mientras exista un resultado los ira almacenando en la variable
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
                 webServiceResult += line;
-
             }
             bufferedReader.close();
         } catch (Exception e) {}
@@ -110,6 +110,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         }
         return clv;
     }
+
     public boolean validarPass(){
         boolean clv=false;
         if(pass.getText().toString().equals(pass2.getText().toString())){
@@ -122,7 +123,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
     @Override
     public void onClick(View view) {
-        if (validarClave() && validarCorreo() && validarPass()){
+        if (validarClave() && validarCorreo() && validarPass()) {
             registrarse_OnClick();
         }
     }

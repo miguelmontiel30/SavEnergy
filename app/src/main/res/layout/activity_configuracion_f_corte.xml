@@ -65,10 +65,14 @@
                         android:text="Proxima fecha de Facturación"
                         android:textColor="#000" />
 
-                    <Spinner
-                        android:id="@+id/sp_f_facturacion"
+                    <TextView
+                        android:id="@+id/txt_fecha"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="29dp"
+                        android:layout_gravity="center"
+                        android:gravity="center"
+                        android:text="TextView"
+                        android:textSize="18sp" />
 
                     <TextView
                         android:id="@+id/txt_tarifa"

@@ -15,18 +15,21 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".Inicio"
-            android:theme="@style/NoActionBar">
+            android:name=".Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Inicio_Sesion" />
-        <activity
-            android:name=".Registrarse"
-            android:theme="@style/NoActionBar"></activity>
+        <activity android:name=".Inicio_Sesion"
+            android:label="Inicia sesión"
+            android:parentActivityName=".Inicio" >
+        </activity>
+        <activity android:name=".Registrarse"
+            android:label="Registrate"
+            android:parentActivityName=".Inicio" >
+        </activity>
         <activity android:name=".Configuracion_f_corte" />
         <activity
             android:name=".Principal"
