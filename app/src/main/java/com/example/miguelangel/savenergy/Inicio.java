@@ -20,6 +20,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
+
         iniciar_sesion = (Button) findViewById(R.id.inicio_sesion);         //Asignación de variable a componente en XML
         iniciar_sesion.setOnClickListener(this);
 
@@ -30,9 +31,12 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         tarifa.setOnClickListener(this);
 
         principal = (Button) findViewById(R.id.id_principal);
-        tarifa.setOnClickListener(this);
+        principal.setOnClickListener(this);
     }
-
+    public void startDua(View view) {
+        //startActivity(new Intent(this, Registrarse.class));
+        startActivity(new Intent(this, Inicio_Sesion.class));
+    }
     public void inicio_sesion_OnClick() {
         Intent intent = new Intent(Inicio.this, Inicio_Sesion.class);
         startActivity(intent);

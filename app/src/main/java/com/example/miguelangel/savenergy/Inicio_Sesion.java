@@ -2,6 +2,8 @@ package com.example.miguelangel.savenergy;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.os.StrictMode;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -42,64 +44,47 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         pass = (EditText) findViewById(R.id.password);
         iniciar = (Button) findViewById(R.id.iniciar_sesion);
         iniciar.setOnClickListener(this);
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
                             //Metodo con 2 parametros para conectar con servidor y devuelve datos
-
-    public String getDatos(String contra, String email){
+    public String validar(String contra, String email){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
         URL url = null;
-        String linea = "";
-        int respuesta = 0;
-        StringBuilder result=null;
-
+        String line = "";
+        String webServiceResult="";
         try {
             url= new URL("https://savenergy.000webhostapp.com/savenergy/Login.php?contra="+contra+"&email="+email);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-            connection.setReadTimeout(15000);
-            connection.setConnectTimeout(10000);
-            connection.setRequestMethod("GET");
-            connection.setDoOutput(true);
-            respuesta=connection.getResponseCode();
-            result = new StringBuilder();
-            if(respuesta==200){
-                InputStream in=new BufferedInputStream(connection.getInputStream());
-                BufferedReader reader = new BufferedReader(new InputStreamReader(in));
-                while((linea=reader.readLine())!=null){
-                    result.append(linea);
-                }
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
             }
-            else if(respuesta!=200){
-                Toast.makeText(getApplicationContext(),"Revisa tu conexion de internet",Toast.LENGTH_LONG).show();
-                return result.toString();
-            }
+            bufferedReader.close();
         } catch (Exception e) {}
-        return result.toString();
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+    public boolean sesion(){
+        boolean ses= false;
+        try {
+            String resultJSON="";
+            JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
+            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                ses = true;
+                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
+            }
+            else if (resultJSON.equals("2")){//el ususario no existe
+                Toast.makeText(getApplicationContext(),"Datos incorrectos",Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return ses;
     }
     @Override
     public void onClick(View view) {
-        Thread tr=new Thread(){
-            @Override
-            public void run() {
-                final String resultado=getDatos(pass.getText().toString(),email.getText().toString());//se guarda el resultado de
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        JSONObject respuestaJSON = null;   //Creo un JSONObject a partir del StringBuilder pasado a cadena
-                        try {
-                            respuestaJSON = new JSONObject(resultado.toString());
-                            String resultJSON = respuestaJSON.getString("estado");
-                            if (resultJSON.equals("1")){      // hay un alumno que mostrar
-                                iniciar_sesionOnclick();
-                            }else if (resultJSON.equals("2")){
-                                Toast.makeText(getApplicationContext(),"User incorrect",Toast.LENGTH_LONG).show();
-                        }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-            }
-        };
-        tr.start();
+        if (sesion()){
+            iniciar_sesionOnclick();
+        }
     }
 }
