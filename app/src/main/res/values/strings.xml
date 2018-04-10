@@ -15,7 +15,16 @@
     <string name="pass">Contraseña</string>
     <string name="re_pass">Repetir Contraseña</string>
     <string name="correo">Correo</string>
-    <string name="nombre">Clave</string>
+    <string name="clave_prod">Clave del producto</string>
+    <!-- Strings de errores "Registrarse" -->
+    <string name="vacio">Este campo es obligatorio</string>
+    <string name="correo_inv">Correo Inválido</string>
+    <string name="correo_reg">Este correo ya se encuntra registrado</string>
+    <string name="pass_inc">Sólo caracteres alfanumericos</string>
+    <string name="contrasenias">Las contraseñas deben coincidir</string>
+    <string name="prod_reg">El producto ya tiene un cliente asignado</string>
+    <string name="prod_inex">Este producto no existe</string>
+    <string name="prod_in">Este producto esta desactivado</string>
 
     <!-- Stringa de interfaz "INICIO"-->
     <string name="inicia_sesion">Iniciar Sesión</string>

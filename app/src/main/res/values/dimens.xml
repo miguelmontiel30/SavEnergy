@@ -8,4 +8,7 @@
 
     <!-- Dimesiones para Botones -->
     <dimen name="button_content">10dp</dimen>
+
+    <!-- Dimesiones para Errores -->
+    <dimen name="error">5dp</dimen>
 </resources>

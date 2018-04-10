@@ -6,4 +6,5 @@
     <color name="buttonText">#fff</color>
     <color name="sustentable">#33cc33</color>
     <color name="electrica">#00bfff</color>
+    <color name="error_validacion">#ff0000</color>
 </resources>

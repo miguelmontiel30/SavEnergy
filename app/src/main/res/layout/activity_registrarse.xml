@@ -28,11 +28,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:orientation="vertical">
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="8dp">
 
 
-            <!-- Cabecera SavEnergy -->
+                                                                <!-- Cabecera SavEnergy -->
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -55,34 +57,43 @@
                     tools:layout_editor_absoluteY="16dp" />
             </LinearLayout>
 
-            <!-- Text Input layouts de Registro -->
+                                                                <!-- Fin de la cabecera -->
+
+                                                             <!-- Text Input layouts de Registro -->
+
             <!-- Clave del producto -->
+
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_nombre"
+                android:id="@+id/til_clave"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 app:counterEnabled="true"
-                app:counterMaxLength="15">
-                android:hint="@string/nombre">
+                app:counterMaxLength="15"
+                android:hint="@string/clave_prod"
+                app:counterOverflowTextAppearance="@style/AppTheme.CharacterCounter"
+                app:errorTextAppearance="@style/AppTheme.EditTextError">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/et_clave"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     app:errorEnabled="true" />
+
             </android.support.design.widget.TextInputLayout>
 
             <!-- Correo -->
+
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/email"
+                android:id="@+id/til_correo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
                 android:hint="@string/correo"
-                android:layout_marginTop="8dp">
+                app:errorTextAppearance="@style/AppTheme.EditTextError">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/et_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -90,15 +101,17 @@
             </android.support.design.widget.TextInputLayout>
 
             <!-- Contraseña -->
+
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/password_txt"
+                android:id="@+id/til_contrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:passwordToggleEnabled="true"
-                android:hint="@string/pass">
+                android:hint="@string/pass"
+                app:errorTextAppearance="@style/AppTheme.EditTextError"
+                app:passwordToggleEnabled="true">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/et_contrasenia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -106,35 +119,38 @@
             </android.support.design.widget.TextInputLayout>
 
             <!-- Repetir Contraseña-->
+
             <android.support.design.widget.TextInputLayout
                 android:id="@+id/til_repetir_contrasenia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                app:passwordToggleEnabled="true"
-                android:hint="@string/re_pass">
+                android:hint="@string/re_pass"
+                app:errorTextAppearance="@style/AppTheme.EditTextError"
+                app:passwordToggleEnabled="true">
 
-                <android.support.design.widget.TextInputEditText
+                <EditText
                     android:id="@+id/repeat_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword"
+                    />
             </android.support.design.widget.TextInputLayout>
 
+                                                            <!-- Declaración de botones -->
 
-            <!-- Boton registro-->
             <Button
                 android:id="@+id/registrarse"
-                android:theme="@style/Button_style"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
                 android:padding="@dimen/button_content"
-                android:layout_gravity="center_horizontal"
+                android:text="@string/registrarse"
                 android:textColor="@color/buttonText"
-                android:text="@string/registrarse" />
-        </LinearLayout>
+                android:theme="@style/Button_style" />
 
+        </LinearLayout>
     </ScrollView>
 
 
