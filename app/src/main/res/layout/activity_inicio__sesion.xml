@@ -6,16 +6,21 @@
     android:layout_height="match_parent"
     tools:context="com.example.miguelangel.savenergy.Inicio_Sesion">
 
+
+                                <!-- Scroll view para dispositivos pequeños -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+                                <!-- Contenedor principal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:padding="8sp">
 
+            <!-- Contenedor de la cabecera de SavEnergy -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="126dp"
@@ -32,88 +37,76 @@
                     android:layout_gravity="center"
                     android:contentDescription="Logo banner"
                     android:src="@drawable/logo"
-                    tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteX="110dp"
-                    tools:layout_editor_absoluteY="16dp" />
+                    tools:ignore="MissingConstraints" />
             </LinearLayout>
 
+            <!-- Contenedor de los componentes TextInputLayout -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-
                 android:layout_marginTop="15sp"
                 android:orientation="vertical"
                 android:padding="15sp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="138dp">
+                tools:ignore="MissingConstraints">
 
-                <TextView
-                    android:id="@+id/usuario"
+                <!-- TextInputLayouts de Inicio Sesion -->
+
+                <!-- TextInputLayout para correo electronico del usuario -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Correo electronico" />
+                    android:hint="@string/correo_electronico"
+                    app:errorTextAppearance="@style/AppTheme.EditTextError">
 
-                <EditText
-                    android:id="@+id/correo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:contentDescription="usuario@ejemplo.com"
-                    android:ems="10"
-                    android:hint="Correo@ejemplo,com"
-                    android:inputType="textEmailAddress" />
+                    <EditText
+                        android:id="@+id/correo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
-                    android:id="@+id/password_txt"
+                <!-- TextInputLayout para contraseña del usuario -->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_password"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="8dp"
-                    android:text="Contraseña" />
+                    android:hint="@string/pass"
+                    app:errorTextAppearance="@style/AppTheme.EditTextError"
+                    app:passwordToggleEnabled="true">
 
-                <EditText
-                    android:id="@+id/password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:hint="contraseña"
-                    android:inputType="textPassword" />
+                    <EditText
+                        android:id="@+id/password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:inputType="textPassword" />
+                </android.support.design.widget.TextInputLayout>
 
+                <!-- Texto olvidaste contraseña -->
                 <TextView
                     android:id="@+id/olvido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="¿Olvidaste tu contraseña?"
-                    android:layout_marginTop="5dp"
                     android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="5dp"
+                    android:text="@string/olvido"
                     android:textColor="@color/colorPrimary" />
 
+                <!-- Boton de accion -->
                 <Button
                     android:id="@+id/iniciar_sesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:text="Iniciar Sesión" />
+                    android:text="@string/inicia_sesion"
+                    android:theme="@style/Button_style" />
 
             </LinearLayout>
 
-            <TextView
-                android:id="@+id/o"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="15dp"
-                android:gravity="center"
-                android:text="Ó" />
+        </LinearLayout> <!-- Fin del contenedor principal de la interfaz -->
 
-            <Button
-                android:id="@+id/google"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:layout_gravity="end|bottom"
-                android:text="Inicia Sesión con Google" />
-
-        </LinearLayout>
-    </ScrollView>
+    </ScrollView> <!-- Fin del contenedor ScrollView -->
 
 </android.support.constraint.ConstraintLayout>

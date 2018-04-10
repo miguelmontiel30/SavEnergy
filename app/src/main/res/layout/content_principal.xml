@@ -20,21 +20,22 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15sp"
-            android:orientation="vertical" >
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="15sp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/txt_bienvenido"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
                     android:layout_gravity="center_horizontal"
-                    android:text="@string/bienvenido" />
+                    android:text="@string/bienvenido"
+                    android:textSize="30sp" />
 
             </LinearLayout>
 
@@ -42,31 +43,32 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="6dp"
                     android:layout_marginTop="25dp"
-                    android:orientation="horizontal" >
+                    android:orientation="horizontal"
+                    android:padding="6dp">
+
                     <TextView
                         android:id="@+id/txt_precio_actual"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000"
-                        android:textSize="12sp"
                         android:layout_gravity=""
-                        android:text="@string/precio" />
+                        android:text="@string/precio"
+                        android:textColor="#000"
+                        android:textSize="12sp" />
 
                     <EditText
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="12sp"
                         android:layout_weight="1"
                         android:ems="5"
-                        android:inputType="number" />
+                        android:inputType="number"
+                        android:textSize="12sp" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -75,23 +77,23 @@
                 android:id="@+id/grafica"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
-                android:layout_weight="1"/>
+                android:layout_weight="1" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:padding="8dp"
-                android:orientation="horizontal" >
+                android:orientation="horizontal"
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/txt_consumo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:textSize="20sp"
                     android:layout_gravity=""
-                    android:text="Consumo de" />
+                    android:text="Consumo de"
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/sp_fecha"
@@ -99,61 +101,64 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:padding="8dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/txt_consumo_e_e"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#000"
-                    android:textSize="18sp"
                     android:layout_gravity=""
-                    android:text="Energía Electrica (CFE)" />
+                    android:text="Energía Electrica (CFE)"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
                     android:layout_gravity="center_vertical"
-                    android:padding="8dp"
-                    android:orientation="horizontal" >
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
 
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/ss_1"  />
+                        android:src="@drawable/ss_1" />
 
                     <EditText
                         android:id="@+id/tv_consumo_e_e"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#000"
                         android:layout_marginLeft="15dp"
                         android:inputType="textPersonName"
-                        android:text="32" />
+                        android:text="32"
+                        android:textColor="#000" />
+
                     <TextView
                         android:id="@+id/txt_kwh_e"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textSize="18sp"
+                        android:text="kWh"
                         android:textColor="#000"
-                        android:text="kWh" />
+                        android:textSize="18sp" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/txt_consumo_e_s"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
-                    android:textColor="#000"
-                    android:textSize="18sp"
                     android:layout_gravity=""
-                    android:text="Energía Electrica Sustentable" />
+                    android:layout_marginTop="15dp"
+                    android:text="Energía Electrica Sustentable"
+                    android:textColor="#000"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout

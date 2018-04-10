@@ -7,24 +7,12 @@
     android:layout_height="match_parent"
     tools:context="com.example.miguelangel.savenergy.Registrarse">
 
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
-        style="@style/Toolbar_components"
-        android:layout_width="422dp"
-        android:layout_height="?actionBarSize"
-        android:layout_marginEnd="8dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:title="@string/registrarse"
-        app:titleTextColor="@color/buttonText" />
+                <!-- Declaración del ScrollView Contenedor -->
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:ignore="MissingConstraints">
+        android:layout_height="match_parent">
 
-
+                    <!-- Contenedor global de la interfaz -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -32,18 +20,13 @@
             android:orientation="vertical"
             android:padding="8dp">
 
-
-                                                                <!-- Cabecera SavEnergy -->
-
+                    <!-- Cabecera SavEnergy -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="50dp"
                 android:orientation="vertical"
                 android:padding="15dp"
-                tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="8dp"
-                tools:layout_editor_absoluteY="5dp">
+                tools:ignore="MissingConstraints">
 
                 <ImageView
                     android:id="@+id/imageView2"
@@ -56,9 +39,15 @@
                     tools:layout_editor_absoluteX="110dp"
                     tools:layout_editor_absoluteY="16dp" />
             </LinearLayout>
+                    <!-- Fin de la cabecera -->
 
-                                                                <!-- Fin de la cabecera -->
-
+                    <!-- Contenedor de los componentes -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusableInTouchMode="true"
+            android:orientation="vertical"
+            android:padding="15dp">
                                                              <!-- Text Input layouts de Registro -->
 
             <!-- Clave del producto -->
@@ -80,7 +69,6 @@
                     android:layout_height="wrap_content"
                     android:inputType="textPersonName"
                     app:errorEnabled="true" />
-
             </android.support.design.widget.TextInputLayout>
 
             <!-- Correo -->
@@ -138,20 +126,22 @@
             </android.support.design.widget.TextInputLayout>
 
                                                             <!-- Declaración de botones -->
-
             <Button
                 android:id="@+id/registrarse"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="20dp"
-                android:padding="@dimen/button_content"
                 android:text="@string/registrarse"
                 android:textColor="@color/buttonText"
                 android:theme="@style/Button_style" />
 
         </LinearLayout>
+                    <!-- Fin del contenedor de componentes-->
+
+        </LinearLayout>
+                    <!-- Fin del contenedor global -->
+
     </ScrollView>
-
-
+                    <!-- Fin del ScrollView -->
 </android.support.constraint.ConstraintLayout>

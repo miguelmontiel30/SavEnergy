@@ -38,6 +38,12 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
     TextInputLayout til_clave,til_correo,til_contrasenia,til_repetir_contrasenia;
 
                                                 //Fin de la declaracion de variables
+                    //Método para regresar
+    public void onBackPressed(){
+        Intent intent = new Intent(Registrarse.this,Inicio.class);
+        startActivity(intent);
+        finish();
+    }
 
                     //Metodo que abre el siguiente Activity en caso de ser válidos los datos
     public void registrarse_OnClick() {
@@ -141,14 +147,21 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                     //Método para validar que las contraseñas sean iguales
     public boolean validar_contrasenia(String repeat_pass){
         String pass_1 = String.valueOf(pass.getText());
-        if (repeat_pass != pass_1) {
-            til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
+        if (repeat_pass.equals(pass_1)) {
+            til_repetir_contrasenia.setError(null);
             //til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
         }else{
-            til_repetir_contrasenia.setError(null);
+            til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
         }
 
         return true;
+    }
+
+    //Método para regresar cuando pulsan boton back (toolbar)
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
     }
 
     //Metodo OnClick
@@ -254,6 +267,8 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         registrar.setOnClickListener(this);
 
                                                     //Fin de la asignación de variables a componentes XML
+
+
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 

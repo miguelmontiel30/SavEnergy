@@ -3,9 +3,9 @@
     package="com.example.miguelangel.savenergy">
 
     <!-- To access Google+ APIs: -->
-    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"></uses-permission>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"></uses-permission>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <application
         android:allowBackup="true"
@@ -14,22 +14,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity
-            android:name=".Inicio">
+        <activity android:name=".Inicio">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Inicio_Sesion"
+        <activity
+            android:name=".Inicio_Sesion"
             android:label="Inicia sesión"
-            android:parentActivityName=".Inicio" >
-        </activity>
-        <activity android:name=".Registrarse"
+            android:parentActivityName=".Inicio" />
+        <activity
+            android:name=".Registrarse"
             android:label="Registrate"
-            android:parentActivityName=".Inicio" >
-        </activity>
+            android:parentActivityName=".Inicio" />
         <activity android:name=".Configuracion_f_corte" />
         <activity
             android:name=".Principal"
@@ -40,7 +39,9 @@
         <activity
             android:name=".Tarifas"
             android:label="@string/title_activity_tarifas"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".Configuracion_Perfil" />
+        <activity android:name=".Menu_Configuraciones"></activity>
     </application>
 
 </manifest>
