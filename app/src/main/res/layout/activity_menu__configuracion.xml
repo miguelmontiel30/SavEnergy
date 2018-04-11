@@ -27,14 +27,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Configurar Perfil" />
+            android:text="@string/c_perfil"
+            android:theme="@style/Button_style"/>
 
         <Button
             android:id="@+id/btn_contrasenia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Cambiar Contraseña" />
+            android:text="@string/c_pass"
+            android:theme="@style/Button_style"/>
 
 
         <Button
@@ -42,7 +44,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:text="Cambiar tipo de Tarifa y corte" />
+            android:text="@string/c_fact"
+            android:theme="@style/Button_style"/>
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
