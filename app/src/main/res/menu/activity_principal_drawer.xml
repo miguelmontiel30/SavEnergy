@@ -7,35 +7,38 @@
         <item
             android:id="@+id/nav_inicio"
             android:icon="@drawable/ic_inicio"
-            android:title="Inicio" />
-        <item
-            android:id="@+id/nav_configuracion_perfil"
-            android:icon="@drawable/ic_configuracion"
-            android:title="Configuración del perfil" />
+            android:title="@string/inicio" />
     </group>
 
-    <item android:title="Consulta tu Energía">
+    <item android:title="@string/consulta">
         <menu>
-            <item
-                android:id="@+id/nav_consumida"
-                android:icon="@drawable/ic_consumo"
-                android:title="Consumida" />
             <item
                 android:id="@+id/nav_generada"
                 android:icon="@drawable/ic_generacion"
-                android:title="Generada" />
+                android:title="@string/generada" />
+            <item
+                android:id="@+id/nav_consumida"
+                android:icon="@drawable/ic_consumo"
+                android:title="@string/consumida" />
             <item
                 android:id="@+id/nav_facturacion"
                 android:icon="@drawable/ic_facturacion"
-                android:title="Facturación" />
+                android:title="@string/facturacion" />
         </menu>
     </item>
 
-    <group android:checkableBehavior="single">
-        <item
-            android:id="@+id/nav_salir"
-            android:icon="@drawable/ic_salir"
-            android:title="Salir" />
-    </group>
+    <item android:title="@string/user">
+        <menu>
+            <item
+                android:id="@+id/nav_configuracion_perfil"
+                android:icon="@drawable/ic_configuracion"
+                android:title="@string/conf_p" />
+            <item
+                android:id="@+id/nav_salir"
+                android:icon="@drawable/ic_salir"
+                android:title="@string/c_sesion" />
+        </menu>
+    </item>
+
 
 </menu>

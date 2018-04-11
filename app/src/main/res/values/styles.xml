@@ -16,6 +16,7 @@
     <style name="Button_style" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/colorPrimary</item>
         <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="android:textColor">@color/buttonText</item>
     </style>
 
     <!-- Estilos de la toolbar-->
@@ -39,6 +40,16 @@
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <!-- Estilo de contador de caracteres-->
+    <style name="AppTheme.CharacterCounter" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textColor">@color/error_validacion</item>
+    </style>
+
+    <!-- Mensaje de error debajo del EditText-->
+    <style name="AppTheme.EditTextError" parent="@android:style/TextAppearance">
+        <item name="android:textColor">@color/error_validacion</item>
+    </style>
 
 
 </resources>

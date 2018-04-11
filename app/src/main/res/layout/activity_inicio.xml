@@ -36,9 +36,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="vertical"
-                    tools:layout_editor_absoluteX="8dp"
-                    tools:layout_editor_absoluteY="8dp">
+                    android:orientation="vertical">
 
                     <ImageSwitcher
                         android:layout_width="match_parent"
@@ -62,8 +60,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center|center_horizontal"
-                        android:textColor="#000"
                         android:textSize="15sp"
+                        android:textColor="@color/colorPrimary"
                         android:text="@string/cuenta" />
 
                     <Button
@@ -91,22 +89,7 @@
                         android:textColor="@color/buttonText"
                         android:theme="@style/Button_style"
                         android:text="@string/inicia_sesion" />
-
-                    <Button
-                        android:id="@+id/tarifas"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/buttonText"
-                        android:theme="@style/Button_style"
-                        android:text="Tarifas" />
-                    <Button
-                        android:id="@+id/id_principal"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:textColor="@color/buttonText"
-                        android:theme="@style/Button_style"
-                        android:text="Principal" />
-                </LinearLayout>
+            </LinearLayout>
             </LinearLayout>
     </ScrollView>
 
