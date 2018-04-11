@@ -187,7 +187,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     @Override
     public void onClick(View view) {
         registrar(pass,correo,fecha+"",id_tarifa,id_cuota);
-        iniciar_sesionOnclick();
+            iniciar_sesionOnclick();
 
     }
 }
