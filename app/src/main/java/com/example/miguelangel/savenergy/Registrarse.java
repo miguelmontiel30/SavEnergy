@@ -167,7 +167,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
     //Metodo OnClick
     @Override
     public void onClick(View view) {
-        if (validarClave() && validarCorreo() && validarPass()) {
+        if (validarClave() && validarCorreo()) {
             registrarse_OnClick();
         }
     }
