@@ -28,7 +28,7 @@ public class Principal extends AppCompatActivity
 
                                     //Fin de la Declaración de variables
 
-    //Metodo para insertar los datos en la Gráfica
+                //Metodo para insertar los datos en la Gráfica
 
     private void setData(int count, int range){
         ArrayList<Entry> yValues_1 = new ArrayList<>();
@@ -57,7 +57,7 @@ public class Principal extends AppCompatActivity
         grafica.setData(data);
     }
 
-    //Método Para pasar de Intent a otro con el menu
+                //Método para pasar de Intent a otro con el menu
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -142,5 +142,5 @@ public class Principal extends AppCompatActivity
             super.onBackPressed();
         }
     }
-    
+
 }

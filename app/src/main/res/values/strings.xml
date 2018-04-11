@@ -15,6 +15,11 @@
     <string name="c_sesion">Cerrar Sesión</string>
     <string name="user">Configuración del usuario</string>
 
+    <!-- Strings de Menu de configuración -->
+    <string name="c_perfil">Configurar Perfil</string>
+    <string name="c_pass">Cambiar Contraseña</string>
+    <string name="c_fact">Cambiar tipo de Tarifa y corte</string>
+
     <!-- Strings de Erores -->
     <string name="campo_obligatorio">Este campo es obligatorio</string>
 

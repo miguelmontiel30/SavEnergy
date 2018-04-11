@@ -30,6 +30,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     TextInputLayout til_correo,til_password;
     EditText email, pass;
     Button iniciar;
+    String usuario_cache,password_cache;
                                     //Fin de la declaración de variables
 
 
@@ -90,12 +91,12 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     public void guardarUser(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
 
-        String usuario = String.valueOf(email.getText());
-        String password = String.valueOf(pass.getText());
+        usuario_cache = String.valueOf(email.getText());
+        password_cache = String.valueOf(pass.getText());
 
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("usuario", usuario);
-        editor.putString("contrasenia",password);
+        editor.putString("usuario", usuario_cache);
+        editor.putString("contrasenia",password_cache);
 
         editor.commit();
     }

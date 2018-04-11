@@ -149,12 +149,11 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         String pass_1 = String.valueOf(pass.getText());
         if (repeat_pass.equals(pass_1)) {
             til_repetir_contrasenia.setError(null);
-            //til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
+            return true;
         }else{
             til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
         }
-
-        return true;
+        return false;
     }
 
     //Método para regresar cuando pulsan boton back (toolbar)
@@ -167,7 +166,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
     //Metodo OnClick
     @Override
     public void onClick(View view) {
-        if(validarClave() && validarCorreo()){
+        if(validarClave() && validarCorreo() && validar_contrasenia(String.valueOf(pass2.getText()))){
             registrarse_OnClick();
         }
     }
