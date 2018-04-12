@@ -1,6 +1,8 @@
 package com.example.miguelangel.savenergy;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,6 +14,14 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     Button iniciar_sesion;
     Button registrarse;
                                 //Fin de la declaración de variables
+
+            //Método para cargar al usuario en caso de que haya uno con sesión iniciada
+    public void validacion_user(String usuario, String contra){
+        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+
+        String user = preferences.getString("usuario","No hay nada guardado");
+        String pass = preferences.getString("contrasenia","No hay nada guardado");
+    }
 
             //Método para asignar toolbar
     public void startDua(View view) {

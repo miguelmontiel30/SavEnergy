@@ -48,6 +48,9 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                     //Metodo que abre el siguiente Activity en caso de ser válidos los datos
     public void registrarse_OnClick() {
         Intent intent = new Intent(Registrarse.this,Configuracion_f_corte.class);
+        intent.putExtra("clave",String.valueOf(clave.getText()));
+        intent.putExtra("correo",String.valueOf(correo.getText()));
+        intent.putExtra("pass",String.valueOf(pass.getText()));
         startActivity(intent);
         finish();
     }
@@ -72,32 +75,30 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
                     //Metodo para validación de clave de producto con Base de datos
     public boolean validarClave(){
-        String est;
-        String id;
-        boolean clv=false;
+        String est, id;
+        boolean clv = false;
         try {
-            JSONObject respuestaJSON = new JSONObject  (validar(1, clave.getText().toString()));//Se guarda el resultado obtenido del JSON
-            String resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            JSONObject respuestaJSON = new JSONObject  (validar(1, clave.getText().toString()));    //Se guarda el resultado obtenido del JSON
+            String resultJSON = respuestaJSON.getString("estado");                                  //guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // hay registros
                 est = respuestaJSON.getJSONObject("consulta").getString("estado");
                 id = respuestaJSON.getJSONObject("consulta").getString("id_usuario");
-                if(est.equals("Activo")||est.equals("activo")) {//si el el producto esta activado
-                    if(id.equals("null")||id=="null"){  // si el producto no tiene cliente asignado
+                if(est.equals("Activo")||est.equals("activo")) {    //Si el el producto esta activado
+                    if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
                         clv = true;
-                    }else {//El producto ya tiene un cliente asignado
+                    }else {                                         //El producto ya tiene un cliente asignado
                         til_clave.setError(getResources().getString(R.string.prod_reg)); //Muestra error en TextInputLayout
                     }
                 }else{//El producto no esta activado
                     til_clave.setError(getResources().getString(R.string.prod_in));      //Muestra error en TextInputLayout
                 }
-            }
-            else if (resultJSON.equals("2")){//la clave del producto es incorrecta
+            }else if (resultJSON.equals("2")){      //la clave del producto es incorrecta
                 til_clave.setError(getResources().getString(R.string.prod_inex));       //Muestra error en TextInputLayout
                 clv=false;
             }
-        } catch (JSONException e) {
+            }catch (JSONException e) {
             e.printStackTrace();
-        }
+            }
         return clv;
     }
 

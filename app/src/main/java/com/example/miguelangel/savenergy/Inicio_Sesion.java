@@ -37,6 +37,8 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                             //Metodo para lanzar un nuevo Activity
     public void iniciar_sesionOnclick() {
         Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
+        intent.putExtra("user",String.valueOf(usuario_cache));
+        intent.putExtra("pass",String.valueOf(password_cache));
         startActivity(intent);
         finish();
     }
@@ -44,6 +46,8 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                             //Método para regresar si el usuario presiono atras -->
     public void onBackPressed(){
         Intent intent = new Intent(Inicio_Sesion.this, Inicio.class);
+        intent.putExtra("user",String.valueOf(usuario_cache));
+        intent.putExtra("pass",String.valueOf(password_cache));
         startActivity(intent);
         finish();
     }
