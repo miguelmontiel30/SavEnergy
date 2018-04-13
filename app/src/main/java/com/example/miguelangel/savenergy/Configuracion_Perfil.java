@@ -5,6 +5,9 @@ import android.os.Bundle;
 
 public class Configuracion_Perfil extends AppCompatActivity {
 
+    
+
+    //Método onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

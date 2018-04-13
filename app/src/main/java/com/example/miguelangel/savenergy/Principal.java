@@ -91,8 +91,22 @@ public class Principal extends AppCompatActivity
 
         return user;
     }
-                //Metodo para insertar los datos en la Gráfica
 
+                //Método para borrar sesión guardada del usuario
+    public void eliminarSesion(){
+        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        preferences.edit().clear().commit();
+        cargarLogin();
+    }
+
+                 //Método para pasar al Login cuando cierras sesion
+    public void cargarLogin(){
+        Intent intent = new Intent(Principal.this, Inicio_Sesion.class);
+        startActivity(intent);
+        finish();
+    }
+
+                //Metodo para insertar los datos en la Gráfica
     private void setData(int count, int range){
         ArrayList<Entry> yValues_1 = new ArrayList<>();
         for (int i = 0; i < count; i++){
@@ -143,7 +157,7 @@ public class Principal extends AppCompatActivity
         } else if (id == R.id.nav_facturacion) {
 
         } else if (id == R.id.nav_salir) {
-
+            eliminarSesion();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -175,16 +189,19 @@ public class Principal extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+                //Creas un objeto de tipo NavigationView que es para encontrar los omponentes del HeaderNAV
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        //View headerView = navigationView.getHeaderView(0);
         navigationView.setNavigationItemSelectedListener(this);
 
         header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
-        correo = (TextView) header.findViewById(R.id.correo_user);                          //Asignación de variables de tipo TextView
+        correo = (TextView) header.findViewById(R.id.correo_user);                                  //Asignación de variables de tipo TextView
         nombre = (TextView) header.findViewById(R.id.nombre_user);                                 //Asignación de variables de tipo TextView
         //imagen_usuario = (CircleImageView) header.findViewById(R.id.imageViewUsuario);
 
-        setCampos(String.valueOf(cargarCache()));            //Método que carga las preferencias del usuario
+        //Método que carga las preferencias del usuario
+        setCampos(String.valueOf(cargarCache()));
+
+                                                    //Métodos para llenar Gráfica con Datos
         grafica = (LineChart) findViewById(R.id.grafica);           //Asignación de variables de tipo LineChart
         setData(100, 60);                               //Método que llama la insersión de datos en la gráfica
         grafica.animateX(3000);                         //Método que indica el tiempo de animación a la

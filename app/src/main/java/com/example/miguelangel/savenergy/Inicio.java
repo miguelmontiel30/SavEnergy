@@ -7,20 +7,71 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
                                 //Inicio de la declaración de variables
     Button iniciar_sesion;
     Button registrarse;
+    String user,password;
                                 //Fin de la declaración de variables
 
-            //Método para cargar al usuario en caso de que haya uno con sesión iniciada
-    public void validacion_user(String usuario, String contra){
+            //Método para conectar y validar user en la BD en caso de que haya uno con sesión iniciada
+    public String validacionUser(){
+                            //Carga de preferencias del usuario
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        user = preferences.getString("usuario","No hay nada guardado");
+        password = preferences.getString("contrasenia","No hay nada guardado");
 
-        String user = preferences.getString("usuario","No hay nada guardado");
-        String pass = preferences.getString("contrasenia","No hay nada guardado");
+        URL url = null;
+        String line = "";
+        String webServiceResult="";
+
+        try {
+            url= new URL("https://savenergy.000webhostapp.com/savenergy/Login.php?contra="+password+"&email="+user);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
+            }
+            bufferedReader.close();
+        } catch (Exception e) {}
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+
+                                //Método para iniciar sesion en caso de que la validación sea correcta
+    public void cargarSesion(){
+        Toast.makeText(getApplicationContext(),"Carga Sesion",Toast.LENGTH_LONG).show();
+        try {
+            String resultJSON="";
+            JSONObject respuestaJSON = new JSONObject  (validacionUser());//Se guarda el resultado obtenido del JSON
+            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                cargarPrincipal();
+                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
+            }
+            else if (resultJSON.equals("2")){//el ususario no existe
+                Toast.makeText(getApplicationContext(),"Bienvenido a SavEnergy",Toast.LENGTH_LONG).show();
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+                                //Metodo para pasar a Activity Principal
+    public void cargarPrincipal(){
+        Intent intent = new Intent(Inicio.this, Principal.class);
+        startActivity(intent);
+        finish();
     }
 
             //Método para asignar toolbar
@@ -46,12 +97,14 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     //Método onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
+        cargarSesion();
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
-
         iniciar_sesion = (Button) findViewById(R.id.inicio_sesion);         //Asignación de variable a componente en XML
-        iniciar_sesion.setOnClickListener(this);
+        iniciar_sesion.setOnClickListener(this);                            //Asignación de evento a componente en XML
 
         registrarse = (Button) findViewById(R.id.registrarse);              //Asignación de variable a componente en XML
         registrarse.setOnClickListener(this);

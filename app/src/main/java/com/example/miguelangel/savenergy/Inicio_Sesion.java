@@ -37,7 +37,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                             //Metodo para lanzar un nuevo Activity
     public void iniciar_sesionOnclick() {
         Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
-        intent.putExtra("user",String.valueOf(usuario_cache));
         startActivity(intent);
         finish();
     }
@@ -92,26 +91,16 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
                             //Método para guardar o recordar al usuario
     public void guardarUser(){
-        //SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
 
         usuario_cache = String.valueOf(email.getText());
         password_cache = String.valueOf(pass.getText());
 
-        /*
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("usuario", usuario_cache);
         editor.putString("contrasenia",password_cache);
 
-        editor.commit();*/
-    }
-
-                            //Método para leer los datos del SharedPreferences
-    public void cargarPreferencias(){
-        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-
-        String user = preferences.getString("usuario","No hay nada guardado");
-        String pass = preferences.getString("contrasenia","No hay nada guardado");
-
+        editor.commit();
     }
 
                             //Método para regresar cuando pulsan boton back (toolbar)
