@@ -38,7 +38,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     public void iniciar_sesionOnclick() {
         Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
         intent.putExtra("user",String.valueOf(usuario_cache));
-        intent.putExtra("pass",String.valueOf(password_cache));
         startActivity(intent);
         finish();
     }
@@ -78,8 +77,8 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
                 ses = true;
-                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
                 guardarUser();
+                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
             }
             else if (resultJSON.equals("2")){//el ususario no existe
                 til_correo.setError(getResources().getString(R.string.datos_inv));
@@ -93,16 +92,17 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
                             //Método para guardar o recordar al usuario
     public void guardarUser(){
-        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        //SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
 
         usuario_cache = String.valueOf(email.getText());
         password_cache = String.valueOf(pass.getText());
 
+        /*
         SharedPreferences.Editor editor = preferences.edit();
         editor.putString("usuario", usuario_cache);
         editor.putString("contrasenia",password_cache);
 
-        editor.commit();
+        editor.commit();*/
     }
 
                             //Método para leer los datos del SharedPreferences
