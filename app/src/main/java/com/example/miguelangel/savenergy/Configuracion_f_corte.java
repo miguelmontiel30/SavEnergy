@@ -37,6 +37,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     Calendar date;
     int day, month, year;
     Spinner spTarifas, spCuotas;
+            // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
     ArrayList<String> lista_tarifa = new ArrayList<String>();
     ArrayList<String> lista_cuota = new ArrayList<String>();
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();

@@ -62,5 +62,6 @@
     <!-- String de interfaz "Inicio_Sesion" -->
     <string name="olvido">¿Olvidaste tu contraseña?</string>
     <string name="datos_inv">Correo o contraseña incorrectos</string>
+    <string name="progres_bar">Iniciando...</string>
 
 </resources>

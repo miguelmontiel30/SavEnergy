@@ -54,6 +54,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
         try {
             String resultJSON="";
             JSONObject respuestaJSON = new JSONObject  (validacionUser());//Se guarda el resultado obtenido del JSON
+            Toast.makeText(getApplicationContext(),user+" / "+password,Toast.LENGTH_LONG).show();
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
                 cargarPrincipal();
