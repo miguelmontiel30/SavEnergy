@@ -7,6 +7,8 @@ import android.os.StrictMode;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,9 +18,10 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.regex.Pattern;
 
 public class Cambiar_contrasenia extends AppCompatActivity implements View.OnClickListener{
-    TextInputLayout contra, contra2;
+    TextInputLayout til_pass, til_pass2;
     Button guardar;
     EditText pass, pass2;
     @Override
@@ -64,15 +67,39 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
                         opc = true;
                     }
                 }else {
-                    contra2.setError("Las contraseñas no coinciden");
+                    til_pass2.setError("Las contraseñas no coinciden");
                 }
             }else {
-                contra2.setError("Obligatorio llenar este campo");
+                til_pass2.setError("Obligatorio llenar este campo");
             }
         }else{
-            contra.setError("Obligatorio llenar este campo");
+            til_pass.setError("Obligatorio llenar este campo");
         }
         return opc;
+    }
+
+    //Método para validar que las contraseñas sean iguales
+    public boolean validar_contrasenia(String pass2){
+        String pass_1 = String.valueOf(pass.getText());
+        if (pass2.equals(pass_1)) {
+            til_pass2.setError(null);
+            return true;
+        }else{
+            til_pass2.setError(getResources().getString(R.string.contrasenias));
+        }
+        return false;
+    }
+    //Metodo para validar los caracteres usados en la contraseña
+    public boolean validar_car_contrasenia(String pass){
+        Pattern patron = Pattern.compile("^[A-Za-z0-9 ]+$");
+        if (!patron.matcher(pass).matches() || pass.length() > 30) {
+            til_pass.setError(getResources().getString(R.string.pass_inc));
+            return false;
+        } else {
+            til_pass.setError(null);
+        }
+
+        return true;
     }
 
     @Override
@@ -84,10 +111,46 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
         guardar.setOnClickListener(this);
 
         pass = (EditText) findViewById(R.id.et_contraseñia);
-        pass2 = (EditText) findViewById(R.id.repeat_contraseñia);
+        pass.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
 
-        contra = (TextInputLayout) findViewById(R.id.til_contraseñia);
-        contra2 = (TextInputLayout) findViewById(R.id.til_repetir_contraseñia);
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()>15){
+                    til_pass.setError("Máximo 15 caracteres");
+                }else{
+                    validar_car_contrasenia(String.valueOf(s));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+        pass2 = (EditText) findViewById(R.id.repeat_contraseñia);
+        pass2.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(s.length()>15){
+                    til_pass2.setError("Maximo 15 caracteres");
+                }else{
+                    validar_contrasenia(String.valueOf(s));
+                }
+            }
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        til_pass = (TextInputLayout) findViewById(R.id.til_contraseñia);
+        til_pass2 = (TextInputLayout) findViewById(R.id.til_repetir_contraseñia);
 
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
@@ -97,9 +160,7 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
         if(view == guardar){
             if(ejecutar()==true) {
                 onBackPressed();
-            }
-            else{
-                Toast.makeText(getApplicationContext(), "No funciona", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Cambios realizados", Toast.LENGTH_SHORT).show();
             }
         }
 

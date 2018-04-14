@@ -109,7 +109,7 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
             JSONObject respuestaJSON = new JSONObject  (validar(2, correo.getText().toString()));//Se guarda el resultado obtenido del JSON
             String resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // ese correo ya existe
-                til_clave.setError(getResources().getString(R.string.correo_reg)); //Muestra error en TextInputLayout
+                til_correo.setError(getResources().getString(R.string.correo_reg)); //Muestra error en TextInputLayout
             }
             else if (resultJSON.equals("2")){//el correo no esta en la BD, lo cual es correcto para permitir el registro
                 clv=true;
@@ -244,12 +244,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 validar_contrasenia(String.valueOf(s));
-                        /*== String.valueOf(pass.getText())){
-                    til_repetir_contrasenia.setError(null);
-                    //getResources().getString(R.string.contrasenias)
-                }else{
-                    til_repetir_contrasenia.setError(String.valueOf(pass.getText()));
-                }*/
             }
 
             @Override

@@ -11,6 +11,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -92,6 +93,18 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         return ses;
     }
 
+    //Metodo para validar correo
+    public boolean validar_correo(String correo){
+        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+            til_correo.setError(getResources().getString(R.string.correo_inv));
+            return false;
+        } else {
+            til_correo.setError(null);
+        }
+
+        return true;
+    }
+
                             //Método para guardar o recordar al usuario
     public void guardarUser(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
@@ -132,6 +145,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 til_correo.setError(null);
+                validar_correo(String.valueOf(s));
             }
 
             @Override
@@ -173,10 +187,8 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         //Toast.makeText(getApplicationContext(), validar(pass.getText().toString(), email.getText().toString()), Toast.LENGTH_SHORT).show();
         if(view == iniciar) {
             if (sesion()) {
-                Toast.makeText(getApplicationContext(), "iniciar", Toast.LENGTH_SHORT).show();
                 iniciar_sesionOnclick();
             }
-            Toast.makeText(getApplicationContext(), "no iniciar", Toast.LENGTH_SHORT).show();
         }
     }
 }

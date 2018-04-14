@@ -73,17 +73,17 @@
                         <EditText
                             android:id="@+id/txt_fecha"
                             android:layout_width="213dp"
-                            android:layout_height="29dp"
+                            android:layout_height="wrap_content"
                             android:layout_gravity="center"
-                            android:editable="false"
                             android:layout_marginTop="5dp"
+                            android:editable="false"
                             android:textColor="@color/colorPrimaryDark"
                             android:textSize="18sp" />
 
                         <ImageButton
                             android:id="@+id/im_calendar"
                             android:layout_width="wrap_content"
-                            android:layout_height="29dp"
+                            android:layout_height="match_parent"
                             android:layout_weight="1"
                             android:background="@android:color/transparent"
                             app:srcCompat="@drawable/ic_calendar" />
