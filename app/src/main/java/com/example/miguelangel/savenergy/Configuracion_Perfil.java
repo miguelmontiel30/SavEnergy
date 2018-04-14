@@ -28,7 +28,6 @@ public class Configuracion_Perfil extends AppCompatActivity {
                         //Carga de preferencias del usuario
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         user = preferences.getString("usuario","No hay nada guardado");
-        Toast.makeText(getApplicationContext(),user,Toast.LENGTH_LONG).show();
         URL url = null;
         String line = "";
         String webServiceResult="";
@@ -49,13 +48,14 @@ public class Configuracion_Perfil extends AppCompatActivity {
         String correo_user_set,nombre_user_set,tarifa_user_set;
         try {
             String resultJSON="";
-            JSONObject respuestaJSON = new JSONObject  (llamarDatos());   //Se guarda el resultado obtenido del JSON
+            JSONObject respuestaJSON = new JSONObject (llamarDatos());   //Se guarda el resultado obtenido del JSON
             resultJSON = respuestaJSON.getString("estado"); //Consulta al arreglo "Estado"
+            Toast.makeText(getApplicationContext(),"llega a estado",Toast.LENGTH_LONG).show();
             if (resultJSON.equals("1")) {      // Existen registros en BD
+                Toast.makeText(getApplicationContext(),"Entro al IF",Toast.LENGTH_LONG).show();
                 correo_user_set = respuestaJSON.getJSONObject("consulta").getString("email");
                 nombre_user_set = respuestaJSON.getJSONObject("consulta").getString("nombre");
-                tarifa_user_set = respuestaJSON.getJSONObject("id_tarifa").getString("id_tarifa");
-                Toast.makeText(getApplicationContext(),correo_user_set,Toast.LENGTH_LONG).show();
+                tarifa_user_set = respuestaJSON.getJSONObject("consulta").getString("id_tarifa");
                 nombre.setText(nombre_user_set);
                 correo.setText(correo_user_set);
                 tarifa.setText(tarifa_user_set);
@@ -87,12 +87,10 @@ public class Configuracion_Perfil extends AppCompatActivity {
         correo = (EditText) findViewById(R.id.et_correo);               //Asignación de variable de tipo EditText
         tarifa = (EditText) findViewById(R.id.et_tarifa);               //Asignación de variable de tipo EditText
 
-
-                                //Metodos que carga la Interfaz
+        //Metodos que carga la Interfaz
 
         //Cargar datos en la interfaz
         setCampos();
-
     }
 
     //Método si el usuario presiono ir hacia atrás

@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.miguelangel.savenergy.Cambiar_contrasenia">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="8dp">
+
+            <!-- Contraseña -->
+
+            <TextView
+                android:id="@+id/instruccion_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/colorPrimary"
+                android:textSize="25sp"
+                android:gravity="center"
+                android:text="@string/instruccion_contra" />
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_contrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/pass"
+                app:errorTextAppearance="@style/AppTheme.EditTextError"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/et_contrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Repetir Contraseña-->
+
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_repetir_contrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:hint="@string/re_pass"
+                app:errorTextAppearance="@style/AppTheme.EditTextError"
+                app:passwordToggleEnabled="true">
+
+                <EditText
+                    android:id="@+id/repeat_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Declaración de botón -->
+            <Button
+                android:id="@+id/registrarse"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end|bottom"
+                android:layout_marginTop="20dp"
+                android:text="@string/guardar"
+                android:textColor="@color/buttonText"
+                android:theme="@style/Button_style" />
+        </LinearLayout>
+
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

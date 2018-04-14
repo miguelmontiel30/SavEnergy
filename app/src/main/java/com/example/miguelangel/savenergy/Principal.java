@@ -125,8 +125,6 @@ public class Principal extends AppCompatActivity
         return true;
     }
 
-
-
                                 //Metodo OnCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
