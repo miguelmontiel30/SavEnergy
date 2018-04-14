@@ -64,8 +64,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
-
-                            //Validación de usuario en la BD
     public boolean sesion(){
         boolean ses= false;
         try {
