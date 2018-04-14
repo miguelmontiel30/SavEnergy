@@ -31,18 +31,20 @@
             android:label="Registrate"
             android:parentActivityName=".Inicio" />
         <activity android:name=".Configuracion_f_corte" />
-        <activity
-            android:name=".Principal"
+        <activity android:name=".Principal"
             android:label="@string/title_activity_principal"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Principal_admin_global" />
         <activity android:name=".Consumos" />
-        <activity
-            android:name=".Tarifas"
+        <activity android:name=".Tarifas"
             android:label="@string/title_activity_tarifas"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".Configuracion_Perfil" />
-        <activity android:name=".Menu_Configuraciones" />
+        <activity android:name=".Configuracion_Perfil"
+            android:parentActivityName=".Principal"
+            ></activity>
+        <activity android:name=".Menu_Configuraciones"
+            android:parentActivityName=".Principal"
+            />
         <activity android:name=".SplashInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
         <intent-filter>

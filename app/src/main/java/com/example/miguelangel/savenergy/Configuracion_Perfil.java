@@ -68,7 +68,11 @@ public class Configuracion_Perfil extends AppCompatActivity {
 
     }
 
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
 
     //Método onCreate
     @Override

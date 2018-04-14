@@ -11,7 +11,11 @@ import android.widget.EditText;
 public class Menu_Configuraciones extends AppCompatActivity implements View.OnClickListener {
 
     Button perfil,corte;
-
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
                             //Método Si presiona en boton "Atrás"
     @Override
     public  void onBackPressed(){
