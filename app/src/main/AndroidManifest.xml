@@ -36,7 +36,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Principal_admin_global" />
         <activity android:name=".Consumos" />
-        <activity android:name=".Tarifas"
+        <activity
+            android:name=".Tarifas"
             android:label="@string/title_activity_tarifas"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracion_Perfil"
@@ -53,6 +54,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Cambiar_contrasenia"></activity>
     </application>
 
 </manifest>

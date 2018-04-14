@@ -68,4 +68,7 @@
     <string name="configura">Seleccione la próxima fecha de corte</string>
     <string name="cuota">Cuota</string>
     <string name="finalizar">Finalizar</string>
+
+    <!-- String de interfaz "Configuración de contraseña" -->
+    <string name="instruccion_contra">Escriba la nueva contraseña</string>
 </resources>
