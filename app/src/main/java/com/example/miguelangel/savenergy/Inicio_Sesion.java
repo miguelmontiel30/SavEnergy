@@ -30,7 +30,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     TextInputLayout til_correo,til_password;
     EditText email, pass;
     Button iniciar;
-    String correo_cache,password_cache,nombre_cache;
+    String correo_cache,password_cache,nombre_cache,id_user_cache,fecha_cache,id_tarifa_cache,id_cuota_cache;
                                     //Fin de la declaración de variables
 
 
@@ -71,9 +71,13 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
             JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                id_user_cache = respuestaJSON.getJSONObject("usuario").getString("id_usuario");
                 correo_cache = respuestaJSON.getJSONObject("usuario").getString("email");
                 password_cache = respuestaJSON.getJSONObject("usuario").getString("contrasenia");
                 nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
+                fecha_cache = respuestaJSON.getJSONObject("usuario").getString("proxima_fecha_c");
+                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("id_tarifa");
+                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_cuota");
                 ses = true;
                 guardarUser();
                 Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
@@ -163,8 +167,13 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View view) {
-        if (sesion()){
-            iniciar_sesionOnclick();
+        //Toast.makeText(getApplicationContext(), validar(pass.getText().toString(), email.getText().toString()), Toast.LENGTH_SHORT).show();
+        if(view == iniciar) {
+            if (sesion()) {
+                Toast.makeText(getApplicationContext(), "iniciar", Toast.LENGTH_SHORT).show();
+                iniciar_sesionOnclick();
+            }
+            Toast.makeText(getApplicationContext(), "no iniciar", Toast.LENGTH_SHORT).show();
         }
     }
 }

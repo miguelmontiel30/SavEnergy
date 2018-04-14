@@ -30,7 +30,7 @@
                 android:text="@string/instruccion_contra" />
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_contrasenia"
+                android:id="@+id/til_contraseñia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -39,16 +39,16 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:id="@+id/et_contrasenia"
+                    android:id="@+id/et_contraseñia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"/>
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Repetir Contraseña-->
 
             <android.support.design.widget.TextInputLayout
-                android:id="@+id/til_repetir_contrasenia"
+                android:id="@+id/til_repetir_contraseñia"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
@@ -57,16 +57,15 @@
                 app:passwordToggleEnabled="true">
 
                 <EditText
-                    android:id="@+id/repeat_password"
+                    android:id="@+id/repeat_contraseñia"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="textPassword"
-                    />
+                    android:inputType="textPassword" />
             </android.support.design.widget.TextInputLayout>
 
             <!-- Declaración de botón -->
             <Button
-                android:id="@+id/registrarse"
+                android:id="@+id/btn_guardar_pass"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end|bottom"

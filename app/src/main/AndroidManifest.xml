@@ -41,7 +41,7 @@
             android:label="@string/title_activity_tarifas"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracion_Perfil"
-            android:parentActivityName=".Principal"
+            android:parentActivityName=".Menu_Configuraciones"
             ></activity>
         <activity android:name=".Menu_Configuraciones"
             android:parentActivityName=".Principal"
@@ -54,7 +54,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Cambiar_contrasenia"></activity>
+        <activity android:name=".Cambiar_contrasenia"
+            android:parentActivityName=".Menu_Configuraciones"
+            ></activity>
     </application>
 
 </manifest>

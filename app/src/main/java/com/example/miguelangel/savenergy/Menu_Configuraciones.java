@@ -10,7 +10,7 @@ import android.widget.EditText;
 
 public class Menu_Configuraciones extends AppCompatActivity implements View.OnClickListener {
 
-    Button perfil,corte;
+    Button perfil,corte,contraseña;
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
@@ -27,6 +27,13 @@ public class Menu_Configuraciones extends AppCompatActivity implements View.OnCl
                             //Método para cargar UI Configuración de perfil
     public void cargarCPerfil(){
         Intent intent = new Intent(Menu_Configuraciones.this,Configuracion_Perfil.class);
+        startActivity(intent);
+        finish();
+    }
+
+                            //Método para cargar UI Cambiar contraseña
+    public void cargarCcontraseña(){
+        Intent intent = new Intent(Menu_Configuraciones.this,Cambiar_contrasenia.class);
         startActivity(intent);
         finish();
     }
@@ -51,6 +58,9 @@ public class Menu_Configuraciones extends AppCompatActivity implements View.OnCl
 
         corte = (Button) findViewById(R.id.btn_tarifa);                           //Asignación de variable de tipo Button
         corte.setOnClickListener(this);
+
+        contraseña = (Button) findViewById(R.id.btn_contrasenia);                 //Asignación de variable de tipo Button
+        contraseña.setOnClickListener(this);
     }
 
     //Método onClick
@@ -60,6 +70,8 @@ public class Menu_Configuraciones extends AppCompatActivity implements View.OnCl
             cargarCPerfil();
         }else if (view == corte){
             cargarCCorte();
+        }else if (view == contraseña){
+            cargarCcontraseña();
         }
     }
 
