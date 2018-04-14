@@ -83,7 +83,7 @@ public class Principal extends AppCompatActivity
 
         }
 
-                //Método para seleccionar al usuario de la cache
+    //Método para seleccionar al usuario de la cache
     public String cargarCache(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
 

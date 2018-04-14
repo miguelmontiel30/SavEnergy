@@ -62,45 +62,63 @@
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="15dp"
-                        android:text="Proxima fecha de Facturación"
-                        android:textColor="#000" />
+                        android:text="@string/configura"
+                        android:textColor="@color/colorPrimary" />
 
-                    <TextView
-                        android:id="@+id/txt_fecha"
-                        android:layout_width="match_parent"
-                        android:layout_height="29dp"
-                        android:layout_gravity="center"
-                        android:gravity="center"
-                        android:text="TextView"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/txt_tarifa"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginTop="15dp"
-                        android:text="Tarifa"
-                        android:textColor="#000" />
+                        android:orientation="horizontal">
 
-                    <Spinner
-                        android:id="@+id/sp_tarifa"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        <EditText
+                            android:id="@+id/txt_fecha"
+                            android:layout_width="213dp"
+                            android:layout_height="29dp"
+                            android:layout_gravity="center"
+                            android:editable="false"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/colorPrimaryDark"
+                            android:textSize="18sp" />
+
+                        <ImageButton
+                            android:id="@+id/im_calendar"
+                            android:layout_width="wrap_content"
+                            android:layout_height="29dp"
+                            android:layout_weight="1"
+                            android:background="@android:color/transparent"
+                            app:srcCompat="@drawable/ic_calendar" />
+                    </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/txt_tarifa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:layout_marginTop="15dp"
+                            android:text="@string/tarifa"
+                            android:textColor="@color/colorPrimary" />
+
+                        <Spinner
+                            android:id="@+id/sp_tarifa"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:gravity="center_vertical" />
+
 
                     <TextView
                         android:id="@+id/txt_cuota"
-                        android:layout_width="match_parent"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="10dp"
                         android:layout_marginTop="15dp"
-                        android:text="Cuota"
-                        android:textColor="#000" />
+                        android:text="@string/cuota"
+                        android:textColor="@color/colorPrimary" />
 
                     <Spinner
                         android:id="@+id/sp_cuota"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"/>
 
 
                 </LinearLayout>
@@ -113,7 +131,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
                 android:layout_marginTop="35dp"
-                android:text="Finalizar" />
+                android:theme="@style/Button_style"
+                android:text="@string/finalizar" />
 
         </LinearLayout>
 

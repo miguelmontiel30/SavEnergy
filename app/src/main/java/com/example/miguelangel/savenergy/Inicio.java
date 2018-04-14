@@ -20,8 +20,7 @@ import java.net.URL;
 public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
                                 //Inicio de la declaración de variables
-    Button iniciar_sesion;
-    Button registrarse;
+    Button iniciar_sesion,registrarse;
     String user,password;
                                 //Fin de la declaración de variables
 
@@ -50,7 +49,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
                                 //Método para iniciar sesion en caso de que la validación sea correcta
     public void cargarSesion(){
-        Toast.makeText(getApplicationContext(),"Carga Sesion",Toast.LENGTH_LONG).show();
         try {
             String resultJSON="";
             JSONObject respuestaJSON = new JSONObject  (validacionUser());//Se guarda el resultado obtenido del JSON

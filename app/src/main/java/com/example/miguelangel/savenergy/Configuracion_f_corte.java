@@ -12,6 +12,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,9 +32,11 @@ import java.util.List;
 
 
 public class Configuracion_f_corte extends AppCompatActivity implements View.OnClickListener{
-    //Declaracion de variables
+
+                            //Inicio de la declaracion de variables
     Button btn_fin;
-    TextView fecha;
+    ImageButton ib_calendar;
+    EditText fecha;
     Calendar date;
     int day, month, year;
     Spinner spTarifas, spCuotas;
@@ -42,6 +45,8 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();
     ArrayList<String> lista_id_cuota = new ArrayList<String>();
     String clave, correo, pass, id_tarifa, id_cuota;
+
+                            //Fin de la declaración de variables
 
     private String conectar(int r) {
         URL url = null;
@@ -132,7 +137,6 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         registrar(pass,correo,fecha+"",id_tarifa,id_cuota);
             cargarPrincipal();
-
     }
 
                         //Método onCreate
@@ -141,16 +145,39 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion_f_corte);
 
+                        //Asignación de variable a componente en XML
+
         spTarifas = (Spinner) findViewById(R.id.sp_tarifa);
         spCuotas = (Spinner) findViewById(R.id.sp_cuota);
+
         btn_fin = (Button) findViewById(R.id.b_finalizar);
         btn_fin.setOnClickListener(this);
-        fecha = (TextView) findViewById(R.id.txt_fecha);
+
+        ib_calendar = (ImageButton) findViewById(R.id.im_calendar);
+        ib_calendar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DatePickerDialog date = new DatePickerDialog(Configuracion_f_corte.this, new DatePickerDialog.OnDateSetListener() {
+                    @Override
+                    public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
+                        i1 = i1+1;
+                        fecha.setText(i+"-"+i1+"-"+i2);
+                    }
+                }, year, month, day);
+                date.show();
+            }
+        });
+
+        fecha = (EditText) findViewById(R.id.txt_fecha);
         date = Calendar.getInstance();
+
+                        //Obtención de variables por Intent
 
         clave = (String) getIntent().getExtras().getSerializable("clave");
         correo = (String) getIntent().getExtras().getSerializable("correo");
         pass = (String) getIntent().getExtras().getSerializable("pass");
+
+                        //Fin de la obtención de variables
 
         day = date.get(Calendar.DAY_OF_MONTH);
         month = date.get(Calendar.MONTH);
@@ -172,7 +199,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             }
         });
 
-        //Se Asigna permiso para mantener abierta la conexion
+                    //Se Asigna permiso para mantener abierta la conexion
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
 
         //Se define el tipo de contenido y la lista de arreglos... Para tarifa y cuota
@@ -187,6 +214,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             @Override public void onNothingSelected(AdapterView<?> adapterView) { }});
         llenarSpCuota();//metodo para llenar el arreglo lista de cuotas
         ArrayAdapter<String> cuo = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,lista_cuota);
+
         spCuotas.setAdapter(cuo);//Se asigna el contenido al spiner de cuotas
         spCuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//funcion del spinner cuota
             @Override
