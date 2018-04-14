@@ -125,14 +125,7 @@ public class Principal extends AppCompatActivity
         return true;
     }
 
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            moveTaskToBack(false);
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
+
 
                                 //Metodo OnCreate
     @Override
@@ -175,7 +168,7 @@ public class Principal extends AppCompatActivity
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
         } else {
-            super.onBackPressed();
+            drawer.closeDrawer(GravityCompat.START);
         }
     }
 

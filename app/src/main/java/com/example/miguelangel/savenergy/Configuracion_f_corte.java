@@ -1,7 +1,9 @@
 package com.example.miguelangel.savenergy;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +39,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     Calendar date;
     int day, month, year;
     Spinner spTarifas, spCuotas;
+    String correo_cache,password_cache,nombre_cache,fecha_cache,tarifa_cache,cuota_cache;
             // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
     ArrayList<String> lista_tarifa = new ArrayList<String>();
     ArrayList<String> lista_cuota = new ArrayList<String>();
@@ -117,6 +120,12 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             while ((line = bufferedReader.readLine()) != null){
                 webServiceResult += line;
             }
+            correo_cache = correo;
+            password_cache = pass;
+            nombre_cache = "Nuevo usuario";
+            tarifa_cache = id_t;
+            cuota_cache = id_c;
+            guardarUser();
             bufferedReader.close();
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
@@ -126,6 +135,18 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         Intent intent = new Intent(Configuracion_f_corte.this, Principal.class);
         startActivity(intent);
         finish();
+    }
+
+    public void guardarUser(){//Metodo que guarda los datos del nuevo ususario registrado
+        SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("correo", correo_cache);
+        editor.putString("contrasenia",password_cache);
+        editor.putString("nombre",nombre_cache);
+        editor.putString("fecha",fecha_cache);
+        editor.putString("id_tarifa",tarifa_cache);
+        editor.putString("id_cuota",cuota_cache);
+        editor.commit();
     }
 
 
@@ -158,7 +179,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         year = date.get(Calendar.YEAR);
 
         month = month+1;
-        fecha.setText(day+"/"+month+"/"+year);
+        fecha.setText(day+"-"+month+"-"+year);
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
