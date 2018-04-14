@@ -41,9 +41,11 @@
             android:label="@string/title_activity_tarifas"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracion_Perfil"
+            android:label="Configura el Perfil"
             android:parentActivityName=".Menu_Configuraciones"
             ></activity>
         <activity android:name=".Menu_Configuraciones"
+            android:label="Configurar"
             android:parentActivityName=".Principal"
             />
         <activity android:name=".SplashInicioActivity"

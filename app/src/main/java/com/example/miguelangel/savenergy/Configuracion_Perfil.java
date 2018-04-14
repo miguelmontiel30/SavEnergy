@@ -20,19 +20,21 @@ public class Configuracion_Perfil extends AppCompatActivity {
 
                             // Inicio de la declaración de variables
     EditText nombre,correo,tarifa;
-    String user;
                             //Fin de la declaración de variables
 
-            //Método para cargar consulta en BD
-    public String llamarDatos(){
-                        //Carga de preferencias del usuario
+            //Método para setear campos de UI con la carga de datos
+    public String usuarioCache(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-        user = preferences.getString("usuario","No hay nada guardado");
+        String user = preferences.getString("correo","Null");
+        return user;
+    }
+
+    public String consultar(){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
         URL url = null;
         String line = "";
         String webServiceResult="";
         try {
-            url = new URL("https://savenergy.000webhostapp.com/savenergy/datos.php?correo=" + user);
+            url= new URL("https://savenergy.000webhostapp.com/savenergy/datos.php?correo=" + usuarioCache() );
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
@@ -43,30 +45,27 @@ public class Configuracion_Perfil extends AppCompatActivity {
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
 
-            //Método para setear campos de UI con la carga de datos
     public void setCampos(){
-        String correo_user_set,nombre_user_set,tarifa_user_set;
+        String email_set,name_set,tarifa_set;
         try {
             String resultJSON="";
-            JSONObject respuestaJSON = new JSONObject (llamarDatos());   //Se guarda el resultado obtenido del JSON
-            resultJSON = respuestaJSON.getString("estado"); //Consulta al arreglo "Estado"
-            Toast.makeText(getApplicationContext(),"llega a estado",Toast.LENGTH_LONG).show();
-            if (resultJSON.equals("1")) {      // Existen registros en BD
-                Toast.makeText(getApplicationContext(),"Entro al IF",Toast.LENGTH_LONG).show();
-                correo_user_set = respuestaJSON.getJSONObject("consulta").getString("email");
-                nombre_user_set = respuestaJSON.getJSONObject("consulta").getString("nombre");
-                tarifa_user_set = respuestaJSON.getJSONObject("consulta").getString("id_tarifa");
-                nombre.setText(nombre_user_set);
-                correo.setText(correo_user_set);
-                tarifa.setText(tarifa_user_set);
+            JSONObject respuestaJSON = new JSONObject  (consultar());//Se guarda el resultado obtenido del JSON
+            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                email_set = respuestaJSON.getJSONObject("consulta").getString("email");
+                name_set = respuestaJSON.getJSONObject("consulta").getString("nombre");
+                tarifa_set = respuestaJSON.getJSONObject("consulta").getString("Tarifa");
+
+                nombre.setText(name_set);
+                correo.setText(email_set);
+                tarifa.setText(tarifa_set);
             }
-            else if (resultJSON.equals("2")){   //No se encuentran registros
-                Toast.makeText(getApplicationContext(),"Error al cargar datos del usuario",Toast.LENGTH_LONG).show();
+            else if (resultJSON.equals("2")){//el ususario no existe
+                Toast.makeText(getApplicationContext(),"Error al cargar datos",Toast.LENGTH_LONG).show();
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
