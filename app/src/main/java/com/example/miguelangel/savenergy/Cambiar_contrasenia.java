@@ -34,27 +34,45 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
         finish();
     }
 
-    public void cambiar(String pass, String id_user){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
+    public String cambiar(String pass, String id_user){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
+        String line = "";
+        String webServiceResult="";
         URL url = null;
         try {
             url= new URL("https://savenergy.000webhostapp.com/savenergy/changed_password.php?pass="+pass+"&id_user="+id_user);
             HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
+            }
+            bufferedReader.close();
         } catch (Exception e) {}
-
+        return webServiceResult;
     }
 
-    public void ejecutar(){
+    public boolean ejecutar(){
+        boolean opc = false;
+        String contr, id_user;
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
+        id_user = preferences.getString("id_usuario","Null");
+        contr = pass.getText().toString();
         if (!pass.getText().toString().equals("")){
-            if (!pass.getText().toString().equals("")){
-
-                cambiar(pass.getText().toString(),preferences.getString("id_usuario","Null"));
+            if (!pass2.getText().toString().equals("")){
+                if (pass.getText().toString().equals(pass2.getText().toString())){
+                    //Toast.makeText(getApplicationContext(), cambiar(contr,id_user), Toast.LENGTH_SHORT).show();
+                    if(cambiar(contr,id_user).equals("Cambios realizados!")){
+                        opc = true;
+                    }
+                }else {
+                    contra2.setError("Las contraseñas no coinciden");
+                }
             }else {
                 contra2.setError("Obligatorio llenar este campo");
             }
         }else{
             contra.setError("Obligatorio llenar este campo");
         }
+        return opc;
     }
 
     @Override
@@ -77,7 +95,12 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
     @Override
     public void onClick(View view) {
         if(view == guardar){
-            ejecutar();
+            if(ejecutar()==true) {
+                onBackPressed();
+            }
+            else{
+                Toast.makeText(getApplicationContext(), "No funciona", Toast.LENGTH_SHORT).show();
+            }
         }
 
     }
