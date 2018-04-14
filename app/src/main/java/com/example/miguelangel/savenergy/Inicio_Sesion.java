@@ -30,11 +30,11 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     TextInputLayout til_correo,til_password;
     EditText email, pass;
     Button iniciar;
-    String usuario_cache,password_cache;
+    String correo_cache,password_cache,nombre_cache;
                                     //Fin de la declaración de variables
 
 
-                            //Metodo para lanzar un nuevo Activity
+                            //Metodo para lanzar el Activity Principal)
     public void iniciar_sesionOnclick() {
         Intent intent = new Intent(Inicio_Sesion.this, Principal.class);
         startActivity(intent);
@@ -44,8 +44,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                             //Método para regresar si el usuario presiono atras -->
     public void onBackPressed(){
         Intent intent = new Intent(Inicio_Sesion.this, Inicio.class);
-        intent.putExtra("user",String.valueOf(usuario_cache));
-        intent.putExtra("pass",String.valueOf(password_cache));
         startActivity(intent);
         finish();
     }
@@ -75,6 +73,9 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
             JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                correo_cache = respuestaJSON.getJSONObject("usuario").getString("email");
+                password_cache = respuestaJSON.getJSONObject("usuario").getString("contrasenia");
+                nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
                 ses = true;
                 guardarUser();
                 Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
@@ -92,13 +93,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                             //Método para guardar o recordar al usuario
     public void guardarUser(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-
-        usuario_cache = String.valueOf(email.getText());
-        password_cache = String.valueOf(pass.getText());
-
         SharedPreferences.Editor editor = preferences.edit();
-        editor.putString("usuario", usuario_cache);
+        editor.putString("correo", correo_cache);
         editor.putString("contrasenia",password_cache);
+        editor.putString("nombre",nombre_cache);
 
         editor.commit();
     }

@@ -42,56 +42,16 @@ public class Principal extends AppCompatActivity
     private View header;
     TextView nombre,correo;
 
-                                    //Fin de la Declaración de variables
-
-                //Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
-    public String llamarDatos(String email){
-        URL url = null;
-        String line = "";
-        String webServiceResult="";
-        try {
-            url = new URL("https://savenergy.000webhostapp.com/savenergy/datos.php?correo=" + email);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
-                webServiceResult += line;
-            }
-            bufferedReader.close();
-        } catch (Exception e) {}
-        return webServiceResult;//Resultado del servidor (convertido en JSON)
-    }
 
                 //Método que setea campos para funcionamiento dinamico
-    public void setCampos(String email){
-            String correo_user_set,nombre_user_set;
-            try {
-                String resultJSON="";
-                JSONObject respuestaJSON = new JSONObject  (llamarDatos(email));   //Se guarda el resultado obtenido del JSON
-                resultJSON = respuestaJSON.getString("estado"); //Consulta al arreglo "Estado"
-                if (resultJSON.equals("1")) {      // Existen registros en BD
-                    correo_user_set = respuestaJSON.getJSONObject("consulta").getString("email");
-                    nombre_user_set = respuestaJSON.getJSONObject("consulta").getString("nombre");
-                    nombre.setText(nombre_user_set);
-                    correo.setText(correo_user_set);
-                }
-                else if (resultJSON.equals("2")){   //No se encuentran registros
-                    Toast.makeText(getApplicationContext(),user_cache,Toast.LENGTH_LONG).show();
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-
-        }
-
-                //Método para seleccionar al usuario de la cache
-    public String cargarCache(){
+    public void setCampos(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
 
-        String user = preferences.getString("usuario","No hay nada guardado");
-
-        return user;
-    }
-
+        String correo_cache = preferences.getString("correo","Null");
+        String nombre_cache = preferences.getString("nombre","Null");
+        nombre.setText(nombre_cache);
+        correo.setText(correo_cache);
+        }
                 //Método para borrar sesión guardada del usuario
     public void eliminarSesion(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
@@ -199,7 +159,7 @@ public class Principal extends AppCompatActivity
         //imagen_usuario = (CircleImageView) header.findViewById(R.id.imageViewUsuario);
 
         //Método que carga las preferencias del usuario
-        setCampos(String.valueOf(cargarCache()));
+        setCampos();
 
                                                     //Métodos para llenar Gráfica con Datos
         grafica = (LineChart) findViewById(R.id.grafica);           //Asignación de variables de tipo LineChart

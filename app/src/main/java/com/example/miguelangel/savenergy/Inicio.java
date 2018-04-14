@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -22,63 +23,24 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
                                 //Inicio de la declaración de variables
     Button iniciar_sesion;
     Button registrarse;
-    String user,password;
+    String correo,password;
                                 //Fin de la declaración de variables
 
-            //Método para conectar y validar user en la BD en caso de que haya uno con sesión iniciada
-    public String validacionUser(){
-                            //Carga de preferencias del usuario
+            //Método para validar user en caso de que haya uno con sesión iniciada
+    public void invocarDatos(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-        user = preferences.getString("usuario","No hay nada guardado");
-        password = preferences.getString("contrasenia","No hay nada guardado");
-
-        URL url = null;
-        String line = "";
-        String webServiceResult="";
-
-        try {
-            url= new URL("https://savenergy.000webhostapp.com/savenergy/Login.php?contra="+password+"&email="+user);
-            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
-                webServiceResult += line;
-            }
-            bufferedReader.close();
-        } catch (Exception e) {}
-        return webServiceResult;//Resultado del servidor (convertido en JSON)
-    }
-
-                                //Método para iniciar sesion en caso de que la validación sea correcta
-    public void cargarSesion(){
-        Toast.makeText(getApplicationContext(),"Carga Sesion",Toast.LENGTH_LONG).show();
-        try {
-            String resultJSON="";
-            JSONObject respuestaJSON = new JSONObject  (validacionUser());//Se guarda el resultado obtenido del JSON
-            Toast.makeText(getApplicationContext(),user+" / "+password,Toast.LENGTH_LONG).show();
-            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
-            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
-                cargarPrincipal();
-                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
-            }
-            else if (resultJSON.equals("2")){//el ususario no existe
-                Toast.makeText(getApplicationContext(),"Bienvenido a SavEnergy",Toast.LENGTH_LONG).show();
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        correo = preferences.getString("correo","Null");
+        password = preferences.getString("contrasenia","Null");
+        if (!correo.equals("Null")&&!password.equals("Null")) {
+            cargarPrincipal();
+            Toast.makeText(getApplicationContext(), "Bienvenido", Toast.LENGTH_LONG).show();
         }
     }
-
-                                //Metodo para pasar a Activity Principal
+        //Metodo para pasar a Activity Principal
     public void cargarPrincipal(){
         Intent intent = new Intent(Inicio.this, Principal.class);
         startActivity(intent);
         finish();
-    }
-
-            //Método para asignar toolbar
-    public void startDua(View view) {
-        //startActivity(new Intent(this, Registrarse.class));
-        startActivity(new Intent(this, Inicio_Sesion.class));
     }
 
             //Método para cambiar a la interfaz Inicio de Sesion
@@ -98,9 +60,6 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
     //Método onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        cargarSesion();
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio);
 
@@ -109,6 +68,8 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
 
         registrarse = (Button) findViewById(R.id.registrarse);              //Asignación de variable a componente en XML
         registrarse.setOnClickListener(this);
+
+        invocarDatos();
     }
 
     //Método onClick
