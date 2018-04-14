@@ -77,7 +77,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                 nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
                 fecha_cache = respuestaJSON.getJSONObject("usuario").getString("proxima_fecha_c");
                 id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("id_tarifa");
-                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_cuota");
+                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_cuotas");
                 ses = true;
                 guardarUser();
                 Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
@@ -99,7 +99,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         editor.putString("correo", correo_cache);
         editor.putString("contrasenia",password_cache);
         editor.putString("nombre",nombre_cache);
-
+        editor.putString("id_usuario",id_user_cache);
+        editor.putString("fecha",fecha_cache);
+        editor.putString("id_tarifa",id_tarifa_cache);
+        editor.putString("id_cuota",id_cuota_cache);
         editor.commit();
     }
 
