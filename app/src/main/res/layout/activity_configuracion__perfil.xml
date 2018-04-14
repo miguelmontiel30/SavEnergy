@@ -53,44 +53,52 @@
                 android:orientation="vertical"
                 android:padding="15dp">
 
-                <TextView
+                <android.support.design.widget.TextInputLayout
                     android:id="@+id/txt_nombre"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/nombre"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/nombre"
+                    app:errorTextAppearance="@style/AppTheme.EditTextError"
+                    android:textColor="@color/colorPrimaryDark"
+                    app:passwordToggleEnabled="true">
+                    <EditText
+                        android:id="@+id/et_nombre"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="true"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorPrimary"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <EditText
-                    android:id="@+id/et_nombre"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="true"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorPrimary"/>
-
-                <TextView
+                <android.support.design.widget.TextInputLayout
                     android:id="@+id/txt_correo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/correo_electronico"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/correo_electronico"
+                    app:errorTextAppearance="@style/AppTheme.EditTextError"
+                    android:textColor="@color/colorPrimaryDark">
 
-                <EditText
-                    android:id="@+id/et_correo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:editable="true"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorPrimary"/>
+                    <EditText
+                        android:id="@+id/et_correo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="true"
+                        android:ems="10"
+                        android:inputType="textPersonName"
+                        android:textColor="@color/colorPrimary"/>
+                </android.support.design.widget.TextInputLayout>
 
-                <TextView
+                <android.support.design.widget.TextInputLayout
                     android:id="@+id/txt_tarifa"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/tarifa"
-                    android:textColor="@color/colorPrimaryDark" />
+                    android:layout_marginTop="8dp"
+                    android:hint="@string/tarifa"
+                    app:errorTextAppearance="@style/AppTheme.EditTextError"
+                    android:textColor="@color/colorPrimaryDark">
 
                 <EditText
                     android:id="@+id/et_tarifa"
@@ -100,6 +108,8 @@
                     android:ems="10"
                     android:inputType="textPersonName"
                     android:textColor="@color/colorPrimary"/>
+                </android.support.design.widget.TextInputLayout>
+
                 <Button
                     android:id="@+id/btn_guardar"
                     android:layout_width="wrap_content"

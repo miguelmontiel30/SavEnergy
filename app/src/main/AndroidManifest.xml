@@ -14,7 +14,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Inicio"
+        <activity
+            android:name=".Inicio"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -43,14 +44,16 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracion_Perfil" />
         <activity android:name=".Menu_Configuraciones" />
-        <activity android:name=".SplashInicioActivity"
+        <activity
+            android:name=".SplashInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
-        <intent-filter>
+            <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Cambiar_contrasenia"></activity>
     </application>
 
 </manifest>

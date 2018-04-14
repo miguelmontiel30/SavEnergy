@@ -28,6 +28,7 @@ public class Configuracion_Perfil extends AppCompatActivity {
                         //Carga de preferencias del usuario
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         user = preferences.getString("usuario","No hay nada guardado");
+        Toast.makeText(getApplicationContext(),user,Toast.LENGTH_LONG).show();
         URL url = null;
         String line = "";
         String webServiceResult="";
@@ -54,7 +55,7 @@ public class Configuracion_Perfil extends AppCompatActivity {
                 correo_user_set = respuestaJSON.getJSONObject("consulta").getString("email");
                 nombre_user_set = respuestaJSON.getJSONObject("consulta").getString("nombre");
                 tarifa_user_set = respuestaJSON.getJSONObject("id_tarifa").getString("id_tarifa");
-
+                Toast.makeText(getApplicationContext(),correo_user_set,Toast.LENGTH_LONG).show();
                 nombre.setText(nombre_user_set);
                 correo.setText(correo_user_set);
                 tarifa.setText(tarifa_user_set);
