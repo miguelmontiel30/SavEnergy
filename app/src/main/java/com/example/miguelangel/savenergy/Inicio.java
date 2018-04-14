@@ -23,7 +23,7 @@ public class Inicio extends AppCompatActivity implements View.OnClickListener {
                                 //Inicio de la declaración de variables
     Button iniciar_sesion;
     Button registrarse;
-    String user,password;
+    String correo,password;
                                 //Fin de la declaración de variables
 
             //Método para validar user en caso de que haya uno con sesión iniciada

@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="0dp"
+        tools:layout_editor_absoluteY="0dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:orientation="vertical">
+
+
+            <!-- Cabecera SavEnergy -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="15dp"
+                tools:ignore="MissingConstraints"
+                tools:layout_editor_absoluteX="8dp"
+                tools:layout_editor_absoluteY="5dp">
+
+                <ImageView
+                    android:id="@+id/imageView2"
+                    android:layout_width="101dp"
+                    android:layout_height="95dp"
+                    android:layout_gravity="center"
+                    android:contentDescription="TODO"
+                    android:src="@drawable/logo"
+                    tools:ignore="MissingConstraints"
+                    tools:layout_editor_absoluteX="110dp"
+                    tools:layout_editor_absoluteY="16dp" />
+            </LinearLayout>
+
+            <!-- Text Input layouts de Registro -->
+            <!-- Clave del producto -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_nombre"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="15"
+                android:hint="@string/nombre">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_clave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPersonName"
+                    app:errorEnabled="true" />
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Correo -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/correo"
+                android:layout_marginTop="8dp">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_correo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Contraseña -->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/password_txt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:passwordToggleEnabled="true"
+                android:hint="@string/pass">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/et_contrasenia"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+            <!-- Repetir Contraseña-->
+            <android.support.design.widget.TextInputLayout
+                android:id="@+id/til_repetir_contrasenia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:passwordToggleEnabled="true"
+                android:hint="@string/re_pass">
+
+                <android.support.design.widget.TextInputEditText
+                    android:id="@+id/repeat_password"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"/>
+            </android.support.design.widget.TextInputLayout>
+
+
+            <!-- Boton registro-->
+            <Button
+                android:id="@+id/registrarse"
+                android:theme="@style/Button_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:padding="@dimen/button_content"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/buttonText"
+                android:text="@string/registrarse" />
+        </LinearLayout>
+
+    </ScrollView>
+</LinearLayout>
