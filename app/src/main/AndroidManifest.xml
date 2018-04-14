@@ -14,11 +14,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Inicio">
+        <activity android:name=".Inicio"
+            android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
         <activity
@@ -41,7 +42,15 @@
             android:label="@string/title_activity_tarifas"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".Configuracion_Perfil" />
-        <activity android:name=".Menu_Configuraciones"></activity>
+        <activity android:name=".Menu_Configuraciones" />
+        <activity android:name=".SplashInicioActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+        <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

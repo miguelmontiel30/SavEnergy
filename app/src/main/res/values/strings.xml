@@ -62,6 +62,7 @@
     <!-- String de interfaz "Inicio_Sesion" -->
     <string name="olvido">¿Olvidaste tu contraseña?</string>
     <string name="datos_inv">Correo o contraseña incorrectos</string>
+    <string name="progres_bar">Iniciando...</string>
 
     <!-- String de interfaz "Configuración de corte" -->
     <string name="configura">Seleccione la próxima fecha de corte</string>
