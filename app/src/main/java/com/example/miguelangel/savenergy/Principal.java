@@ -2,6 +2,7 @@ package com.example.miguelangel.savenergy;
 
                         //Librerias importadas para el funcionamiento
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -9,6 +10,7 @@ import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.KeyEvent;
@@ -38,6 +40,7 @@ public class Principal extends AppCompatActivity
 
                                     //Inicio de Declaración de variables
     private LineChart grafica;
+    private long backPressedTime;
     String user_cache,nombre_user;
     private View header;
     TextView nombre,correo;
@@ -119,7 +122,23 @@ public class Principal extends AppCompatActivity
         } else if (id == R.id.nav_facturacion) {
 
         } else if (id == R.id.nav_salir) {
-            eliminarSesion();
+            final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
+            builder.setMessage("Deseas cerrar sesión?");
+            builder.setCancelable(true);
+            builder.setNegativeButton("Confirmar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    eliminarSesion();
+                }
+            });
+            builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    dialogInterface.cancel();
+                }
+            });
+            AlertDialog alertDialog =  builder.create();
+            alertDialog.show();
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -164,12 +183,13 @@ public class Principal extends AppCompatActivity
                                 //Metodo Si se ha presionado Back
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            drawer.closeDrawer(GravityCompat.START);
+        if (backPressedTime + 2000 > System.currentTimeMillis()){
+            super.onBackPressed();
+            return;
+        }else {
+            Toast.makeText(getBaseContext(), "Pulsa de nuevo para salir", Toast.LENGTH_SHORT).show();
         }
+        backPressedTime = System.currentTimeMillis();
     }
 
 }

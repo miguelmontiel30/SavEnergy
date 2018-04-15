@@ -1,12 +1,13 @@
 package com.example.miguelangel.savenergy;
 
 import android.annotation.SuppressLint;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.StrictMode;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -18,9 +19,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 import org.json.JSONException;
 import org.json.JSONObject;
-import java.io.BufferedInputStream;
+
 import java.io.BufferedReader;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -29,9 +29,11 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
                                     //Inicio de la declaracion de variables
     TextInputLayout til_correo,til_password;
+    ProgressDialog progressDialog;
+    private boolean ses= false;
     EditText email, pass;
     Button iniciar;
-    String correo_cache,password_cache,nombre_cache,id_user_cache,fecha_cache,id_tarifa_cache,id_cuota_cache;
+    String correo_cache,password_cache,nombre_cache,id_user_cache,fecha_cache,id_tarifa_cache,id_cuota_cache,tarifa_cache,cuota_cache,tipo_usuario_cache,id_clave_cache;
                                     //Fin de la declaración de variables
 
 
@@ -65,32 +67,30 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
-    public boolean sesion(){
-        boolean ses= false;
+    public void sesion(){
         try {
             String resultJSON="";
             JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
-                id_user_cache = respuestaJSON.getJSONObject("usuario").getString("id_usuario");
-                correo_cache = respuestaJSON.getJSONObject("usuario").getString("email");
-                password_cache = respuestaJSON.getJSONObject("usuario").getString("contrasenia");
-                nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
-                fecha_cache = respuestaJSON.getJSONObject("usuario").getString("proxima_fecha_c");
-                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("id_tarifa");
-                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_cuotas");
                 ses = true;
+                id_user_cache = respuestaJSON.getJSONObject("usuario").getString("id_usuario");
+                password_cache = respuestaJSON.getJSONObject("usuario").getString("contrasenia");
+                correo_cache = respuestaJSON.getJSONObject("usuario").getString("email");
+                nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
+                tipo_usuario_cache = respuestaJSON.getJSONObject("usuario").getString("tipo_usuario");
+                id_clave_cache = respuestaJSON.getJSONObject("usuario").getString("id_clave_producto");
+                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("ID Cuota");
+                cuota_cache = respuestaJSON.getJSONObject("usuario").getString("Cuota");
+                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("ID Tarifa");
+                tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("Tarifa");
                 guardarUser();
-                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_LONG).show();
             }
             else if (resultJSON.equals("2")){//el ususario no existe
-                til_correo.setError(getResources().getString(R.string.datos_inv));
-                til_password.setError(getResources().getString(R.string.datos_inv));
             }
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        return ses;
     }
 
     //Metodo para validar correo
@@ -109,10 +109,12 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     public void guardarUser(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id_usuario",id_user_cache);
         editor.putString("correo", correo_cache);
         editor.putString("contrasenia",password_cache);
         editor.putString("nombre",nombre_cache);
-        editor.putString("id_usuario",id_user_cache);
+        editor.putString("tipo_usuario",tipo_usuario_cache);
+        editor.putString("id_clave",id_clave_cache);
         editor.putString("fecha",fecha_cache);
         editor.putString("id_tarifa",id_tarifa_cache);
         editor.putString("id_cuota",id_cuota_cache);
@@ -178,17 +180,45 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         til_correo = (TextInputLayout) findViewById(R.id.til_correo);       //Asignación de variables de tipo TextInputLayout
         til_password = (TextInputLayout) findViewById(R.id.til_password);   //Asignación de variables de tipo TextInputLayout
 
+        progressDialog= new ProgressDialog(this);
+
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
 
     @Override
     public void onClick(View view) {
-        //Toast.makeText(getApplicationContext(), validar(pass.getText().toString(), email.getText().toString()), Toast.LENGTH_SHORT).show();
         if(view == iniciar) {
-            if (sesion()) {
+            sesion();
+            progressDialog.setTitle("Espera por favor");
+            progressDialog.setMessage("Iniciando sesion...");
+            progressDialog.show();
+            new BackGroundJob().execute();
+        }
+    }
+    //Metodo para determinar la duracion del Progress Dialog
+    private class BackGroundJob extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            try{
+                Thread.sleep(2500);//Se crea un hilo para determinar el tiempo que dura la animacion
+            }catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            return null;
+        }
+        @Override
+        protected void onPostExecute(Void aVoid) {//Método que se ejecuta despues de terminar la duración
+            progressDialog.cancel();
+            if (ses == true){
+                Toast.makeText(getApplicationContext(),"Bienvenido",Toast.LENGTH_SHORT).show();
                 iniciar_sesionOnclick();
+            }else{
+                til_correo.setError(getResources().getString(R.string.datos_inv));
+                pass.setText("");
+                til_password.setError(getResources().getString(R.string.datos_inv));
             }
         }
     }
+
 }

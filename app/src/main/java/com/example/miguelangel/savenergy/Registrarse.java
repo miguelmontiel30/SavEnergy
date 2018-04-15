@@ -123,11 +123,16 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                     //Metodo para validar los caracteres usados en la contraseña
     public boolean validar_car_contrasenia(String pass){
         Pattern patron = Pattern.compile("^[A-Za-z0-9 ]+$");
-        if (!patron.matcher(pass).matches() || pass.length() > 30) {
-            til_contrasenia.setError(getResources().getString(R.string.pass_inc));
+        if(pass.length() < 15) {
+            if (!patron.matcher(pass).matches()) {
+                til_contrasenia.setError(getResources().getString(R.string.pass_inc));
+                return false;
+            } else {
+                til_contrasenia.setError(null);
+            }
+        }else {
+            til_contrasenia.setError("Máximo 15 caracteres");
             return false;
-        } else {
-            til_contrasenia.setError(null);
         }
         return true;
     }

@@ -72,6 +72,7 @@
 
     <!-- String de interfaz "Configuración de corte" -->
     <string name="configura">Seleccione la próxima fecha de corte</string>
+    <string name="configurar">Seleccione la nueva fecha de corte</string>
     <string name="cuota">Cuota</string>
     <string name="finalizar">Finalizar</string>
 

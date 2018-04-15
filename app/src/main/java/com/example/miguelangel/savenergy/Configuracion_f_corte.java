@@ -48,7 +48,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     ArrayList<String> lista_cuota = new ArrayList<String>();
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();
     ArrayList<String> lista_id_cuota = new ArrayList<String>();
-    String clave, correo, pass, id_tarifa, id_cuota;
+    String clave, correo, pass, id_tarifa, id_cuota,tarifa,cuota;
 
                             //Fin de la declaración de variables
 
@@ -127,9 +127,11 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             }
             correo_cache = correo;
             password_cache = pass;
+            fecha_cache = fecha;
             nombre_cache = "Nuevo usuario";
             tarifa_cache = id_t;
             cuota_cache = id_c;
+
             guardarUser();
             bufferedReader.close();
         } catch (Exception e) {}
@@ -151,13 +153,15 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         editor.putString("fecha",fecha_cache);
         editor.putString("id_tarifa",tarifa_cache);
         editor.putString("id_cuota",cuota_cache);
+        editor.putString("tarifa",tarifa);
+        editor.putString("cuota",cuota);
         editor.commit();
     }
 
 
     @Override
     public void onClick(View view) {
-        registrar(pass,correo,fecha+"",id_tarifa,id_cuota);
+        registrar(pass,correo,fecha.getText().toString(),id_tarifa,id_cuota);
             cargarPrincipal();
     }
 
@@ -232,6 +236,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 id_tarifa = lista_id_tarifa.get(i); // Se asigna el valor seleccionado en el Spinner, a la variable tarifa
+                tarifa = lista_tarifa.get(i);
             }
             @Override public void onNothingSelected(AdapterView<?> adapterView) { }});
         llenarSpCuota();//metodo para llenar el arreglo lista de cuotas
@@ -242,6 +247,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 id_cuota = lista_id_cuota.get(i);
+                cuota = lista_cuota.get(i);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}});

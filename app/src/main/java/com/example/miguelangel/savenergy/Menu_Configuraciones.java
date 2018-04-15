@@ -40,7 +40,7 @@ public class Menu_Configuraciones extends AppCompatActivity implements View.OnCl
 
                             //Método para cargar UI Configuración de fecha de corte
     public void cargarCCorte(){
-        Intent intent = new Intent(Menu_Configuraciones.this,Configuracion_f_corte.class);
+        Intent intent = new Intent(Menu_Configuraciones.this,Cambiar_periodo_corte.class);
         startActivity(intent);
         finish();
     }

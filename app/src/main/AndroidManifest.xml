@@ -53,7 +53,7 @@
         <activity
             android:name=".SplashInicioActivity"
             android:theme="@style/AppTheme.NoActionBar">
-            <intent-filter>
+        <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
@@ -62,6 +62,9 @@
         <activity
             android:name=".Cambiar_contrasenia"
             android:parentActivityName=".Menu_Configuraciones" />
+        <activity android:name=".Cambiar_periodo_corte"
+            android:parentActivityName=".Menu_Configuraciones">
+        </activity>
         <activity android:name=".Energia_Generada"
             android:label="Energía Generada"
             android:parentActivityName=".Principal"/>
