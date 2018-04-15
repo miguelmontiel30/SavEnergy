@@ -55,6 +55,7 @@
     <!-- Strings de interfaz "Configuracion de Perfil" -->
     <string name="nombre">Nombre</string>
     <string name="correo_electronico">Correo Electrónico</string>
+    <string name="correo_no_valido">El formato de correo no es válido</string>
     <string name="tarifa">Tarifa</string>
     <string name="foto">Cambiar foto de perfil</string>
     <string name="guardar">Guardar</string>

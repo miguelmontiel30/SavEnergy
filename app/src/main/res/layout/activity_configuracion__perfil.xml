@@ -66,7 +66,6 @@
                         android:id="@+id/et_nombre"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:editable="true"
                         android:ems="10"
                         android:inputType="textPersonName"
                         android:textColor="@color/colorPrimary"/>
@@ -91,31 +90,12 @@
                         android:textColor="@color/colorPrimary"/>
                 </android.support.design.widget.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
-                    android:id="@+id/txt_tarifa"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:hint="@string/tarifa"
-                    app:errorTextAppearance="@style/AppTheme.EditTextError"
-                    android:textColor="@color/colorPrimaryDark">
-
-                <EditText
-                    android:id="@+id/et_tarifa"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:editable="false"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    android:textColor="@color/colorPrimary"/>
-                </android.support.design.widget.TextInputLayout>
-
                 <Button
                     android:id="@+id/btn_guardar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="bottom|right"
-                    android:layout_margin="8dp"
+                    android:layout_marginTop="25dp"
                     android:padding="15dp"
                     android:text="@string/guardar"
                     android:theme="@style/Button_style"/>

@@ -129,7 +129,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         } else {
             til_contrasenia.setError(null);
         }
-
         return true;
     }
 
