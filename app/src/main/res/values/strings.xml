@@ -50,7 +50,12 @@
 
     <!--Strings de interfaz "Bienvenido"-->
     <string name="bienvenido">Bienvenido</string>
-    <string name="precio">El precio por kWh/h actual es de $:</string>
+    <string name="precio_actual">El precio por kWh/h actual es de $:</string>
+    <string name="precio">0</string>
+    <string name="electrica">Energía Electrica (CFE)</string>
+    <string name="consumo_diario">Consumo de</string>
+    <string name="kw">kW</string>
+    <string name="sustentable">Energía Electrica Sustentable</string>
 
     <!-- Strings de interfaz "Configuracion de Perfil" -->
     <string name="nombre">Nombre</string>
@@ -72,4 +77,8 @@
 
     <!-- String de interfaz "Configuración de contraseña" -->
     <string name="instruccion_contra">Escriba la nueva contraseña</string>
+
+    <!-- String de interfaz "Energía Generada" -->
+    <string name="generada_e">Energía Generada</string>
+
 </resources>

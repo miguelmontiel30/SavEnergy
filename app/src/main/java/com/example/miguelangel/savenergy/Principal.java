@@ -113,7 +113,9 @@ public class Principal extends AppCompatActivity
 
 
         } else if (id == R.id.nav_generada) {
-
+            Intent intent = new Intent(Principal.this,Energia_Generada.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_facturacion) {
 
         } else if (id == R.id.nav_salir) {

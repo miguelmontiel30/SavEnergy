@@ -2,19 +2,15 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/Principal"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="com.example.miguelangel.savenergy.Principal"
-    tools:showIn="@layout/app_bar_principal">
-
+    tools:context="com.example.miguelangel.savenergy.Energia_Generada">
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-                                <!-- Contenedor principal de UI Principal -->
+                            <!-- Contenedor principal de UI Principal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -22,71 +18,27 @@
             android:orientation="vertical"
             android:padding="15sp">
 
-                                <!-- Cabecera del sistema -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
+                            <!-- Cabecera del sistema -->
                 <TextView
-                    android:id="@+id/txt_bienvenido"
+                    android:id="@+id/txt_cabecera"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:text="@string/bienvenido"
-                    android:textSize="30sp" />
-            </LinearLayout>
-                                <!-- Fin de la cabecera -->
+                    android:text="@string/sustentable"
+                    android:textSize="25sp"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_gravity="center_horizontal"/>
+                            <!-- Fin de la cabecera -->
 
-                                <!-- Contenedor vertical de precios -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="8dp">
-
-                                <!-- Contenedor horizontal de precios -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="25dp"
-                    android:orientation="horizontal"
-                    android:padding="6dp">
-
-                    <TextView
-                        android:id="@+id/txt_precio_actual"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="5dp"
-                        android:text="@string/precio_actual"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp" />
-
-                    <TextView
-                        android:id="@+id/precio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/precio"
-                        android:layout_marginStart="5dp"
-                        android:textColor="@color/colorPrimary"
-                        android:textSize="18sp" />
-
-                </LinearLayout>
-                                <!-- Fin del contenedor horizontal de precios -->
-
-            </LinearLayout>
-                                <!-- Fin del contenedor vertical de precios -->
-
-                                <!-- Gráfica -->
+                            <!-- Gráfica -->
             <com.github.mikephil.charting.charts.LineChart
                 android:id="@+id/grafica"
                 android:layout_width="match_parent"
                 android:layout_height="300dp"
                 android:layout_marginTop="10dp"
                 android:layout_weight="1" />
-                                <!-- Gráfica -->
+                            <!-- Gráfica -->
 
-                                <!-- Contenedor de selección fecha -->
+                            <!-- Contenedor de selección fecha -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -98,7 +50,7 @@
                     android:id="@+id/txt_consumo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity=""
+                    android:layout_marginEnd="5dp"
                     android:text="@string/consumo_diario"
                     android:textColor="@color/colorPrimary"
                     android:textSize="20sp" />
@@ -109,7 +61,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
-                                <!-- Fin del contenedor de selección fecha -->
+                            <!-- Fin del contenedor de selección fecha -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -123,8 +75,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity=""
-                    android:text="@string/electrica"
-                    android:textColor="@color/electrica"
+                    android:text="@string/generada"
+                    android:textColor="@color/sustentable"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -138,7 +90,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/energia_electrica_comercial" />
+                        android:src="@drawable/generada" />
 
                     <TextView
                         android:id="@+id/tv_consumo_e_e"
@@ -147,7 +99,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="5dp"
                         android:text="0"
-                        android:textColor="@color/electrica"
+                        android:textColor="@color/sustentable"
                         android:textSize="18sp" />
 
                     <TextView
@@ -155,7 +107,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kw"
-                        android:textColor="@color/electrica"
+                        android:textColor="@color/sustentable"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -166,8 +118,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity=""
                     android:layout_marginTop="15dp"
-                    android:text="@string/sustentable"
-                    android:textColor="@color/colorPrimary"
+                    android:text="@string/consumida"
+                    android:textColor="@color/error_validacion"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -180,7 +132,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/energia_electrica_sustentable" />
+                    android:src="@drawable/consumida" />
 
                 <TextView
                     android:id="@+id/tv_consumo_e_s"
@@ -189,7 +141,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="5dp"
                     android:text="0"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/error_validacion"
                     android:textSize="18sp" />
 
                 <TextView
@@ -197,13 +149,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kw"
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/error_validacion"
                     android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>
-                                <!-- Fin del contenedor principal -->
-
+                            <!-- Fin del contenedor principal -->
     </ScrollView>
 
 </android.support.constraint.ConstraintLayout>
