@@ -42,7 +42,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     Calendar date;
     int day, month, year;
     Spinner spTarifas, spCuotas;
-    String correo_cache,password_cache,nombre_cache,fecha_cache,tarifa_cache,cuota_cache;
+    String correo_cache,password_cache,nombre_cache,clave_cache,tarifa_cache,cuota_cache;
             // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
     ArrayList<String> lista_tarifa = new ArrayList<String>();
     ArrayList<String> lista_cuota = new ArrayList<String>();
@@ -113,13 +113,13 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         }
     }
 
-    private String registrar(String pass, String correo, String fecha, String id_t, String id_c) {
+    private String registrar(String pass, String correo, String id_clave, String id_t, String id_c) {
         URL url = null;
         String line = "";
         String webServiceResult="";
         try {
             url = new URL("https://savenergy.000webhostapp.com/savenergy/insert_user.php?" +
-                    "pass="+pass+"&email="+correo+"&date="+fecha+"&tar="+id_t+"&cuo="+id_c);
+                    "pass="+pass+"&email="+correo+"&id_clave="+id_clave+"&tar="+id_t+"&cuo="+id_c);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //Abrir la conexión
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null){
@@ -127,7 +127,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             }
             correo_cache = correo;
             password_cache = pass;
-            fecha_cache = fecha;
+            clave_cache = id_clave;
             nombre_cache = "Nuevo usuario";
             tarifa_cache = id_t;
             cuota_cache = id_c;
@@ -150,10 +150,11 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         editor.putString("correo", correo_cache);
         editor.putString("contrasenia",password_cache);
         editor.putString("nombre",nombre_cache);
-        editor.putString("fecha",fecha_cache);
+        editor.putString("id_clave",clave_cache);
         editor.putString("id_tarifa",tarifa_cache);
         editor.putString("id_cuota",cuota_cache);
         editor.putString("tarifa",tarifa);
+        editor.putString("fecha",fecha.getText().toString());
         editor.putString("cuota",cuota);
         editor.commit();
     }
@@ -161,7 +162,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
 
     @Override
     public void onClick(View view) {
-        registrar(pass,correo,fecha.getText().toString(),id_tarifa,id_cuota);
+        registrar(pass,correo,clave,id_tarifa,id_cuota);
             cargarPrincipal();
     }
 
