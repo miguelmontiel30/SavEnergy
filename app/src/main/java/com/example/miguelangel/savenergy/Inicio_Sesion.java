@@ -67,10 +67,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
-    public void sesion(){
+    public void sesion(String pass, String email){
         try {
             String resultJSON="";
-            JSONObject respuestaJSON = new JSONObject  (validar(pass.getText().toString(), email.getText().toString()));//Se guarda el resultado obtenido del JSON
+            JSONObject respuestaJSON = new JSONObject  (validar(pass,email));//Se guarda el resultado obtenido del JSON
             resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
                 ses = true;
@@ -190,7 +190,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         if(view == iniciar) {
-            sesion();
+            sesion(pass.getText().toString(), email.getText().toString());
             System.out.print(ses);
             progressDialog.setTitle("Espera por favor");
             progressDialog.setMessage("Iniciando sesion...");

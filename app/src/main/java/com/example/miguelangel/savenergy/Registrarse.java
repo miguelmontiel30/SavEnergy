@@ -82,7 +82,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
             String resultJSON = respuestaJSON.getString("estado");                                  //guarda el registro del arreglo estado
             if (resultJSON.equals("1")) {      // hay registros
                 est = respuestaJSON.getJSONObject("consulta").getString("estado");
-                id = respuestaJSON.getJSONObject("consulta").getString("id_usuario");
                 if(est.equals("Activo")||est.equals("activo")) {    //Si el el producto esta activado
                     //if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
                         clv = true;

@@ -65,6 +65,7 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
                     //Toast.makeText(getApplicationContext(), cambiar(contr,id_user), Toast.LENGTH_SHORT).show();
                     if(cambiar(contr,id_user).equals("Cambios realizados!")){
                         opc = true;
+                        Toast.makeText(getApplicationContext(), id_user, Toast.LENGTH_SHORT).show();
                     }
                 }else {
                     til_pass2.setError("Las contraseñas no coinciden");

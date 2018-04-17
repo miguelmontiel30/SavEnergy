@@ -49,6 +49,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();
     ArrayList<String> lista_id_cuota = new ArrayList<String>();
     String clave, correo, pass, id_tarifa, id_cuota,tarifa,cuota;
+    Inicio_Sesion sesion = new Inicio_Sesion();
 
                             //Fin de la declaración de variables
 
@@ -119,7 +120,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         String webServiceResult="";
         try {
             url = new URL("https://savenergy.000webhostapp.com/savenergy/insert_user.php?" +
-                    "pass="+pass+"&email="+correo+"&id_clave="+id_clave+"&tar="+id_t+"&cuo="+id_c);
+                    "pass="+pass+"&email="+correo+"&clave="+id_clave+"&tar="+id_t+"&cuo="+id_c);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //Abrir la conexión
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null){
@@ -164,6 +165,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     public void onClick(View view) {
         registrar(pass,correo,clave,id_tarifa,id_cuota);
             cargarPrincipal();
+            sesion.sesion(pass,correo);
     }
 
                         //Método onCreate
@@ -211,7 +213,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         year = date.get(Calendar.YEAR);
 
         month = month+1;
-        fecha.setText(day+"-"+month+"-"+year);
+        fecha.setText(year+"-"+day+"-"+month);
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
