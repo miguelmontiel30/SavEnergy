@@ -84,11 +84,11 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                 est = respuestaJSON.getJSONObject("consulta").getString("estado");
                 id = respuestaJSON.getJSONObject("consulta").getString("id_usuario");
                 if(est.equals("Activo")||est.equals("activo")) {    //Si el el producto esta activado
-                    if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
+                    //if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
                         clv = true;
-                    }else {                                         //El producto ya tiene un cliente asignado
-                        til_clave.setError(getResources().getString(R.string.prod_reg)); //Muestra error en TextInputLayout
-                    }
+                    //}else {                                         //El producto ya tiene un cliente asignado
+                      //  til_clave.setError(getResources().getString(R.string.prod_reg)); //Muestra error en TextInputLayout
+                    //}
                 }else{//El producto no esta activado
                     til_clave.setError(getResources().getString(R.string.prod_in));      //Muestra error en TextInputLayout
                 }

@@ -128,16 +128,16 @@ public class Principal extends AppCompatActivity
             final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
             builder.setMessage("Deseas cerrar sesión?");
             builder.setCancelable(true);
-            builder.setNegativeButton("Confirmar", new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialogInterface, int i) {
-                    eliminarSesion();
-                }
-            });
-            builder.setPositiveButton("Cancelar", new DialogInterface.OnClickListener() {
+            builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialogInterface, int i) {
                     dialogInterface.cancel();
+                }
+            });
+            builder.setPositiveButton("Confirmar", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialogInterface, int i) {
+                    eliminarSesion();
                 }
             });
             AlertDialog alertDialog =  builder.create();

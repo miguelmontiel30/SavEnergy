@@ -80,10 +80,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
                 nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
                 tipo_usuario_cache = respuestaJSON.getJSONObject("usuario").getString("tipo_usuario");
                 id_clave_cache = respuestaJSON.getJSONObject("usuario").getString("id_clave_producto");
-                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("ID Cuota");
-                cuota_cache = respuestaJSON.getJSONObject("usuario").getString("Cuota");
-                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("ID Tarifa");
-                tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("Tarifa");
+                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_uota");
+                cuota_cache = respuestaJSON.getJSONObject("usuario").getString("cuota");
+                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("id_tarifa");
+                tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("tarifa");
                 guardarUser();
             }
             else if (resultJSON.equals("2")){//el ususario no existe
@@ -115,9 +115,10 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         editor.putString("nombre",nombre_cache);
         editor.putString("tipo_usuario",tipo_usuario_cache);
         editor.putString("id_clave",id_clave_cache);
-        editor.putString("fecha",fecha_cache);
         editor.putString("id_tarifa",id_tarifa_cache);
+        editor.putString("tarifa",tarifa_cache);
         editor.putString("id_cuota",id_cuota_cache);
+        editor.putString("cuota",cuota_cache);
         editor.commit();
     }
 
@@ -190,6 +191,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     public void onClick(View view) {
         if(view == iniciar) {
             sesion();
+            System.out.print(ses);
             progressDialog.setTitle("Espera por favor");
             progressDialog.setMessage("Iniciando sesion...");
             progressDialog.show();

@@ -207,7 +207,7 @@ public class Cambiar_periodo_corte extends AppCompatActivity implements View.OnC
     public void getdatos(){
         String tar,cuo,id_tar,id_cuo;
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-        fecha_cache = preferences.getString("fecha","Null");
+        fecha_cache = preferences.getString("fecha","Presiona aqui...");
         tar = preferences.getString("tarifa","Null");
         cuo = preferences.getString("cuota","Null");
         id_tar = preferences.getString("id_tarifa","Null");
