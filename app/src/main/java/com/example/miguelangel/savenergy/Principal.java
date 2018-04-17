@@ -113,14 +113,17 @@ public class Principal extends AppCompatActivity
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_consumida) {
-
-
+            Intent intent = new Intent(Principal.this,Energia_Consumida.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_generada) {
             Intent intent = new Intent(Principal.this,Energia_Generada.class);
             startActivity(intent);
             finish();
         } else if (id == R.id.nav_facturacion) {
-
+            Intent intent = new Intent(Principal.this,Facturacion.class);
+            startActivity(intent);
+            finish();
         } else if (id == R.id.nav_salir) {
             final AlertDialog.Builder builder = new AlertDialog.Builder(Principal.this);
             builder.setMessage("Deseas cerrar sesión?");

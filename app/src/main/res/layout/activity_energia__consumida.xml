@@ -4,41 +4,31 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.miguelangel.savenergy.Energia_Generada">
+    tools:context="com.example.miguelangel.savenergy.Energia_Consumida">
 
+                        <!-- Contenedor ScrollView -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-                            <!-- Contenedor principal de UI Principal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:focusableInTouchMode="true"
             android:orientation="vertical"
             android:padding="15dp">
 
-                            <!-- Cabecera del sistema -->
-                <TextView
-                    android:id="@+id/txt_cabecera"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/sustentable"
-                    android:textSize="25sp"
-                    android:textColor="@color/colorPrimary"
-                    android:layout_gravity="center_horizontal"/>
-                            <!-- Fin de la cabecera -->
+            <!-- Cabecera del sistema -->
+            <TextView
+                android:id="@+id/txt_cabecera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instruccion"
+                android:textSize="25sp"
+                android:textColor="@color/colorPrimary"
+                android:layout_gravity="center_horizontal"/>
+            <!-- Fin de la cabecera -->
 
-                            <!-- Gráfica -->
-            <com.github.mikephil.charting.charts.LineChart
-                android:id="@+id/grafica"
-                android:layout_width="match_parent"
-                android:layout_height="300dp"
-                android:layout_marginTop="10dp"
-                android:layout_weight="1" />
-                            <!-- Gráfica -->
-
-                            <!-- Contenedor de selección fecha -->
+            <!-- Contenedor de selección fecha -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -61,7 +51,19 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
             </LinearLayout>
-                            <!-- Fin del contenedor de selección fecha -->
+            <!-- Fin del contenedor de selección fecha -->
+
+            <!-- Gráfica -->
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/grafica"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="10dp"
+                android:layout_weight="1" />
+            <!-- Gráfica -->
+
+            <!-- Contenedor de selección fecha -->
+            <!-- Fin del contenedor de selección fecha -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,12 +73,24 @@
                 android:padding="8dp">
 
                 <TextView
+                    android:id="@+id/consumida"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity=""
+                    android:layout_marginTop="15dp"
+                    android:text="@string/titulo"
+                    android:textColor="#000"
+                    android:gravity="center_horizontal"
+                    android:layout_marginBottom="18sp"
+                    android:textSize="22sp" />
+
+                <TextView
                     android:id="@+id/txt_consumo_e_e"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity=""
-                    android:text="@string/generada"
-                    android:textColor="@color/sustentable"
+                    android:text="@string/total_electrica"
+                    android:textColor="@color/electrica"
                     android:textSize="18sp" />
 
                 <LinearLayout
@@ -90,7 +104,7 @@
                     <ImageView
                         android:layout_width="60dp"
                         android:layout_height="60dp"
-                        android:src="@drawable/generada" />
+                        android:src="@drawable/energia_electrica_comercial" />
 
                     <TextView
                         android:id="@+id/tv_consumo_e_e"
@@ -99,7 +113,7 @@
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="5dp"
                         android:text="0"
-                        android:textColor="@color/sustentable"
+                        android:textColor="@color/electrica"
                         android:textSize="18sp" />
 
                     <TextView
@@ -107,7 +121,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/kw"
-                        android:textColor="@color/sustentable"
+                        android:textColor="@color/electrica"
                         android:textSize="18sp" />
 
                 </LinearLayout>
@@ -118,8 +132,8 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity=""
                     android:layout_marginTop="15dp"
-                    android:text="@string/consumida"
-                    android:textColor="@color/error_validacion"
+                    android:text="@string/total_sustentable"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
             </LinearLayout>
 
@@ -132,7 +146,7 @@
                 <ImageView
                     android:layout_width="60dp"
                     android:layout_height="60dp"
-                    android:src="@drawable/consumida" />
+                    android:src="@drawable/energia_electrica_sustentable" />
 
                 <TextView
                     android:id="@+id/tv_consumo_e_s"
@@ -141,7 +155,7 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="5dp"
                     android:text="0"
-                    android:textColor="@color/error_validacion"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
 
                 <TextView
@@ -149,12 +163,11 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/kw"
-                    android:textColor="@color/error_validacion"
+                    android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
             </LinearLayout>
 
         </LinearLayout>
-                            <!-- Fin del contenedor principal -->
-    </ScrollView>
 
+    </ScrollView>
 </android.support.constraint.ConstraintLayout>

@@ -82,4 +82,11 @@
     <!-- String de interfaz "Energía Generada" -->
     <string name="generada_e">Energía Generada</string>
 
+    <!-- String de interfaz "Energía Consumida" -->
+    <string name="instruccion">Selecciona el periodo que deseas consultar</string>
+
+    <!-- String de interfaz "Facturación" -->
+    <string name="titulo">Energía Electrica Consumida</string>
+    <string name="total_electrica">Comercial (CFE)</string>
+    <string name="total_sustentable">Sustentable Propia</string>
 </resources>
