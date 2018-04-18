@@ -43,7 +43,7 @@ public class Principal extends AppCompatActivity
     private long backPressedTime;
     String user_cache,nombre_user;
     private View header;
-    TextView nombre,correo;
+    TextView nombre,correo,user;
 
 
                 //Método que setea campos para funcionamiento dinamico
@@ -54,6 +54,7 @@ public class Principal extends AppCompatActivity
         String nombre_cache = preferences.getString("nombre","Null");
         nombre.setText(nombre_cache);
         correo.setText(correo_cache);
+        user.setText(nombre_cache);
         }
                 //Método para borrar sesión guardada del usuario
     public void eliminarSesion(){
@@ -171,6 +172,7 @@ public class Principal extends AppCompatActivity
         header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
         correo = (TextView) header.findViewById(R.id.correo_user);                                  //Asignación de variables de tipo TextView
         nombre = (TextView) header.findViewById(R.id.nombre_user);                                 //Asignación de variables de tipo TextView
+        user = (TextView) findViewById(R.id.txt_user);
         //imagen_usuario = (CircleImageView) header.findViewById(R.id.imageViewUsuario);
 
         //Método que carga las preferencias del usuario
