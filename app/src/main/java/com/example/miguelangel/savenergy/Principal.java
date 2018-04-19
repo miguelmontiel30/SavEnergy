@@ -44,12 +44,12 @@ public class Principal extends AppCompatActivity
     String user_cache,nombre_user;
     private View header;
     TextView nombre,correo,user;
+    Inicio_Sesion sesion = new Inicio_Sesion();
 
 
                 //Método que setea campos para funcionamiento dinamico
     public void setCampos(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-
         String correo_cache = preferences.getString("correo","Null");
         String nombre_cache = preferences.getString("nombre","Null");
         nombre.setText(nombre_cache);
