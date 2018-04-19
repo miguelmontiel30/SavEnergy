@@ -31,7 +31,9 @@
             android:name=".Registrarse"
             android:label="Registrate"
             android:parentActivityName=".Inicio" />
-        <activity android:name=".Configuracion_f_corte" />
+        <activity android:name=".Configuracion_f_corte"
+            android:parentActivityName=".Registrarse"
+            />
         <activity
             android:name=".Principal"
             android:label="@string/title_activity_principal"

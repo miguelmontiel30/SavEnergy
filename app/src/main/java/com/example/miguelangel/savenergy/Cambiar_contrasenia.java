@@ -61,14 +61,10 @@ public class Cambiar_contrasenia extends AppCompatActivity implements View.OnCli
         contr = pass.getText().toString();
         if (!pass.getText().toString().equals("")){
             if (!pass2.getText().toString().equals("")){
-                if (pass.getText().toString().equals(pass2.getText().toString())){
-                    //Toast.makeText(getApplicationContext(), cambiar(contr,id_user), Toast.LENGTH_SHORT).show();
+                if (validar_contrasenia(pass2.getText().toString())){
                     if(cambiar(contr,id_user).equals("Cambios realizados!")){
                         opc = true;
-                        Toast.makeText(getApplicationContext(), id_user, Toast.LENGTH_SHORT).show();
                     }
-                }else {
-                    til_pass2.setError("Las contraseñas no coinciden");
                 }
             }else {
                 til_pass2.setError("Obligatorio llenar este campo");

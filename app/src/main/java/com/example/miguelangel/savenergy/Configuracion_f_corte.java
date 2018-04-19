@@ -42,14 +42,13 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     Calendar date;
     int day, month, year;
     Spinner spTarifas, spCuotas;
-    String correo_cache,password_cache,nombre_cache,clave_cache,tarifa_cache,cuota_cache;
+    String id_user_cache, tipo_usuario_cache, id_clave_cache, id_cuota_cache, id_tarifa_cache,correo_cache,password_cache,nombre_cache,clave_cache,tarifa_cache,cuota_cache;
             // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
     ArrayList<String> lista_tarifa = new ArrayList<String>();
     ArrayList<String> lista_cuota = new ArrayList<String>();
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();
     ArrayList<String> lista_id_cuota = new ArrayList<String>();
     String clave, correo, pass, id_tarifa, id_cuota,tarifa,cuota;
-    Inicio_Sesion sesion = new Inicio_Sesion();
 
                             //Fin de la declaración de variables
 
@@ -132,11 +131,51 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             nombre_cache = "Nuevo usuario";
             tarifa_cache = id_t;
             cuota_cache = id_c;
-
-            guardarUser();
             bufferedReader.close();
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+
+    //Metodo con 2 parametros para conectar con servidor y devuelve datos
+    public String validar(String contra, String email){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
+        URL url = null;
+        String line = "";
+        String webServiceResult="";
+        try {
+            url= new URL("https://savenergy.000webhostapp.com/savenergy/Login.php?contra="+contra+"&email="+email);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
+            }
+            bufferedReader.close();
+        } catch (Exception e) {}
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+
+    public void cargarDatos(String pass, String email){
+        try {
+            String resultJSON="";
+            JSONObject respuestaJSON = new JSONObject  (validar(pass,email));//Se guarda el resultado obtenido del JSON
+            resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+            if (resultJSON.equals("1")) {      // el correo y contraseña son correctas
+                id_user_cache = respuestaJSON.getJSONObject("usuario").getString("id_usuario");
+                password_cache = respuestaJSON.getJSONObject("usuario").getString("contrasenia");
+                correo_cache = respuestaJSON.getJSONObject("usuario").getString("email");
+                nombre_cache = respuestaJSON.getJSONObject("usuario").getString("nombre");
+                tipo_usuario_cache = respuestaJSON.getJSONObject("usuario").getString("tipo_usuario");
+                id_clave_cache = respuestaJSON.getJSONObject("usuario").getString("id_clave_producto");
+                id_cuota_cache= respuestaJSON.getJSONObject("usuario").getString("id_uota");
+                cuota_cache = respuestaJSON.getJSONObject("usuario").getString("cuota");
+                id_tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("id_tarifa");
+                tarifa_cache = respuestaJSON.getJSONObject("usuario").getString("tarifa");
+                guardarUser();
+            }
+            else if (resultJSON.equals("2")){//el ususario no existe
+            }
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     public void cargarPrincipal() {
@@ -148,6 +187,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     public void guardarUser(){//Metodo que guarda los datos del nuevo ususario registrado
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
+        editor.putString("id_usuario",id_user_cache);
         editor.putString("correo", correo_cache);
         editor.putString("contrasenia",password_cache);
         editor.putString("nombre",nombre_cache);
@@ -155,20 +195,50 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         editor.putString("id_tarifa",tarifa_cache);
         editor.putString("id_cuota",cuota_cache);
         editor.putString("tarifa",tarifa);
+        editor.putString("tipo_ususario",tipo_usuario_cache);
         editor.putString("fecha",fecha.getText().toString());
         editor.putString("cuota",cuota);
         editor.commit();
     }
 
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
+    //Método Si presiona en boton "Atrás"
+    @Override
+    public  void onBackPressed(){
+        Intent intent = new Intent(Configuracion_f_corte.this,Registrarse.class);
+        startActivity(intent);
+        finish();
+    }
 
     @Override
     public void onClick(View view) {
         registrar(pass,correo,clave,id_tarifa,id_cuota);
+            cargarDatos(pass,correo);
+            insertFecha(id_user_cache,fecha.getText().toString());
             cargarPrincipal();
-            sesion.sesion(pass,correo);
     }
 
-                        //Método onCreate
+    private String insertFecha(String id_user_cache, String fecha) {
+        URL url = null;
+        String line = "";
+        String webServiceResult="";
+        try {
+            url= new URL("https://savenergy.000webhostapp.com/savenergy/primer_recibo.php?id_user="+id_user_cache+"&fecha="+fecha);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();//Se abre la conexion
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null) {//mientras exista un resultado los ira almacenando en la variable
+                webServiceResult += line;
+            }
+            bufferedReader.close();
+        } catch (Exception e) {}
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+    }
+
+    //Método onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -213,7 +283,7 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         year = date.get(Calendar.YEAR);
 
         month = month+1;
-        fecha.setText(year+"-"+day+"-"+month);
+        fecha.setText(year+"-"+month+"-"+day);
         fecha.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

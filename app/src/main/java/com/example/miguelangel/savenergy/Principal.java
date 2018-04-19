@@ -45,13 +45,13 @@ public class Principal extends AppCompatActivity
     private long backPressedTime;
     String user_cache,nombre_user;
     private View header;
+    Inicio_Sesion sesion = new Inicio_Sesion();
     TextView nombre,correo,user,fecha;
 
 
                 //Método que setea campos para funcionamiento dinamico
     public void setCampos(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
-
         String correo_cache = preferences.getString("correo","Null");
         String nombre_cache = preferences.getString("nombre","Null");
         nombre.setText(nombre_cache);

@@ -66,7 +66,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
             while ((line = bufferedReader.readLine()) != null){//mientras exista un resultado los ira almacenando en la variable
                 webServiceResult += line;
-
             }
             bufferedReader.close();
         } catch (Exception e) {}
@@ -75,46 +74,54 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
                     //Metodo para validación de clave de producto con Base de datos
     public boolean validarClave(){
-        String est, id;
+        String est;
         boolean clv = false;
-        try {
-            JSONObject respuestaJSON = new JSONObject  (validar(1, clave.getText().toString()));    //Se guarda el resultado obtenido del JSON
-            String resultJSON = respuestaJSON.getString("estado");                                  //guarda el registro del arreglo estado
-            if (resultJSON.equals("1")) {      // hay registros
-                est = respuestaJSON.getJSONObject("consulta").getString("estado");
-                if(est.equals("Activo")||est.equals("activo")) {    //Si el el producto esta activado
-                    //if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
+        if (!clave.getText().toString().equals("")){
+            try {
+                JSONObject respuestaJSON = new JSONObject  (validar(1, clave.getText().toString()));    //Se guarda el resultado obtenido del JSON
+                String resultJSON = respuestaJSON.getString("estado");                                  //guarda el registro del arreglo estado
+                if (resultJSON.equals("1")) {      // hay registros
+                    est = respuestaJSON.getJSONObject("consulta").getString("estado");
+                    if(est.equals("Activo")||est.equals("activo")) {    //Si el el producto esta activado
+                        //if(id.equals("null")||id=="null"){              // si el producto no tiene cliente asignado
                         clv = true;
-                    //}else {                                         //El producto ya tiene un cliente asignado
-                      //  til_clave.setError(getResources().getString(R.string.prod_reg)); //Muestra error en TextInputLayout
-                    //}
-                }else{//El producto no esta activado
-                    til_clave.setError(getResources().getString(R.string.prod_in));      //Muestra error en TextInputLayout
+                        //}else {                                         //El producto ya tiene un cliente asignado
+                        //  til_clave.setError(getResources().getString(R.string.prod_reg)); //Muestra error en TextInputLayout
+                        //}
+                    }else{//El producto no esta activado
+                        til_clave.setError(getResources().getString(R.string.prod_in));      //Muestra error en TextInputLayout
+                    }
+                }else if (resultJSON.equals("2")){      //la clave del producto es incorrecta
+                    til_clave.setError(getResources().getString(R.string.prod_inex));       //Muestra error en TextInputLayout
+                    clv=false;
                 }
-            }else if (resultJSON.equals("2")){      //la clave del producto es incorrecta
-                til_clave.setError(getResources().getString(R.string.prod_inex));       //Muestra error en TextInputLayout
-                clv=false;
-            }
             }catch (JSONException e) {
-            e.printStackTrace();
+                e.printStackTrace();
             }
+        }else {
+            til_clave.setError("Obligatorio llenar este campo");
+        }
         return clv;
     }
 
                     //Metodo para validar el correo en la BD
     public boolean validarCorreo(){
         boolean clv=false;
-        try {
-            JSONObject respuestaJSON = new JSONObject  (validar(2, correo.getText().toString()));//Se guarda el resultado obtenido del JSON
-            String resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
-            if (resultJSON.equals("1")) {      // ese correo ya existe
-                til_correo.setError(getResources().getString(R.string.correo_reg)); //Muestra error en TextInputLayout
+        if (!correo.getText().toString().equals("")){
+            try {
+                JSONObject respuestaJSON = new JSONObject  (validar(2, correo.getText().toString()));//Se guarda el resultado obtenido del JSON
+                String resultJSON = respuestaJSON.getString("estado");//guarda el registro del arreglo estado
+                if (resultJSON.equals("1")) {      // ese correo ya existe
+                    til_correo.setError(getResources().getString(R.string.correo_reg)); //Muestra error en TextInputLayout
+                }
+                else if (resultJSON.equals("2")){//el correo no esta en la BD, lo cual es correcto para permitir el registro
+                    clv=true;
+                }
+            } catch (JSONException e) {
+                e.printStackTrace();
             }
-            else if (resultJSON.equals("2")){//el correo no esta en la BD, lo cual es correcto para permitir el registro
-                clv=true;
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
+        }else{
+            til_correo.setError("Obligatorio llenar este campo");
         }
         return clv;
     }
@@ -151,12 +158,15 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
                     //Método para validar que las contraseñas sean iguales
     public boolean validar_contrasenia(String repeat_pass){
         String pass_1 = String.valueOf(pass.getText());
-        if (repeat_pass.equals(pass_1)) {
-            til_repetir_contrasenia.setError(null);
-            return true;
-        }else{
-            til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
+        if (!pass_1.equals("")){
+            if (repeat_pass.equals(pass_1)) {
+                til_repetir_contrasenia.setError(null);
+                return true;
+            }else{
+                til_repetir_contrasenia.setError(getResources().getString(R.string.contrasenias));
+            }
         }
+        til_repetir_contrasenia.setError("Obligatorio llenar este campo");
         return false;
     }
 
@@ -262,9 +272,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
 
         registrar = (Button) findViewById(R.id.registrarse);        //Asignacion de variables de tipo button
         registrar.setOnClickListener(this);
-
-                                                    //Fin de la asignación de variables a componentes XML
-
 
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
