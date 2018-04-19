@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -26,6 +27,7 @@ import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,7 +45,7 @@ public class Principal extends AppCompatActivity
     private long backPressedTime;
     String user_cache,nombre_user;
     private View header;
-    TextView nombre,correo,user;
+    TextView nombre,correo,user,fecha;
 
 
                 //Método que setea campos para funcionamiento dinamico
@@ -56,21 +58,56 @@ public class Principal extends AppCompatActivity
         correo.setText(correo_cache);
         user.setText(nombre_cache);
         }
-                //Método para borrar sesión guardada del usuario
+                                    //Método para borrar sesión guardada del usuario
     public void eliminarSesion(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         preferences.edit().clear().commit();
         cargarLogin();
     }
 
-                 //Método para pasar al Login cuando cierras sesion
+                                    //Método para pasar al Login cuando cierras sesion
     public void cargarLogin(){
         Intent intent = new Intent(Principal.this, Inicio_Sesion.class);
         startActivity(intent);
         finish();
     }
+                                //Método que consulta fecha en la BD
+    public String consulta_fecha(){
+        URL url = null;
+        String line = "";
+        String webServiceResult="";
+        try {
+            url = new URL("https://savenergy.000webhostapp.com/savenergy/fecha_actual.php");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //Abrir la conexión
+            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            while ((line = bufferedReader.readLine()) != null){
+                webServiceResult += line;
+            }
+            bufferedReader.close();
+        } catch (Exception e) {}
+        return webServiceResult;//Resultado del servidor (convertido en JSON)
+        }
+                                 //Método para insertar las fecha de corte
 
-                //Metodo para insertar los datos en la Gráfica
+    private void setFecha() {
+        try {
+            String fecha_actual="";
+            JSONArray jsonArray = null;
+            Toast.makeText(getApplicationContext(),"Entro al metodo",Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(),consulta_fecha(),Toast.LENGTH_SHORT).show();
+            jsonArray = new JSONArray(consulta_fecha());
+            JSONObject jsonObject = jsonArray.getJSONObject(0);
+            Toast.makeText(getApplicationContext(),"Continua aqui",Toast.LENGTH_SHORT).show();
+            fecha_actual = jsonObject.getString("fecha");
+            fecha.setText(fecha_actual);
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+
+                                //Metodo para insertar los datos en la Gráfica
+
     private void setData(int count, int range){
         ArrayList<Entry> yValues_1 = new ArrayList<>();
         for (int i = 0; i < count; i++){
@@ -98,7 +135,7 @@ public class Principal extends AppCompatActivity
         grafica.setData(data);
     }
 
-                //Método para pasar de Intent a otro con el menu
+                                //Método para pasar de Intent a otro con el menu
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -173,7 +210,12 @@ public class Principal extends AppCompatActivity
         correo = (TextView) header.findViewById(R.id.correo_user);                                  //Asignación de variables de tipo TextView
         nombre = (TextView) header.findViewById(R.id.nombre_user);                                 //Asignación de variables de tipo TextView
         user = (TextView) findViewById(R.id.txt_user);
+
+        fecha = (TextView) findViewById(R.id.txt_fecha);
         //imagen_usuario = (CircleImageView) header.findViewById(R.id.imageViewUsuario);
+
+        //Método que carga la fecha actual
+        setFecha();
 
         //Método que carga las preferencias del usuario
         setCampos();
@@ -183,6 +225,9 @@ public class Principal extends AppCompatActivity
         setData(100, 60);                               //Método que llama la insersión de datos en la gráfica
         grafica.animateX(3000);                         //Método que indica el tiempo de animación a la
         grafica.getAxisRight().setEnabled(false);
+
+        //Se Asigna permiso para mantener abierta la conexion
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
                                 //Metodo Si se ha presionado Back

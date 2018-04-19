@@ -6,6 +6,19 @@ import android.os.Bundle;
 
 public class Energia_Consumida extends AppCompatActivity {
 
+    //Método si el usuario presiono ir hacia atrás
+    @Override
+    public void onBackPressed(){
+        Intent intent = new Intent(Energia_Consumida.this,Principal.class);
+        startActivity(intent);
+        finish();
+    }
+
+    @Override
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return false;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -51,11 +51,12 @@
     <!--Strings de interfaz "Bienvenido"-->
     <string name="bienvenido">Bienvenido</string>
     <string name="precio_actual">El precio por kWh/h actual es de $:</string>
-    <string name="precio">0</string>
+    <string name="precio">0.697</string>
     <string name="electrica">Energía Electrica (CFE)</string>
     <string name="consumo_diario">Consumo de</string>
     <string name="kw">kW</string>
     <string name="sustentable">Energía Electrica Sustentable</string>
+    <string name="fecha">Aqui aparecera la fecha</string>
 
     <!-- Strings de interfaz "Configuracion de Perfil" -->
     <string name="nombre">Nombre</string>
@@ -86,7 +87,14 @@
     <string name="instruccion">Selecciona el periodo que deseas consultar</string>
 
     <!-- String de interfaz "Facturación" -->
+    <string name="title">Detalles del cobro</string>
     <string name="titulo">Energía Electrica Consumida</string>
     <string name="total_electrica">Comercial (CFE)</string>
     <string name="total_sustentable">Sustentable Propia</string>
+    <string name="periodo">Periodo</string>
+    <string name="fecha_inicio">Fecha de Inicio</string>
+    <string name="fecha_termino">Fecha de Termino</string>
+    <string name="dias">Días Transcurridos</string>
+    <string name="periodo_select">Periodo Seleccionado</string>
+
 </resources>

@@ -67,6 +67,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         } catch (Exception e) {}
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
+
     public void sesion(String pass, String email){
         try {
             String resultJSON="";
