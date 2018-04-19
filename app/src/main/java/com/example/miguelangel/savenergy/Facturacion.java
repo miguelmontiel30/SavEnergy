@@ -15,11 +15,13 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 
 public class Facturacion extends AppCompatActivity {
 
     Spinner spFecha;
     String id_user;
+    ArrayList<String> lista_fechas = new ArrayList<String>();
 
     //Método si el usuario presiono ir hacia atrás
     @Override
@@ -53,12 +55,10 @@ public class Facturacion extends AppCompatActivity {
             String resultJSON="";
             JSONObject respuestaJSON = new JSONObject (conectar());//Se guarda el resultado obtenido del JSON
             JSONArray jsonArray = null;
-            jsonArray = respuestaJSON.getJSONArray("consulta");
+                jsonArray = respuestaJSON.getJSONArray("consulta");
                 for (int i=0;1<respuestaJSON.length();i++){
-                    lista_cuota.add(jsonArray.getJSONObject(i).getString("cuota"));
-                    lista_id_cuota.add(jsonArray.getJSONObject(i).getString("id_cuotas"));
+                    lista_fechas.add(jsonArray.getJSONObject(i).getString("fecha_inicio"));
                 }
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -76,6 +76,8 @@ public class Facturacion extends AppCompatActivity {
         setContentView(R.layout.activity_facturacion);
 
         spFecha = (Spinner) findViewById(R.id.sp_fecha);
+
+        llenarSpCuota();
 
     }
 }

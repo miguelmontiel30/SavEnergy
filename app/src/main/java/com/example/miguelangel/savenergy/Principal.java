@@ -93,11 +93,8 @@ public class Principal extends AppCompatActivity
         try {
             String fecha_actual="";
             JSONArray jsonArray = null;
-            Toast.makeText(getApplicationContext(),"Entro al metodo",Toast.LENGTH_SHORT).show();
-            Toast.makeText(getApplicationContext(),consulta_fecha(),Toast.LENGTH_SHORT).show();
             jsonArray = new JSONArray(consulta_fecha());
             JSONObject jsonObject = jsonArray.getJSONObject(0);
-            Toast.makeText(getApplicationContext(),"Continua aqui",Toast.LENGTH_SHORT).show();
             fecha_actual = jsonObject.getString("fecha");
             fecha.setText(fecha_actual);
 
