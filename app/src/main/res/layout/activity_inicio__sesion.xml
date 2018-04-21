@@ -90,7 +90,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="5dp"
+                    android:layout_marginTop="25dp"
                     android:text="@string/olvido"
                     android:textColor="@color/colorPrimary" />
 
@@ -99,7 +99,7 @@
                     android:id="@+id/iniciar_sesion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="20dp"
                     android:text="@string/inicia_sesion"
                     android:theme="@style/Button_style" />
 

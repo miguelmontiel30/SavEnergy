@@ -17,6 +17,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -33,9 +35,11 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
     private boolean ses= false;
     EditText email, pass;
     Button iniciar;
-    String correo_cache,password_cache,nombre_cache,id_user_cache,fecha_cache,id_tarifa_cache,id_cuota_cache,tarifa_cache,cuota_cache,tipo_usuario_cache,id_clave_cache;
-                                    //Fin de la declaración de variables
+    String correo_cache,password_cache,nombre_cache,id_user_cache,
+            id_tarifa_cache,id_cuota_cache,tarifa_cache,cuota_cache,
+            tipo_usuario_cache,id_clave_cache;
 
+                                    //Fin de la declaración de variables
 
                             //Metodo para lanzar el Activity Principal)
     public void iniciar_sesionOnclick() {
@@ -51,7 +55,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-                            //Metodo con 2 parametros para conectar con servidor y devuelve datos
+                            //Metodo para conectar con el servidor y que devuelva datos del PHP (Usuario)
     public String validar(String contra, String email){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
         URL url = null;
         String line = "";
@@ -68,6 +72,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
 
+                            //Metodo que válida al usuario en la BD
     public void sesion(String pass, String email){
         try {
             String resultJSON="";
@@ -94,7 +99,7 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         }
     }
 
-    //Metodo para validar correo
+                            //Metodo para validar correo
     public boolean validar_correo(String correo){
         if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
             til_correo.setError(getResources().getString(R.string.correo_inv));

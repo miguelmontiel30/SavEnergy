@@ -23,9 +23,12 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.mikephil.charting.charts.LineChart;
+import com.github.mikephil.charting.components.AxisBase;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.LineData;
 import com.github.mikephil.charting.data.LineDataSet;
+import com.github.mikephil.charting.formatter.IAxisValueFormatter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,13 +46,13 @@ public class Principal extends AppCompatActivity
                                     //Inicio de Declaración de variables
     private LineChart grafica;
     private long backPressedTime;
-    String user_cache,nombre_user;
     private View header;
     Inicio_Sesion sesion = new Inicio_Sesion();
     TextView nombre,correo,user,fecha;
+    String fecha_actual="";
+                                    //Fin de la declaración de variables
 
-
-                //Método que setea campos para funcionamiento dinamico
+                                    //Método que setea campos para funcionamiento dinamico
     public void setCampos(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         String correo_cache = preferences.getString("correo","Null");
@@ -57,7 +60,48 @@ public class Principal extends AppCompatActivity
         nombre.setText(nombre_cache);
         correo.setText(correo_cache);
         user.setText(nombre_cache);
+        fecha.setText(fecha_actual);
         }
+
+                                    //Metodo para conectar con el servidor y que devuelva datos del PHP (FECHA)
+   public void getFecha(){
+       try{
+           URL url = new URL("https://savenergy.000webhostapp.com/savenergy/fecha_actual.php");
+           HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+           BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+
+           String line = "";
+           String webServiceResult="";
+           while ((line = bufferedReader.readLine()) != null){
+               webServiceResult += line;
+           }
+           bufferedReader.close();
+           setFecha(webServiceResult);
+       }catch(Exception e){
+           e.printStackTrace();
+       }
+   }
+
+                                    //Método para convertir datos que arroja el PHP (FECHA)
+    public void setFecha(String webServiceResult){
+        JSONArray jsonArray = null;
+        String fecha;
+        try{
+            jsonArray = new JSONArray(webServiceResult);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+        for(int i=0;i<jsonArray.length();i++){
+            try{
+                JSONObject jsonObject = jsonArray.getJSONObject(i);
+                fecha = jsonObject.getString("fecha");
+                fecha_actual = fecha;
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+        }
+    }
+
                                     //Método para borrar sesión guardada del usuario
     public void eliminarSesion(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
@@ -71,68 +115,29 @@ public class Principal extends AppCompatActivity
         startActivity(intent);
         finish();
     }
-                                //Método que consulta fecha en la BD
-    public String consulta_fecha(){
-        URL url = null;
-        String line = "";
-        String webServiceResult="";
-        try {
-            url = new URL("https://savenergy.000webhostapp.com/savenergy/fecha_actual.php");
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection(); //Abrir la conexión
-            BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-            while ((line = bufferedReader.readLine()) != null){
-                webServiceResult += line;
-            }
-            bufferedReader.close();
-        } catch (Exception e) {}
-        return webServiceResult;//Resultado del servidor (convertido en JSON)
-        }
-                                 //Método para insertar las fecha de corte
 
-    private void setFecha() {
-        try {
-            String fecha_actual="";
-            JSONArray jsonArray = null;
-            jsonArray = new JSONArray(consulta_fecha());
-            JSONObject jsonObject = jsonArray.getJSONObject(0);
-            fecha_actual = jsonObject.getString("fecha");
-            fecha.setText(fecha_actual);
-
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
-                                //Metodo para insertar los datos en la Gráfica
+                                    //Metodo para insertar los datos en la Gráfica
 
     private void setData(int count, int range){
         ArrayList<Entry> yValues_1 = new ArrayList<>();
         for (int i = 0; i < count; i++){
-            float value = (float) (Math.random()*range)+250;
+            float value = (float) (Math.random()*range)+50;
             yValues_1.add(new Entry(i,value));
         }
 
-        ArrayList<Entry> yValues_2 = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            float value = (float) (Math.random() * range) + 150;
-            yValues_2.add(new Entry(i, value));
-        }
 
-        LineDataSet set_1, set_2;
+        LineDataSet set_1;
 
-        set_1 = new LineDataSet(yValues_1, "Energía Sustentable");
-        set_1.setColor(getResources().getColor(R.color.sustentable));
+        set_1 = new LineDataSet(yValues_1, "Energía Electrica");
+        set_1.setColor(getResources().getColor(R.color.electrica));
         set_1.setValueTextSize(5f);
 
-        set_2 = new LineDataSet(yValues_2, "Energía Electrica");
-        set_2.setColor(getResources().getColor(R.color.electrica));
-        set_2.setValueTextSize(5f);
-        LineData data = new LineData(set_1,set_2);
+        LineData data = new LineData(set_1);
 
         grafica.setData(data);
     }
 
-                                //Método para pasar de Intent a otro con el menu
+                                    //Método para pasar de Intent a otro con el menu
 
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
@@ -184,7 +189,7 @@ public class Principal extends AppCompatActivity
         return true;
     }
 
-                                //Metodo OnCreate
+                                    //Metodo OnCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -199,35 +204,33 @@ public class Principal extends AppCompatActivity
         drawer.addDrawerListener(toggle);
         toggle.syncState();
 
+        //Se Asigna permiso para mantener abierta la conexion
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+
                 //Creas un objeto de tipo NavigationView que es para encontrar los omponentes del HeaderNAV
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);  //Asignación de variable para obtención de los compnentes del header
 
-        header = ((NavigationView)findViewById(R.id.nav_view)).getHeaderView(0);
-        correo = (TextView) header.findViewById(R.id.correo_user);                                  //Asignación de variables de tipo TextView
-        nombre = (TextView) header.findViewById(R.id.nombre_user);                                 //Asignación de variables de tipo TextView
-        user = (TextView) findViewById(R.id.txt_user);
-
-        fecha = (TextView) findViewById(R.id.txt_fecha);
+        correo = (TextView) header.findViewById(R.id.correo_user);     //Asignación de variables de tipo TextView
+        nombre = (TextView) header.findViewById(R.id.nombre_user);     //Asignación de variables de tipo TextView
+        user = (TextView) findViewById(R.id.txt_user);                 //Asignación de variables de tipo TextView
+        fecha = (TextView) findViewById(R.id.txt_fecha);               //Asignación de variables de tipo TextView
         //imagen_usuario = (CircleImageView) header.findViewById(R.id.imageViewUsuario);
 
-        //Método que carga la fecha actual
-        setFecha();
+        getFecha();
 
         //Método que carga las preferencias del usuario
         setCampos();
-
                                                     //Métodos para llenar Gráfica con Datos
-        grafica = (LineChart) findViewById(R.id.grafica);           //Asignación de variables de tipo LineChart
-        setData(100, 60);                               //Método que llama la insersión de datos en la gráfica
-        grafica.animateX(3000);                         //Método que indica el tiempo de animación a la
-        grafica.getAxisRight().setEnabled(false);
 
-        //Se Asigna permiso para mantener abierta la conexion
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+        grafica = (LineChart) findViewById(R.id.grafica);             //Asignación de variables de tipo LineChart
+        setData(100, 60);                               //Método que llama la insersión de datos en la gráfica
+        grafica.animateX(3000);                          //Método que indica el tiempo de animación a la
+        grafica.getAxisRight().setEnabled(false);
     }
 
-                                //Metodo Si se ha presionado Back
+                                    //Metodo Si se ha presionado Back
     @Override
     public void onBackPressed() {
         if (backPressedTime + 2000 > System.currentTimeMillis()){

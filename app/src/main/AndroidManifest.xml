@@ -71,8 +71,12 @@
             android:name=".Energia_Generada"
             android:label="Energía Generada"
             android:parentActivityName=".Principal" />
-        <activity android:name=".Energia_Consumida" />
-        <activity android:name=".Facturacion"></activity>
+        <activity android:name=".Energia_Consumida"
+            android:label="Energía Consumida"
+            android:parentActivityName=".Principal"/>
+        <activity android:name=".Facturacion"
+            android:label="Facturación"
+            android:parentActivityName=".Principal"/>
     </application>
 
 </manifest>
