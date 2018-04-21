@@ -157,7 +157,7 @@ public class Principal extends AppCompatActivity
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         String id = preferences.getString("id_usuario","Null");
         try{
-            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_suetentable.php?id_user=" + id + "&date= " + fecha_actual);
+            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_sustentable.php?id_user=" + id + "&date= " + fecha_actual);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -220,13 +220,15 @@ public class Principal extends AppCompatActivity
 
         set_1 = new LineDataSet(yValues_1, "Energía Electrica");
         set_1.setColor(getResources().getColor(R.color.electrica));
-        set_1.setValueTextSize(5f);
+        set_1.setValueTextSize(8f);
+        set_1.setCircleColor(getResources().getColor(R.color.electrica));
 
-        set_1 = new LineDataSet(yValues_2, "Energía Sustentable");
-        set_1.setColor(getResources().getColor(R.color.sustentable));
-        set_1.setValueTextSize(5f);
+        set_2 = new LineDataSet(yValues_2, "Energía Sustentable");
+        set_2.setColor(getResources().getColor(R.color.sustentable));
+        set_2.setValueTextSize(8f);
+        set_2.setCircleColor(getResources().getColor(R.color.sustentable));
 
-        LineData data = new LineData(set_1);
+        LineData data = new LineData(set_1,set_2);
 
         grafica.setData(data);
     }
@@ -318,8 +320,8 @@ public class Principal extends AppCompatActivity
         setCampos();
 
         //Metodo para cargar el consumo de la fecha actual
-        getConsumoElectrica();
         getConsumoSustentable();
+        getConsumoElectrica();
 
                                                     //Métodos para llenar Gráfica con Datos
 
@@ -327,6 +329,8 @@ public class Principal extends AppCompatActivity
         setData();                               //Método que llama la insersión de datos en la gráfica
         grafica.animateX(3000);                          //Método que indica el tiempo de animación a la
         grafica.getAxisRight().setEnabled(false);
+        grafica.getAxisLeft().setAxisMaximum(30);
+        grafica.getAxisLeft().setAxisMinimum(0);
     }
 
                                     //Metodo Si se ha presionado Back
