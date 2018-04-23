@@ -326,7 +326,7 @@ public class Principal extends AppCompatActivity
                                                     //Métodos para llenar Gráfica con Datos
 
         grafica = (LineChart) findViewById(R.id.grafica);             //Asignación de variables de tipo LineChart
-        setData();                               //Método que llama la insersión de datos en la gráfica
+        //setData();                               //Método que llama la insersión de datos en la gráfica
         grafica.animateX(3000);                          //Método que indica el tiempo de animación a la
         grafica.getAxisRight().setEnabled(false);
         grafica.getAxisLeft().setAxisMaximum(30);

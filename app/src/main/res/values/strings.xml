@@ -85,6 +85,7 @@
 
     <!-- String de interfaz "Energía Consumida" -->
     <string name="instruccion">Selecciona el periodo que deseas consultar</string>
+    <string name="consumo_ec">Consumo</string>
 
     <!-- String de interfaz "Facturación" -->
     <string name="title">Detalles del cobro</string>

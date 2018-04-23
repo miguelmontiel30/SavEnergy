@@ -69,8 +69,8 @@ public class Energia_Consumida extends AppCompatActivity {
         for(int i=0;i<jsonArray.length();i++){
             try{
                 lista_id_fechas.add(jsonArray.getJSONObject(i).getString("id_recibo"));
-                lista_fechas.add("De: " + jsonArray.getJSONObject(i).getString("fecha_inicio") +
-                        "A: " + jsonArray.getJSONObject(i).getString("fecha_corte"));
+                lista_fechas.add("De:  " + jsonArray.getJSONObject(i).getString("fecha_inicio") +
+                        "  A:  " + jsonArray.getJSONObject(i).getString("fecha_corte"));
             }catch (JSONException e){
                 e.printStackTrace();
             }
@@ -100,14 +100,12 @@ public class Energia_Consumida extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_energia__consumida);
 
-        Toast.makeText(getApplicationContext(),"Entro a este metodo 2",Toast.LENGTH_SHORT).show();
-
                                 //Se Asigna permiso para mantener abierta la conexion
         StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
 
                                 //Se asignan variables a los componentes XML
 
-        //spPeriodos = (Spinner) findViewById(R.id.sp_fecha);
+        spPeriodos = (Spinner) findViewById(R.id.sp_fecha);
 
                                 //Fin de la asignación de variables
 
@@ -115,22 +113,23 @@ public class Energia_Consumida extends AppCompatActivity {
                                 //Métodos implementados para llenar Spinner
 
                     //Método para llenar las listas con datos de la BD
-        //getPeriodos();
+        getPeriodos();
 
                     //Se llena un ArrayAdapter con el contenido de las listas
-        //ArrayAdapter<String> periodos = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,lista_fechas);
+        ArrayAdapter<String> periodos = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,lista_fechas);
 
                     //Se llena el Spinner con el contenido del ArrayAdapter
-        //spPeriodos.setAdapter(periodos);
+        spPeriodos.setAdapter(periodos);
 
                     //Se le asigna un evento al Spinner
-        //spPeriodos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//funcion del spinner cuota
-           /*@Override
+        spPeriodos.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//funcion del spinner cuota
+           @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 id_periodo = lista_id_fechas.get(i);
+               Toast.makeText(getApplicationContext(),id_periodo,Toast.LENGTH_SHORT).show();
                 periodo = lista_fechas.get(i);
             }
             @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {}});*/
+            public void onNothingSelected(AdapterView<?> adapterView) {}});
     }
 }
