@@ -43,12 +43,14 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
     int day, month, year;
     Spinner spTarifas, spCuotas;
     String id_user_cache, tipo_usuario_cache, id_clave_cache, id_cuota_cache, id_tarifa_cache,correo_cache,password_cache,nombre_cache,clave_cache,tarifa_cache,cuota_cache;
-            // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
+    String clave, correo, pass, id_tarifa, id_cuota,tarifa,cuota;
+
+                            // Se declaran las listas en donde se almacenan los datos que se enviaran a los Spinner
+
     ArrayList<String> lista_tarifa = new ArrayList<String>();
     ArrayList<String> lista_cuota = new ArrayList<String>();
     ArrayList<String> lista_id_tarifa = new ArrayList<String>();
     ArrayList<String> lista_id_cuota = new ArrayList<String>();
-    String clave, correo, pass, id_tarifa, id_cuota,tarifa,cuota;
 
                             //Fin de la declaración de variables
 
@@ -201,18 +203,21 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         editor.commit();
     }
 
+                                        //Métodos para el usuario (Presionar "Back")
     @Override
     public boolean onSupportNavigateUp() {
         onBackPressed();
         return false;
     }
-    //Método Si presiona en boton "Atrás"
+
     @Override
     public  void onBackPressed(){
         Intent intent = new Intent(Configuracion_f_corte.this,Registrarse.class);
         startActivity(intent);
         finish();
     }
+
+                                        //Fin de los metodos para el usuario
 
     @Override
     public void onClick(View view) {
@@ -238,24 +243,32 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
         return webServiceResult;//Resultado del servidor (convertido en JSON)
     }
 
-    //Método onCreate
+                                        //Método onCreate
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_configuracion_f_corte);
 
+        Toast.makeText(getApplicationContext(),"Entro a este metodo 1",Toast.LENGTH_SHORT).show();
+
+                                        //Se Asigna permiso para mantener abierta la conexion
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+
                         //Asignación de variable a componente en XML
 
-        spTarifas = (Spinner) findViewById(R.id.sp_tarifa);
-        spCuotas = (Spinner) findViewById(R.id.sp_cuota);
+        spTarifas = (Spinner) findViewById(R.id.sp_tarifa);         //Asignación de variable de tipo Spinner
+        spCuotas = (Spinner) findViewById(R.id.sp_cuota);           //Asignación de variable de tipo Spinner
 
-        btn_fin = (Button) findViewById(R.id.b_finalizar);
-        btn_fin.setOnClickListener(this);
+        btn_fin = (Button) findViewById(R.id.b_finalizar);          //Asignación de variable de tipo Button
+        btn_fin.setOnClickListener(this);                           //Asignación de evento al Botón
 
-        ib_calendar = (ImageButton) findViewById(R.id.im_calendar);
+        fecha = (EditText) findViewById(R.id.txt_fecha);            //Asignación de variable de tipo EditText
+
+        ib_calendar = (ImageButton) findViewById(R.id.im_calendar);    //Asignación de variable de tipo ImageButton
         ib_calendar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(View view) {                      //Asignación de evetno al ImageButton
                 DatePickerDialog date = new DatePickerDialog(Configuracion_f_corte.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
                     public void onDateSet(DatePicker datePicker, int i, int i1, int i2) {
@@ -267,16 +280,15 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             }
         });
 
-        fecha = (EditText) findViewById(R.id.txt_fecha);
         date = Calendar.getInstance();
 
-                        //Obtención de variables por Intent
+                                        //Obtención de variables por Intent
 
         clave = (String) getIntent().getExtras().getSerializable("clave");
         correo = (String) getIntent().getExtras().getSerializable("correo");
         pass = (String) getIntent().getExtras().getSerializable("pass");
 
-                        //Fin de la obtención de variables
+                                        //Fin de la obtención de variables
 
         day = date.get(Calendar.DAY_OF_MONTH);
         month = date.get(Calendar.MONTH);
@@ -298,24 +310,37 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             }
         });
 
-                    //Se Asigna permiso para mantener abierta la conexion
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+                                //Se define el tipo de contenido y la lista de arreglos... Para tarifa y cuota
 
-        //Se define el tipo de contenido y la lista de arreglos... Para tarifa y cuota
-        llenarSpTarifa();//metodo para llenar el arreglo lista de tarifas
+                                    //Metodo para llenar el arreglo lista_de_tarifas
+        llenarSpTarifa();
+
+                        //Se llena un ArrayAdapter con el contenido de las listas
         ArrayAdapter<String> tar = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,lista_tarifa);
-        spTarifas.setAdapter(tar);//Se asigna el contenido al spiner de tarifas
-        spTarifas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//funcion del spinner tarifa
+
+                        //Se llena el Spinner con el contenido del ArrayAdapter
+        spTarifas.setAdapter(tar);
+
+                        //Se le asigna un evento al Spinner
+        spTarifas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {      //Implementa una función al Spinner
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 id_tarifa = lista_id_tarifa.get(i); // Se asigna el valor seleccionado en el Spinner, a la variable tarifa
                 tarifa = lista_tarifa.get(i);
             }
             @Override public void onNothingSelected(AdapterView<?> adapterView) { }});
-        llenarSpCuota();//metodo para llenar el arreglo lista de cuotas
+
+
+                                    //Metodo para llenar el arreglo lista_de_cuotas
+        llenarSpCuota();
+
+                        //Se llena un ArrayAdapter con el contenido de las listas
         ArrayAdapter<String> cuo = new ArrayAdapter<String>(this,android.R.layout.simple_expandable_list_item_1,lista_cuota);
 
-        spCuotas.setAdapter(cuo);//Se asigna el contenido al spiner de cuotas
+                        //Se llena el Spinner con el contenido del ArrayAdapter
+        spCuotas.setAdapter(cuo);
+
+                        //Se le asigna un evento al Spinner
         spCuotas.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {//funcion del spinner cuota
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
@@ -325,4 +350,6 @@ public class Configuracion_f_corte extends AppCompatActivity implements View.OnC
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {}});
     }
+
+                                        //Fin del método onCreate
 }

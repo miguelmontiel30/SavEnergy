@@ -320,8 +320,8 @@ public class Principal extends AppCompatActivity
         setCampos();
 
         //Metodo para cargar el consumo de la fecha actual
-        getConsumoSustentable();
         getConsumoElectrica();
+        getConsumoSustentable();
 
                                                     //Métodos para llenar Gráfica con Datos
 
