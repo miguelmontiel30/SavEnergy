@@ -93,9 +93,10 @@
     <string name="total_electrica">Comercial (CFE)</string>
     <string name="total_sustentable">Sustentable Propia</string>
     <string name="periodo">Periodo</string>
+    <string name="cero">0</string>
     <string name="fecha_inicio">Fecha de Inicio</string>
     <string name="fecha_termino">Fecha de Termino</string>
-    <string name="dias">Días Transcurridos</string>
+    <string name="dias">Días </string>
     <string name="periodo_select">Periodo Seleccionado</string>
 
 </resources>

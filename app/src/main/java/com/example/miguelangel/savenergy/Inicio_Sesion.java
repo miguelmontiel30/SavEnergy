@@ -48,13 +48,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         finish();
     }
 
-                            //Método para regresar si el usuario presiono atras -->
-    public void onBackPressed(){
-        Intent intent = new Intent(Inicio_Sesion.this, Inicio.class);
-        startActivity(intent);
-        finish();
-    }
-
                             //Metodo para conectar con el servidor y que devuelva datos del PHP (Usuario)
     public String validar(String contra, String email){//Metodo que devuelve dos objetos - estado y consulta, convertidos en JSON
         URL url = null;
@@ -99,18 +92,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         }
     }
 
-                            //Metodo para validar correo
-    public boolean validar_correo(String correo){
-        if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
-            til_correo.setError(getResources().getString(R.string.correo_inv));
-            return false;
-        } else {
-            til_correo.setError(null);
-        }
-
-        return true;
-    }
-
                             //Método para guardar o recordar al usuario
     public void guardarUser(){
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
@@ -135,12 +116,23 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
         return false;
     }
 
+    //Método para regresar si el usuario presiono atras -->
+    public void onBackPressed(){
+        Intent intent = new Intent(Inicio_Sesion.this, Inicio.class);
+        startActivity(intent);
+        finish();
+    }
+
+
+
                             //Metodo onCreate
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicio__sesion);
+
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
 
         //Se asigna la variable que corresponde a cada componente declarado en el archivo XML
 
@@ -154,7 +146,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 til_correo.setError(null);
-                validar_correo(String.valueOf(s));
             }
 
             @Override
@@ -189,7 +180,6 @@ public class Inicio_Sesion extends AppCompatActivity implements View.OnClickList
 
         progressDialog= new ProgressDialog(this);
 
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
 

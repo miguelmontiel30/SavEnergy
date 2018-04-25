@@ -12,10 +12,10 @@
 
     <item android:title="@string/consulta">
         <menu>
-            <item
+            <!--<item
                 android:id="@+id/nav_generada"
                 android:icon="@drawable/ic_generacion"
-                android:title="@string/generada" />
+                android:title="@string/generada" />-->
             <item
                 android:id="@+id/nav_consumida"
                 android:icon="@drawable/ic_consumo"

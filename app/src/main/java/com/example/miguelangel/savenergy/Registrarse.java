@@ -191,6 +191,8 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registrarse);
 
+        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
+
                                                     //Asignacion de variables con componentes
 
         clave = (EditText) findViewById(R.id.et_clave);              //Asignación de variables de tipo EditText
@@ -273,7 +275,6 @@ public class Registrarse extends AppCompatActivity implements View.OnClickListen
         registrar = (Button) findViewById(R.id.registrarse);        //Asignacion de variables de tipo button
         registrar.setOnClickListener(this);
 
-        StrictMode.setThreadPolicy(new StrictMode.ThreadPolicy.Builder().permitNetwork().build());
     }
 
 }

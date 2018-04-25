@@ -112,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="15dp"
                         android:layout_marginRight="5dp"
-                        android:text="0"
+                        android:text="15"
                         android:textColor="@color/electrica"
                         android:textSize="18sp" />
 
@@ -154,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="5dp"
-                    android:text="0"
+                    android:text="7"
                     android:textColor="@color/colorPrimary"
                     android:textSize="18sp" />
 

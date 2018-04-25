@@ -50,6 +50,8 @@ public class Principal extends AppCompatActivity
     Inicio_Sesion sesion = new Inicio_Sesion();
     TextView nombre,correo,user,fecha;
     String fecha_actual="";
+    ArrayList<String> lista_fechas_electrica = new ArrayList<String>();
+    ArrayList<String> lista_fechas_sustentable = new ArrayList<String>();
     ArrayList<Entry> yValues_1 = new ArrayList<>();
     ArrayList<Entry> yValues_2 = new ArrayList<>();
 
@@ -110,7 +112,7 @@ public class Principal extends AppCompatActivity
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         String id = preferences.getString("id_usuario","Null");
         try{
-            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_electrica.php?id_user=" + id + "&date= " + fecha_actual);
+            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_electrica.php?id_user=" + id + "&date=" + fecha_actual);
             HttpURLConnection connection = (HttpURLConnection) url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 
@@ -129,10 +131,7 @@ public class Principal extends AppCompatActivity
                                     //Metodo para convertir y asignar datos que muestra el PHP(SELECT_CONSUMO_ELECTRICA)
     public void setConsumoElectrica(String webServiceResult){
         JSONArray jsonArray = null;
-        String id_user;
-        String fecha;
         String consumo;
-        String id_tipo;
         try{
             jsonArray = new JSONArray(webServiceResult);
         }catch (JSONException e){
@@ -141,11 +140,9 @@ public class Principal extends AppCompatActivity
         for(int i=0;i<jsonArray.length();i++){
             try{
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                id_user = jsonObject.getString("id_usuario");
-                fecha = jsonObject.getString("fecha");
+                lista_fechas_electrica.add(jsonArray.getJSONObject(i).getString("fecha"));
                 consumo = jsonObject.getString("volts");
                 yValues_1.add(new Entry(i,Float.parseFloat(consumo)));
-                id_tipo = jsonObject.getString("id_tipo_consumo");
             }catch (JSONException e){
                 e.printStackTrace();
             }
@@ -157,10 +154,9 @@ public class Principal extends AppCompatActivity
         SharedPreferences preferences = getSharedPreferences("info", Context.MODE_PRIVATE);
         String id = preferences.getString("id_usuario","Null");
         try{
-            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_sustentable.php?id_user=" + id + "&date= " + fecha_actual);
-            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            URL url = new URL("https://savenergy.000webhostapp.com/savenergy/select_consumo_sustentable.php?id_user=" + id + "&date=" + fecha_actual);
+            HttpURLConnection connection = (HttpURLConnection)url.openConnection();
             BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
-
             String line = "";
             String webServiceResult="";
             while ((line = bufferedReader.readLine()) != null){
@@ -176,10 +172,7 @@ public class Principal extends AppCompatActivity
                                     //Metodo para convertir y asignar datos que muestra el PHP(SELECT_CONSUMO_SUSTENTABLE)
     public void setConsumoSustentable(String webServiceResult){
         JSONArray jsonArray = null;
-        String id_user;
-        String fecha;
         String consumo;
-        String id_tipo;
         try{
             jsonArray = new JSONArray(webServiceResult);
         }catch (JSONException e){
@@ -188,11 +181,9 @@ public class Principal extends AppCompatActivity
         for(int i=0;i<jsonArray.length();i++){
             try{
                 JSONObject jsonObject = jsonArray.getJSONObject(i);
-                id_user = jsonObject.getString("id_usuario");
-                fecha = jsonObject.getString("fecha");
+                lista_fechas_sustentable.add(jsonArray.getJSONObject(i).getString("fecha"));
                 consumo = jsonObject.getString("volts");
                 yValues_2.add(new Entry(i,Float.parseFloat(consumo)));
-                id_tipo = jsonObject.getString("id_tipo_consumo");
             }catch (JSONException e){
                 e.printStackTrace();
             }
@@ -215,22 +206,29 @@ public class Principal extends AppCompatActivity
 
                                     //Metodo para insertar los datos en la Gráfica
 
-    private void setData(){
-        LineDataSet set_1,set_2;
+    private LineDataSet setDataElectrica(){
+        LineDataSet set_1;
 
         set_1 = new LineDataSet(yValues_1, "Energía Electrica");
         set_1.setColor(getResources().getColor(R.color.electrica));
         set_1.setValueTextSize(8f);
         set_1.setCircleColor(getResources().getColor(R.color.electrica));
+        set_1.setCircleRadius(5f);
+
+
+        return set_1;
+    }
+
+    private LineDataSet setDataSustentable(){
+        LineDataSet set_2;
 
         set_2 = new LineDataSet(yValues_2, "Energía Sustentable");
         set_2.setColor(getResources().getColor(R.color.sustentable));
         set_2.setValueTextSize(8f);
         set_2.setCircleColor(getResources().getColor(R.color.sustentable));
+        set_2.setCircleRadius(5f);
 
-        LineData data = new LineData(set_1,set_2);
-
-        grafica.setData(data);
+        return set_2;
     }
 
                                     //Método para pasar de Intent a otro con el menu
@@ -252,11 +250,11 @@ public class Principal extends AppCompatActivity
             Intent intent = new Intent(Principal.this,Energia_Consumida.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_generada) {
+        } /*else if (id == R.id.nav_generada) {
             Intent intent = new Intent(Principal.this,Energia_Generada.class);
             startActivity(intent);
             finish();
-        } else if (id == R.id.nav_facturacion) {
+        }*/ else if (id == R.id.nav_facturacion) {
             Intent intent = new Intent(Principal.this,Facturacion.class);
             startActivity(intent);
             finish();
@@ -320,13 +318,15 @@ public class Principal extends AppCompatActivity
         setCampos();
 
         //Metodo para cargar el consumo de la fecha actual
-        getConsumoElectrica();
-        getConsumoSustentable();
+
 
                                                     //Métodos para llenar Gráfica con Datos
 
         grafica = (LineChart) findViewById(R.id.grafica);             //Asignación de variables de tipo LineChart
-        //setData();                               //Método que llama la insersión de datos en la gráfica
+        getConsumoSustentable();
+        getConsumoElectrica();
+        LineData data = new LineData(setDataElectrica(),setDataSustentable());
+        //grafica.setData(data);
         grafica.animateX(3000);                          //Método que indica el tiempo de animación a la
         grafica.getAxisRight().setEnabled(false);
         grafica.getAxisLeft().setAxisMaximum(30);

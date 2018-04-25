@@ -10,45 +10,45 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-                                        <!-- Contenedor Principal -->
+        <!-- Contenedor Principal -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:padding="15dp"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:padding="15dp">
 
-                                        <!-- Contenedor de la cabecera -->
+            <!-- Contenedor de la cabecera -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_gravity="center_horizontal">
+                android:layout_gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_titulo"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textSize="30sp"
                     android:text="@string/title"
-                    android:textColor="@color/colorPrimaryDark"/>
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="30sp" />
             </LinearLayout>
-                                        <!-- Contenedor Principal -->
+            <!-- Contenedor Principal -->
 
-                                        <!-- Contenedor de datos-->
+            <!-- Contenedor de datos-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="8dp"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:padding="8dp">
 
                 <TextView
                     android:id="@+id/tv_selecciona"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="15dp"
-                    android:textSize="20sp"
                     android:text="@string/instruccion"
-                    android:textColor="@color/colorPrimary"/>
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="20sp" />
 
                 <Spinner
                     android:id="@+id/sp_fecha"
@@ -56,83 +56,183 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="8dp"
                     android:layout_marginTop="8dp" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:padding="8dp"
-                    android:orientation="horizontal" >
-                        <TextView
-                            android:id="@+id/tv_periodo"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="@string/periodo"
-                            android:textColor="@color/colorPrimary"
-                            android:layout_marginRight="8dp"/>
-                        <TextView
-                            android:id="@+id/tv_periodo_seleccionao"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:textSize="15sp"
-                            android:text="@string/periodo_select"
-                            android:textColor="@color/colorPrimary"/>
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:id="@+id/tv_periodo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="8dp"
+                        android:text="@string/periodo"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
+
+                    <TextView
+                        android:id="@+id/tv_periodo_selec"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/periodo_select"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="15sp" />
                 </LinearLayout>
+            </LinearLayout>
+
+            <!-- Contenedor de datos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_inicio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:layout_marginTop="15dp"
+                    android:hint="@string/fecha_inicio">
+
+                    <EditText
+                        android:id="@+id/txt_inicio"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="5dp"
+                        android:editable="false"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_dias"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:layout_marginTop="15dp"
+                    android:hint="@string/dias">
+
+                    <EditText
+                        android:id="@+id/txt_dias"
+                        android:layout_width="60dp"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/til_fin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:editable="false"
+                    android:layout_marginTop="15dp"
+                    android:hint="@string/fecha_termino">
+
+                    <EditText
+                        android:id="@+id/txt_fin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:inputType="textEmailAddress" />
+                </android.support.design.widget.TextInputLayout>
+            </LinearLayout>
+            <!-- Contenedor de datos -->
+
+            <!-- Contenedor de datos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:orientation="vertical"
+                android:padding="8dp">
+
+                <TextView
+                    android:id="@+id/txt_consumo_e_e"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity=""
+                    android:text="@string/generada"
+                    android:textColor="@color/sustentable"
+                    android:textSize="18sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginTop="8dp"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <ImageView
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:src="@drawable/generada" />
+
+                    <TextView
+                        android:id="@+id/tv_consumo_e_e"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="15dp"
+                        android:layout_marginRight="5dp"
+                        android:text="15"
+                        android:textColor="@color/sustentable"
+                        android:textSize="18sp" />
+
+                    <TextView
+                        android:id="@+id/txt_kwh_e"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kw"
+                        android:textColor="@color/sustentable"
+                        android:textSize="18sp" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txt_consumo_e_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity=""
+                    android:layout_marginTop="15dp"
+                    android:text="@string/consumida"
+                    android:textColor="@color/error_validacion"
+                    android:textSize="18sp" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                android:layout_marginTop="10dp">
+                android:padding="8dp">
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/til_inicio"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:hint="@string/fecha_inicio"
-                        app:errorTextAppearance="@style/AppTheme.EditTextError">
+                <ImageView
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:src="@drawable/consumida" />
 
-                        <EditText
-                            android:id="@+id/txt_inicio"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress"
-                            android:layout_marginRight="5dp"/>
-                    </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_consumo_e_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="15dp"
+                    android:layout_marginRight="5dp"
+                    android:text="7"
+                    android:textColor="@color/error_validacion"
+                    android:textSize="18sp" />
 
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/til_dias"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:hint="@string/dias"
-                        app:errorTextAppearance="@style/AppTheme.EditTextError">
-
-                        <EditText
-                            android:id="@+id/txt_dias"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress" />
-                    </android.support.design.widget.TextInputLayout>
-
-                    <android.support.design.widget.TextInputLayout
-                        android:id="@+id/til_fin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="15dp"
-                        android:hint="@string/fecha_termino"
-                        app:errorTextAppearance="@style/AppTheme.EditTextError">
-
-                        <EditText
-                            android:id="@+id/txt_fin"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:inputType="textEmailAddress" />
-                    </android.support.design.widget.TextInputLayout>
+                <TextView
+                    android:id="@+id/txt_kwh_e_s"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kw"
+                    android:textColor="@color/error_validacion"
+                    android:textSize="18sp" />
             </LinearLayout>
-                                        <!-- Contenedor de datos -->
+            <!-- Contenedor de datos -->
+
         </LinearLayout>
-                                        <!-- Fin del contenedor Principal -->
+        <!-- Fin del contenedor Principal -->
     </ScrollView>
 </android.support.constraint.ConstraintLayout>
